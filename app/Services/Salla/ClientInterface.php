@@ -11,9 +11,9 @@ interface ClientInterface
 {
     public function setHeaders();
 
-    public function getHttpRequest($url, $params = []);
+    public function getHttpRequest(string $url, $params = []);
 
-    public function postHttpRequest($url, $body = []);
+    public function postHttpRequest(string $url, $body = []);
 
     public function redirectAway();
 

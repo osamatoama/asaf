@@ -91,7 +91,6 @@ class RegisterService implements RegisterServiceInterface
         return $user->fresh();
     }
 
-
     /**
      * @param $token
      * @return array

@@ -1,9 +1,7 @@
 <?php
 
-
 namespace App\Services\Salla;
 
-use App\Models\User;
 use App\Services\Salla\Registration\RegisterService;
 use Exception;
 use GuzzleHttp\Promise\PromiseInterface;
@@ -21,14 +19,14 @@ class SallaClient implements ClientInterface
 {
 
     /** @var array */
-    private $headers = [
+    private array $headers = [
         'Accept' => 'application/json',
     ];
 
-    private $token = "";
+    private string $token = "";
 
     /** @var Salla */
-    private $sallaOauthClient;
+    private Salla $sallaOauthClient;
 
     /**
      * SallaClient constructor.
@@ -36,8 +34,8 @@ class SallaClient implements ClientInterface
     public function __construct()
     {
         $this->sallaOauthClient = new Salla([
-            'clientId'     => config('services.salla.client_id'),
-            'clientSecret' => config('services.salla.client_secret'),
+            'clientId'     => config('salla.client_id'),
+            'clientSecret' => config('salla.client_secret'),
             'redirectUri'  => route('salla.callback'),
         ]);
     }
@@ -46,7 +44,7 @@ class SallaClient implements ClientInterface
      * @param array $headers
      * @return $this
      */
-    public function setHeaders($headers = [])
+    public function setHeaders(array $headers = []): self
     {
         $this->headers = $headers;
 
@@ -57,20 +55,19 @@ class SallaClient implements ClientInterface
      * @param string $token
      * @return $this
      */
-    public function setToken($token)
+    public function setToken(string $token): self
     {
         $this->token = $token;
 
         return $this;
     }
 
-
     /**
-     * @param $url
+     * @param string $url
      * @param array $params
      * @return mixed
      */
-    public function getHttpRequest($url, $params = [])
+    public function getHttpRequest(string $url, $params = []): mixed
     {
         $response = Http::withHeaders($this->headers)
             ->withToken($this->token)
@@ -80,11 +77,11 @@ class SallaClient implements ClientInterface
     }
 
     /**
-     * @param $url
+     * @param string $url
      * @param array $body
      * @return PromiseInterface|Response
      */
-    public function postHttpRequest($url, $body = [])
+    public function postHttpRequest(string $url, $body = []): PromiseInterface|Response
     {
         $response = Http::withHeaders($this->headers)
             ->withToken($this->token)->post($url, $body);
@@ -93,11 +90,11 @@ class SallaClient implements ClientInterface
     }
 
     /**
-     * @param $url
+     * @param string $url
      * @param array $body
      * @return PromiseInterface|Response
      */
-    public function putHttpRequest($url, $body = [])
+    public function putHttpRequest(string $url, array $body = []): PromiseInterface|Response
     {
         $response = Http::withHeaders($this->headers)
             ->withToken($this->token)->put($url, $body);
@@ -106,11 +103,11 @@ class SallaClient implements ClientInterface
     }
 
     /**
-     * @param $url
+     * @param string $url
      * @param array $body
      * @return PromiseInterface|Response
      */
-    public function deleteHttpRequest($url, $body = [])
+    public function deleteHttpRequest(string $url, array $body = []): PromiseInterface|Response
     {
         $response = Http::withHeaders($this->headers)
             ->withToken($this->token)->delete($url, $body);
@@ -118,11 +115,10 @@ class SallaClient implements ClientInterface
         return json_decode($response->getBody()->getContents(), true);
     }
 
-
     /**
      * @return RedirectResponse
      */
-    public function redirectAway()
+    public function redirectAway(): RedirectResponse
     {
         return redirect()->away($this->sallaOauthClient->getAuthorizationUrl([
             'scope' => 'offline_access',
@@ -131,8 +127,9 @@ class SallaClient implements ClientInterface
 
     /**
      * @throws IdentityProviderException
+     * @throws Exception
      */
-    public function handleCallback(Request $request)
+    public function handleCallback(Request $request): RedirectResponse
     {
         // Redirect back if no code
         if (!$request->has('code')) {
@@ -140,10 +137,10 @@ class SallaClient implements ClientInterface
         }
 
         /** @var  $token */
-        $token = $this->sallaOauthClient->getAccessToken('authorization_code', ['code' => $request->code]);
+        $token = $this->sallaOauthClient->getAccessToken('authorization_code', ['code' => $request->get('code')]);
 
         $response = $this->setToken($token->getToken())
-            ->getHttpRequest(config('services.salla.urls.merchant_info_url'));
+            ->getHttpRequest(config('salla.urls.merchant_info_url'));
 
         if ($response['success']) {
             $merchantInfo = $response["data"];
