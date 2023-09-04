@@ -14,5 +14,5 @@ class AnswerCategory extends Model
         'category_id',
     ];
 
-    protected $dateFormat = 'Y-m-d H:i:s';
+    public $timestamps = false;
 }

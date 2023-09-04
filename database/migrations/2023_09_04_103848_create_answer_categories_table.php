@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('answer_id')->nullable();
             $table->unsignedBigInteger('category_id')->nullable();
-            $table->timestamps();
 
             $table->foreign('answer_id')
                 ->references('id')
