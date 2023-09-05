@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\QuizResultsRequest;
 use App\Http\Resources\QuestionCollectionResource;
 use App\Http\Resources\SallaProductCollectionResource;
 use App\Models\Category;
@@ -27,7 +28,7 @@ class QuizController extends Controller
         return new QuestionCollectionResource($questions);
     }
 
-    public function results(Request $request): JsonResponse
+    public function results(QuizResultsRequest $request): JsonResponse
     {
         $results = (array) $request->get('results', []);
 
