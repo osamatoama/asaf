@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\QuizController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -16,4 +17,18 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+Route::prefix('v1')->as('api.')->group(function () {
+    Route::get('quiz', [QuizController::class, 'index'])->name('quiz');
+    Route::post('results', [QuizController::class, 'results'])->name('results');
+
+
+    Route::get('test-steps-data', function () {
+        return json_decode(file_get_contents(public_path('quiz/data/steps.json')), true);
+    });
+
+    Route::get('test-products-data', function () {
+        return json_decode(file_get_contents(public_path('quiz/data/products.json')), true);
+    });
 });

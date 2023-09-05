@@ -13,22 +13,22 @@ trait QuestionHelpers
     /**
      * Scopes
      */
-    public function ScopeActive(Builder $query): Builder
+    public function scopeActive(Builder $query): Builder
     {
         return $query->where('active', true);
     }
 
-    public function ScopeInactive(Builder $query): Builder
+    public function scopeInactive(Builder $query): Builder
     {
         return $query->where('active', false);
     }
 
-    public function ScopeHasImage(Builder $query): Builder
+    public function scopeHasImage(Builder $query): Builder
     {
         return $query->where('has_image', true);
     }
 
-    public function ScopeHasNoImage(Builder $query): Builder
+    public function scopeHasNoImage(Builder $query): Builder
     {
         return $query->where('has_image', false);
     }

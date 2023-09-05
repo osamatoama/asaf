@@ -9,6 +9,7 @@ class Category extends Model
     protected $fillable = [
         'salla_category_id',
         'name',
+        'url',
         'details',
     ];
 

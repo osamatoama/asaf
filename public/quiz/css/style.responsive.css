@@ -1,0 +1,102 @@
+@media (max-width: 992px) {
+    .container {
+        width: 95%;
+        margin: 10px auto;
+        padding: 10px;
+    }
+    .main-heading {
+        font-size: 45px;
+        margin-bottom: 45px;
+    }
+}
+@media (max-width: 768px) {
+    .container {
+        width: 100%;
+        margin: 10px auto;
+        padding: 10px;
+    }
+    .main-heading {
+        font-size: 40px;
+        margin-bottom: 40px;
+    }
+    .steps-header {
+        margin: 0;
+    }
+    .steps-header .steps-wrapper .step {
+        padding: 0 15px;
+    }
+    .steps-header .steps-wrapper .step .step-icon svg {
+        width: 19px;
+        height: 19px;
+    }
+    .steps-header .steps-wrapper .step .step-icon svg path {
+        fill: #eca077;
+    }
+    .steps-header .steps-wrapper .step.active .step-icon {
+        width: 40px;
+        height: 40px;
+    }
+    .steps-header .steps-wrapper .step.active .step-icon svg {
+        width: 20px;
+        height: 20px;
+    }
+    .steps-header .steps-wrapper .step .step-desc .step-title {
+        font-size: 17px;
+    }
+    .steps-header .steps-wrapper .step.active {
+        gap: 0;
+    }
+    .steps-header .steps-wrapper .step.active .step-desc .step-num {
+        display: none;
+    }
+    .form-container {
+        padding: 20px 0;
+    }
+    .form-step.active {
+        gap: 60px;
+    }
+    .question-wrapper .question {
+        font-size: 18px;
+    }
+    .question-wrapper .answers-wrapper .answer-wrapper .answer {
+        font-size: 16px;
+    }
+}
+@media (max-width: 500px) {
+    .main-heading {
+        font-size: 35px;
+        margin-bottom: 30px;
+    }
+    .gender-options {
+        gap: 25px;
+    }
+    .gender-selection h2 {
+        font-size: 30px;
+    }
+    .gender-selection .show-form {
+        width: 100%;
+        min-width: 200px;
+        max-width: 350px;
+    }
+    .gender-options span {
+        font-size: 20px;
+    }
+    .steps-header .steps-wrapper .step.active .step-icon {
+        width: 35px;
+        height: 35px;
+    }
+    .steps-header .steps-wrapper .step {
+        padding: 0 5px;
+    }
+    .steps-header .steps-wrapper .step.active {
+        padding: 0 10px;
+    }
+    .steps-header .steps-wrapper .step .step-icon svg {
+        width: 17px;
+        height: 17px;
+    }
+    .steps-header .steps-wrapper .step.active .step-icon svg {
+        width: 19px;
+        height: 19px;
+    }
+}

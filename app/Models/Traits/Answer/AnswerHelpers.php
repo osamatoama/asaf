@@ -24,7 +24,6 @@ trait AnswerHelpers
         return new Fluent([
             'original'  => $media?->getUrl(),
             'thumbnail' => $media?->getUrl('thumbnail'),
-            'media'     => $media,
         ]);
     }
 

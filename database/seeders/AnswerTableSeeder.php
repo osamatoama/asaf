@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Answer;
 use App\Models\Category;
+use App\Models\Question;
 use Exception;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\File;
@@ -129,24 +130,25 @@ class AnswerTableSeeder extends Seeder
             ],
         ]);
 
-        Answer::all()->each(function ($answer) {
-            $answer->categories()->attach(
-                Category::inRandomOrder()
-                    ->limit(random_int(1, 3))
-                    ->pluck('id')
-                    ->toArray()
-            );
+        Question::all()->each(function ($question) {
+            $imagesPath = File::files(public_path('answers-images/' . $question->id));
+            $imgCount   = count($imagesPath);
+            foreach ($question->answers as $key => $answer) {
+                $answer->categories()->attach(
+                    Category::inRandomOrder()
+                        ->limit(random_int(1, 3))
+                        ->pluck('id')
+                        ->toArray()
+                );
 
-            try {
-                $imagesPath = File::files(public_path('answers-images/' . $answer->id));
-                if (($imgCount = count($imagesPath)) > 0) {
-                    foreach (range(1, $imgCount) as $img) {
-                        $answer->addMedia(public_path('answers-images/' . $answer->id . '/' . $img . '.jpg'))
+                try {
+                    if ($imgCount > 0) {
+                        $answer->addMedia(public_path('answers-images/' . $question->id . '/' . ($key + 1) . '.jpg'))
                             ->preservingOriginal()
                             ->toMediaCollection('answer-images');
                     }
-                }
-            } catch (Exception $e) {}
+                } catch (Exception $e) {}
+            }
         });
     }
 }

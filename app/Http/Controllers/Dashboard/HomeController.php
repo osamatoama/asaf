@@ -8,6 +8,6 @@ class HomeController extends Controller
 {
     public function __invoke()
     {
-        abort(404, 'Coming Soon...');
+        abort(403, 'Coming Soon...');
     }
 }
