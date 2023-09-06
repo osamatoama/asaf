@@ -15,42 +15,42 @@ class QuestionTableSeeder extends Seeder
         $now = now();
         Question::insert([
             [
-                'title'      => 'نص السؤال الأول التجريبي ؟',
+                'title'      => 'ما هو جنسك ؟',
                 'active'     => true,
                 'has_image'  => true,
                 'created_at' => $now,
                 'updated_at' => $now,
             ],
             [
-                'title'     => 'نص السؤال الثاني التجريبي ؟',
+                'title'     => 'ما أكثر رائحة غريبة تفضلها ؟',
                 'active'     => true,
                 'has_image'  => true,
                 'created_at' => $now,
                 'updated_at' => $now,
             ],
             [
-                'title'      => 'نص السؤال الثالث التجريبي ؟',
+                'title'      => 'كيف يتم وصف نشاطك اليومي',
                 'active'     => true,
                 'has_image'  => true,
                 'created_at' => $now,
                 'updated_at' => $now,
             ],
             [
-                'title'      => 'نص السؤال الرابع التجريبي ؟',
+                'title'      => 'ما هي الأماكن المفضلة لقضاء عطلة ؟',
                 'active'     => true,
                 'has_image'  => true,
                 'created_at' => $now,
                 'updated_at' => $now,
             ],
             [
-                'title'      => 'نص السؤال الخامس التجريبي ؟',
+                'title'      => 'ما هو نوع مشروباتك المفضلة ؟',
                 'active'     => true,
                 'has_image'  => true,
                 'created_at' => $now,
                 'updated_at' => $now,
             ],
             [
-                'title'      => 'نص السؤال السادس التجريبي ؟',
+                'title'      => 'كيف يصفك الناس ؟',
                 'active'     => true,
                 'has_image'  => true,
                 'created_at' => $now,
