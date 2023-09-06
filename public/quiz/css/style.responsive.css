@@ -23,7 +23,7 @@
         margin: 0;
     }
     .steps-header .steps-wrapper .step {
-        padding: 0 15px;
+        padding: 0 20px;
     }
     .steps-header .steps-wrapper .step .step-icon svg {
         width: 19px;
@@ -86,7 +86,7 @@
         height: 35px;
     }
     .steps-header .steps-wrapper .step {
-        padding: 0 5px;
+        padding: 0 12px;
     }
     .steps-header .steps-wrapper .step.active {
         padding: 0 10px;
