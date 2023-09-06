@@ -4,13 +4,10 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\QuizResultsRequest;
+use App\Http\Resources\ProductCollectionResource;
 use App\Http\Resources\QuestionCollectionResource;
-use App\Http\Resources\SallaProductCollectionResource;
 use App\Models\Category;
 use App\Models\Question;
-use App\Models\User;
-use App\Services\Salla\SallaClient;
-use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -47,7 +44,6 @@ class QuizController extends Controller
             return $value === $maxOccurrence;
         })->keys()->toArray();
 
-
         $categories = Category::whereIn('id', $categoriesIdsWithMaxOccurrence)->get();
 
         if($categories->isEmpty()) {
@@ -58,39 +54,16 @@ class QuizController extends Controller
             ]);
         }
 
-        $token    = $this->getToken();
         $products = collect();
 
         foreach ($categories as $category) {
-            try {
-                $data = $this->getSallaCategoryProducts($category->salla_category_id, $token);
-
-                $count = $data['pagination']['count'] ?? 0;
-
-                if($count > 0) {
-                    $categoryProduct = (array) ($data['data'][0] ?? []);
-                    $categoryProduct['category_url'] = $category->url;
-
-                    $products->push($categoryProduct);
-                }
-            } catch (Exception $e) {}
+            $products->push($category->products()->first());
         }
 
         return response()->json([
             'status'  => 200,
             'success' => true,
-            'products' => new SallaProductCollectionResource($products),
+            'products' => new ProductCollectionResource($products),
         ]);
-    }
-
-
-    private function getSallaCategoryProducts(string $sallaCategoryId, ?string $token) {
-        return (new SallaClient())
-            ->setToken($token ?? '')
-            ->getHttpRequest(config('salla.urls.products_list'), ['per_page' => 1, 'category' => $sallaCategoryId]);
-    }
-
-    private function getToken() {
-        return User::first()?->getSallaAccessToken();
     }
 }
