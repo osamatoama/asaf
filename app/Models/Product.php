@@ -11,7 +11,7 @@ class Product extends Model
     use ProductRelations, ProductHelpers;
 
     protected $fillable = [
-        'category_id',
+        'gender_id',
         'salla_product_id',
         'name',
         'url',

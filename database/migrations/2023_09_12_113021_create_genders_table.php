@@ -11,16 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::dropIfExists('products');
-
-        Schema::create('products', function (Blueprint $table) {
+        Schema::create('genders', function (Blueprint $table) {
             $table->id();
-            $table->string('salla_product_id')->nullable();
             $table->string('name')->nullable();
-            $table->string('url')->nullable();
-            $table->string('image_url')->nullable();
-            $table->string('category_url')->nullable();
-            $table->longText('details')->nullable();
             $table->timestamps();
         });
     }
@@ -30,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('products');
+        Schema::dropIfExists('genders');
     }
 };
