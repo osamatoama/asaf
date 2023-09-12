@@ -3,7 +3,7 @@
 namespace App\Models\Traits\Category;
 
 use App\Models\Product;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
  * Trait CategoryRelations
@@ -11,12 +11,10 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 trait CategoryRelations
 {
     /**
-     * @return HasMany
+     * @return BelongsToMany
      */
-    public function products(): HasMany
+    public function products(): BelongsToMany
     {
-        return $this->hasMany(Product::class, 'category_id');
+        return $this->belongsToMany(Product::class, 'product_categories', 'category_id', 'product_id');
     }
-
-
 }

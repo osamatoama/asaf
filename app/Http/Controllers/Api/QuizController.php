@@ -7,6 +7,9 @@ use App\Http\Requests\QuizResultsRequest;
 use App\Http\Resources\ProductCollectionResource;
 use App\Http\Resources\QuestionCollectionResource;
 use App\Models\Category;
+use App\Models\Gender;
+use App\Models\Product;
+use App\Models\ProductCategory;
 use App\Models\Question;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -27,7 +30,8 @@ class QuizController extends Controller
 
     public function results(QuizResultsRequest $request): JsonResponse
     {
-        $results = (array) $request->get('results', []);
+        $genderId = $request->get('gender_id');
+        $results  = (array) $request->get('results', []);
 
         $quizCategories = collect();
         foreach ($results as $questionId => $answerId) {
@@ -44,9 +48,9 @@ class QuizController extends Controller
             return $value === $maxOccurrence;
         })->keys()->toArray();
 
-        $categories = Category::whereIn('id', $categoriesIdsWithMaxOccurrence)->get();
+        $categories = Category::whereIn('id', $categoriesIdsWithMaxOccurrence)->count();
 
-        if($categories->isEmpty()) {
+        if($categories <= 0) {
             return response()->json([
                 'status'  => 200,
                 'success' => false,
@@ -54,16 +58,30 @@ class QuizController extends Controller
             ]);
         }
 
-        $products = collect();
+        $categoriesProductsIds = ProductCategory::whereIn('category_id', $categoriesIdsWithMaxOccurrence)
+            ->pluck('product_id')
+            ->toArray();
 
-        foreach ($categories as $category) {
-            $products->push($category->products()->first());
-        }
+        $products = Product::whereIn('gender_id', [$genderId, Gender::UNISEX_ID])
+            ->whereIn('id', $categoriesProductsIds)
+            ->paginate(Product::PER_PAGE);
 
         return response()->json([
-            'status'  => 200,
-            'success' => true,
+            'status'   => 200,
+            'success'  => true,
             'products' => new ProductCollectionResource($products),
+            'links'    => [
+                'first' => $products->url(1),
+                'last'  => $products->url($products->lastPage()),
+                'prev'  => $products->previousPageUrl(),
+                'next'  => $products->nextPageUrl(),
+            ],
+            'meta'     => [
+                'current_page' => $products->currentPage(),
+                'last_page'    => $products->lastPage(),
+                'per_page'     => $products->perPage(),
+                'total'        => $products->total(),
+            ],
         ]);
     }
 }

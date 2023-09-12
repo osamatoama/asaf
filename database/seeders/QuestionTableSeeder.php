@@ -15,13 +15,6 @@ class QuestionTableSeeder extends Seeder
         $now = now();
         Question::insert([
             [
-                'title'      => 'ما هو جنسك ؟',
-                'active'     => true,
-                'has_image'  => true,
-                'created_at' => $now,
-                'updated_at' => $now,
-            ],
-            [
                 'title'     => 'ما أكثر رائحة غريبة تفضلها ؟',
                 'active'     => true,
                 'has_image'  => true,
@@ -51,6 +44,13 @@ class QuestionTableSeeder extends Seeder
             ],
             [
                 'title'      => 'كيف يصفك الناس ؟',
+                'active'     => true,
+                'has_image'  => true,
+                'created_at' => $now,
+                'updated_at' => $now,
+            ],
+            [
+                'title'      => 'ما هو الحيوان الروحي المفضل لديك ؟',
                 'active'     => true,
                 'has_image'  => true,
                 'created_at' => $now,
