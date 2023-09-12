@@ -131,7 +131,7 @@ function getProductsHandler(url) {
             "content-type": "application/json",
             accept: "application/json",
         },
-        body: JSON.stringify({ results: storedAnswers }),
+        body: JSON.stringify({ gender_id:1, results: storedAnswers }),
     });
     fetchProductsRes
         .then(function (res) {

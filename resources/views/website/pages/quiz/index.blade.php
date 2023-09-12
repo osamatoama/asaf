@@ -1,6 +1,15 @@
 @extends('website.layouts.main')
 
 @section('content')
+    {{-- TODO: Use These info as a first option of the quiz and then delete the un useful data --}}
+    {{-- Male ID => 1 , Female ID => 2 --}}
+    {{-- You can put gender image depend on gender id --}}
+{{--    <select class="form-control" name="gender_id" id="gender_id" aria-label="Gender">--}}
+{{--        @foreach($genders as $id => $name)--}}
+{{--            <option value="{{ $id }}">{{ $name }}</option>--}}
+{{--        @endforeach--}}
+{{--    </select>--}}
+{{----------------------------------------------------------------}}
     <div class="user-preferences-form-container" data-quiz-url="{{ route('api.quiz') }}">
         <h1 class="main-heading">اعرف عطرك حسب شخصيتك</h1>
         <div class="multistep-form-wrapper hidden switch-effect">
