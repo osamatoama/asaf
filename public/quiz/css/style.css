@@ -358,7 +358,6 @@ a {
 .products-container {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
     align-items: center;
     gap: 40px;
 }
@@ -404,6 +403,7 @@ a {
     justify-content: center;
     align-items: center;
     padding: 10px 50px;
+    margin-top: 15px;
     background-color: #dd7339;
     color: #fff;
     border: 1px solid #dd7339;
@@ -414,6 +414,18 @@ a {
 .preferences-test-done .start-over:hover {
     color: #dd7339;
     background-color: transparent;
+}
+.loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.loader svg path {
+    fill : #dd7239;
+}
+.spin {
+    animation: spinLoader 2s infinite linear;
+    -webkit-animation: spinLoader 2s infinite linear;
 }
 .animate {
     animation: swing 1s ease;
@@ -437,5 +449,22 @@ a {
     }
     100% {
         transform: translateX(0px);
+    }
+}
+
+@keyframes spinLoader {
+    0% {
+        transform: rotate(0);
+        -webkit-transform: rotate(0);
+        -moz-transform: rotate(0);
+        -ms-transform: rotate(0);
+        -o-transform: rotate(0);
+    }
+    100% {
+        transform: rotate(360deg);
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
     }
 }

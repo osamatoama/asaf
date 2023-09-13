@@ -10,7 +10,7 @@ class Product extends Model
 {
     use ProductRelations, ProductHelpers;
 
-    public const PER_PAGE = 6;
+    public const PER_PAGE = 4;
     protected $fillable = [
         'gender_id',
         'salla_product_id',

@@ -128,6 +128,34 @@ function renderProducts(products) {
     return productsMarkup;
 }
 
+function showLoader() {
+    const resultsWrapper = document.querySelector('.result-wrapper')
+    const resultsLastChild = document.querySelector('.start-over');
+    const loader = document.createElement('span');
+    loader.classList.add('loader', 'spin');
+    loader.innerHTML = `
+        <svg xmlns="http://www.w3.org/2000/svg" height="2em" viewBox="0 0 512 512"><path d="M304 48a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zm0 416a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zM48 304a48 48 0 1 0 0-96 48 48 0 1 0 0 96zm464-48a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zM142.9 437A48 48 0 1 0 75 369.1 48 48 0 1 0 142.9 437zm0-294.2A48 48 0 1 0 75 75a48 48 0 1 0 67.9 67.9zM369.1 437A48 48 0 1 0 437 369.1 48 48 0 1 0 369.1 437z"/></svg>
+    `;
+    resultsWrapper.insertBefore(loader, resultsLastChild);
+}
+
+function productsObserverHandler (nextPageUrl) {
+    const allProducts = document.querySelectorAll(".products-container .product-wrapper");
+    const lastProduct = allProducts[allProducts.length - 1]
+    const productsObserver = new IntersectionObserver(
+        (entries) => {
+            if (entries[0].isIntersecting) {
+                productsObserver.unobserve(entries[0].target);
+                getProductsHandler(nextPageUrl);
+            }
+        },
+        {
+            threshold: 1
+        }
+    );
+    productsObserver.observe(lastProduct);
+};
+
 function getProductsHandler(url) {
     const fetchProductsRes = fetch(url, {
         method: "POST",
@@ -135,25 +163,40 @@ function getProductsHandler(url) {
             "content-type": "application/json",
             accept: "application/json",
         },
-        body: JSON.stringify({ gender_id: selectedGenderId, results: storedAnswers }),
+        body: JSON.stringify({
+            gender_id: selectedGenderId,
+            results: storedAnswers,
+        }),
     });
-    console.log(storedAnswers);
     fetchProductsRes
         .then(function (res) {
             return res.json();
         })
         .then(function (data) {
-            document.querySelector(".preferences-test-done .products-container").insertAdjacentHTML("beforeend", renderProducts(data.products));
-            document.querySelector(".multistep-form-wrapper").classList.add("hidden");
-            document.querySelector(".preferences-test-done").classList.remove("hidden");
-            setTimeout(() => {
-                document.querySelector(".preferences-test-done").classList.remove("switch-effect");
-            }, 600);
+            if (data.success) {
+                document.querySelector('.result-wrapper .loader')?.remove();
+                document.querySelector(".preferences-test-done .products-container").insertAdjacentHTML(
+                    "beforeend",
+                    renderProducts(data.products)
+                );
+                if (data.meta.current_page === 1) {
+                    document.querySelector(".multistep-form-wrapper").classList.add("hidden");
+                    document.querySelector(".preferences-test-done").classList.remove("hidden");
+                    setTimeout(() => {
+                        document.querySelector(".preferences-test-done").classList.remove("switch-effect");
+                    }, 600);
+                }
+                if (data.links.next) {
+                    showLoader();
+                    productsObserverHandler(data.links.next);
+                }
+            }
         });
 }
 
 function submitAndGetResult(e, submitBtn) {
     e.preventDefault();
+    window.scroll({ top: 0, behavior: 'smooth' });
     getProductsHandler(submitBtn.dataset.url);
     document.querySelector(".multistep-form-wrapper").classList.add("switch-effect");
     setTimeout(() => {
