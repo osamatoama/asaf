@@ -1,5 +1,5 @@
 let selectedGenderId;
-const storedAnswers = {};
+let storedAnswers = {};
 const genderWrapper = document.querySelector('.gender-selection');
 const genderOptions = document.querySelectorAll('.gender-selection .gender');
 const showFormBtn = document.querySelector('.gender-selection .show-form');
@@ -321,12 +321,16 @@ document.querySelector('.back-to-gender-selection').addEventListener('click', fu
         document.querySelector('.multistep-form-wrapper').classList.add('hidden');
         showFormBtn.classList.add('hidden');
         genderWrapper.classList.remove('hidden');
+        genderOptions.forEach((gender) => {
+            gender.classList.remove('selected');
+        })
         setTimeout(() => {
             genderWrapper.classList.remove('switch-effect');
             document.querySelector('.steps-header .steps-wrapper').innerHTML = '';
             document.querySelector('.multistep-form-wrapper .form-steps-wrapper').innerHTML = '';
             document.querySelector('.buttons-wrapper').classList.add('no-prev');
             document.querySelector('.buttons-wrapper').dataset.currentStep = 1;
+            storedAnswers = {};
         }, 200);
     }, 600);
 })
