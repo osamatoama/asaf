@@ -1,18 +1,29 @@
 @extends('website.layouts.main')
 
 @section('content')
-    {{-- TODO: Use These info as a first option of the quiz and then delete the un useful data --}}
-    {{-- Male ID => 1 , Female ID => 2 --}}
-    {{-- You can put gender image depend on gender id --}}
-{{--    <select class="form-control" name="gender_id" id="gender_id" aria-label="Gender">--}}
-{{--        @foreach($genders as $id => $name)--}}
-{{--            <option value="{{ $id }}">{{ $name }}</option>--}}
-{{--        @endforeach--}}
-{{--    </select>--}}
-{{----------------------------------------------------------------}}
     <div class="user-preferences-form-container" data-quiz-url="{{ route('api.quiz') }}">
         <h1 class="main-heading">اعرف عطرك حسب شخصيتك</h1>
+        <div class="gender-selection">
+            <h2>حدد النوع</h2>
+            <div class="gender-options">
+                @foreach($genders as $id => $name)
+                <div class="gender" data-gender-id="{{ $id }}">
+                    <div class="img-wrapper">
+                        <img src="{{ asset('quiz/images/gender-'.$id.'.png') }}" alt="male">
+                    </div>
+                    <span>{{ $name }}</span>
+                </div>
+            @endforeach
+            </div>
+            <button class="show-form hidden">ابدأ الأختبار</button>
+        </div>
         <div class="multistep-form-wrapper hidden switch-effect">
+            <span class="back-to-gender-selection">
+                الرجوع لتحديد النوع
+                <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 320 512">
+                    <path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z"/>
+                </svg>
+            </span>
             <div class="steps-header">
                 <div class="steps-wrapper"></div>
             </div>

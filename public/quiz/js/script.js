@@ -1,4 +1,8 @@
+let selectedGenderId;
 const storedAnswers = {};
+const genderWrapper = document.querySelector('.gender-selection');
+const genderOptions = document.querySelectorAll('.gender-selection .gender');
+const showFormBtn = document.querySelector('.gender-selection .show-form');
 
 function renderStepsHeader(stepsLength) {
     const stepWrapper = document.querySelector(".steps-header .steps-wrapper");
@@ -131,8 +135,9 @@ function getProductsHandler(url) {
             "content-type": "application/json",
             accept: "application/json",
         },
-        body: JSON.stringify({ gender_id:1, results: storedAnswers }),
+        body: JSON.stringify({ gender_id: selectedGenderId, results: storedAnswers }),
     });
+    console.log(storedAnswers);
     fetchProductsRes
         .then(function (res) {
             return res.json();
@@ -177,13 +182,11 @@ function switchStepsHandler(e, btn) {
     const headerCurrentStep = document.querySelector(`.steps-header .step[data-step='${currentStepNum}']`);
     const formCurrentStep = document.querySelector(`.form-step[data-step='${currentStepNum}']`);
     if (btn.dataset.move === "forward") {
-        const nextStep = document.querySelector(
-            `.form-step[data-step='${currentStepNum + 1}']`
-        );
+        const nextStep = document.querySelector(`.form-step[data-step='${currentStepNum + 1}']`);
+        const currentStep = document.querySelector(".form-steps-wrapper .form-step.active");
+        const questionId = currentStep.querySelector(".question").dataset.id;
+        const answerId = currentStep.querySelector(".answer-wrapper.selected").dataset.id;
         if (nextStep) {
-            const currentStep = document.querySelector(".form-steps-wrapper .form-step.active");
-            const questionId = currentStep.querySelector(".question").dataset.id;
-            const answerId = currentStep.querySelector(".answer-wrapper.selected").dataset.id;
             if (answerId && questionId) {
                 storedAnswers[questionId] = answerId;
                 formContainer.classList.add("switch-effect");
@@ -205,14 +208,19 @@ function switchStepsHandler(e, btn) {
                 alert("يجب أختيار إجابة");
             }
         } else {
-            window.scroll({
-                top: buttonsWrapper.getBoundingClientRect().top + 50,
-                behavior: "smooth",
-            });
-            buttonsWrapper.querySelector(".submit-form-btn").classList.add("animate");
-            setTimeout(() => {
-                buttonsWrapper.querySelector(".submit-form-btn").classList.remove("animate");
-            }, 1200);
+            if (answerId && questionId) {
+                storedAnswers[questionId] = answerId;
+                window.scroll({
+                    top: buttonsWrapper.getBoundingClientRect().top + 50,
+                    behavior: "smooth",
+                });
+                buttonsWrapper.querySelector(".submit-form-btn").classList.add("animate");
+                setTimeout(() => {
+                    buttonsWrapper.querySelector(".submit-form-btn").classList.remove("animate");
+                }, 1200);
+            } else {
+                alert("يجب أختيار إجابة");
+            }
         }
     } else {
         if (currentStepNum > 1) {
@@ -238,6 +246,48 @@ function switchStepsHandler(e, btn) {
     }
 }
 
+genderOptions.forEach((gender, i) => {
+    gender.addEventListener('click', function () {
+        if (!this.classList.contains('selected')) {
+            i === 0 ? genderOptions[i + 1].classList.remove('selected') : genderOptions[i - 1].classList.remove('selected');
+            this.classList.add('selected');
+        }
+        selectedGenderId = this.dataset.genderId;
+        showFormBtn.classList.remove('hidden');
+        window.scroll({ top: showFormBtn.getBoundingClientRect().top + 50, behavior: 'smooth' });
+        showFormBtn.classList.add('animate');
+        setTimeout(() => {
+            showFormBtn.classList.remove('animate');
+        }, 1200);
+    });
+})
+
+showFormBtn.addEventListener('click', () => {
+    genderWrapper.classList.add('switch-effect');
+    setTimeout(() => {
+        genderWrapper.classList.add('hidden');
+    }, 300);
+    setTimeout(() => {
+        quizRequestHandler();
+    }, 400);
+});
+
+document.querySelector('.back-to-gender-selection').addEventListener('click', function () {
+    document.querySelector('.multistep-form-wrapper').classList.add('switch-effect');
+    setTimeout(() => {
+        document.querySelector('.multistep-form-wrapper').classList.add('hidden');
+        showFormBtn.classList.add('hidden');
+        genderWrapper.classList.remove('hidden');
+        setTimeout(() => {
+            genderWrapper.classList.remove('switch-effect');
+            document.querySelector('.steps-header .steps-wrapper').innerHTML = '';
+            document.querySelector('.multistep-form-wrapper .form-steps-wrapper').innerHTML = '';
+            document.querySelector('.buttons-wrapper').classList.add('no-prev');
+            document.querySelector('.buttons-wrapper').dataset.currentStep = 1;
+        }, 200);
+    }, 600);
+})
+
 document.querySelector(".move-to-next-step-btn").addEventListener("click", function (e) {
     switchStepsHandler(e, this);
 });
@@ -251,5 +301,3 @@ document.querySelector(".submit-form-btn").addEventListener("click", function (e
 });
 
 document.querySelector(".start-over").addEventListener("click", () => location.reload());
-
-quizRequestHandler();
