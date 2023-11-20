@@ -11,14 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        if (!Schema::hasTable('password_reset_tokens')) {
-            Schema::create('password_reset_tokens', function (Blueprint $table) {
-                $table->string('email')->primary();
-                $table->string('token');
-                $table->timestamp('created_at')->nullable();
+        if(!Schema::hasTable('quizzes')) {
+            Schema::create('quizzes', function (Blueprint $table) {
+                $table->id();
+                $table->string('title')->nullable();
+                $table->boolean('active')->default(true);
+                $table->timestamps();
+                $table->softDeletes();
             });
         }
-
     }
 
     /**
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('password_reset_tokens');
+        Schema::dropIfExists('quizzes');
     }
 };

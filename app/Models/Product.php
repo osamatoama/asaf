@@ -12,7 +12,6 @@ class Product extends Model
 
     public const PER_PAGE = 4;
     protected $fillable = [
-        'gender_id',
         'salla_product_id',
         'name',
         'url',
