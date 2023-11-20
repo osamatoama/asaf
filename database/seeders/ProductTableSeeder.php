@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\Category;
 use App\Models\Product;
 use Exception;
 use Illuminate\Database\Seeder;
