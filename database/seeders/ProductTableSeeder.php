@@ -175,14 +175,5 @@ class ProductTableSeeder extends Seeder
                 'updated_at'        => $now,
             ]
         ]);
-
-        Product::all()->each(function ($product) {
-            $product->categories()->attach(
-                Category::inRandomOrder()
-                    ->limit(random_int(1, 3))
-                    ->pluck('id')
-                    ->toArray()
-            );
-        });
     }
 }
