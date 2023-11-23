@@ -19,6 +19,7 @@ return new class extends Migration
                 $table->string('url')->nullable();
                 $table->string('image_url')->nullable();
                 $table->string('category_url')->nullable();
+                $table->longText('description')->nullable();
                 $table->longText('details')->nullable();
                 $table->timestamps();
             });

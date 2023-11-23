@@ -6,14 +6,18 @@
         <div class="gender-selection">
             <h2>حدد النوع</h2>
             <div class="gender-options">
-                @foreach($genders as $id => $name)
-                <div class="gender" data-gender-id="{{ $id }}">
+                <div class="gender" data-gender-id="1">
                     <div class="img-wrapper">
-                        <img src="{{ asset('quiz/images/gender-'.$id.'.png') }}" alt="male">
+                        <img src="{{ asset('quiz/images/gender-1.png') }}" alt="male">
                     </div>
-                    <span>{{ $name }}</span>
+                    <span>ذكر</span>
                 </div>
-            @endforeach
+                <div class="gender" data-gender-id="2">
+                    <div class="img-wrapper">
+                        <img src="{{ asset('quiz/images/gender-2.png') }}" alt="female">
+                    </div>
+                    <span>أنثى</span>
+                </div>
             </div>
             <button class="show-form hidden">ابدأ الأختبار</button>
         </div>

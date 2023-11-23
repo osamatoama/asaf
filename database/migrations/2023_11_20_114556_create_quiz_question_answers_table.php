@@ -16,6 +16,7 @@ return new class extends Migration
                 $table->id();
                 $table->unsignedBigInteger('quiz_question_id')->nullable();
                 $table->longText('title')->nullable();
+                $table->longText('description')->nullable();
                 $table->boolean('countable')->default(0);
                 $table->timestamps();
 

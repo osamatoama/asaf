@@ -14,6 +14,7 @@ class QuizQuestionAnswer extends Model implements HasMedia
     protected $fillable = [
         'quiz_question_id',
         'title',
+        'description',
         'countable',
     ];
 

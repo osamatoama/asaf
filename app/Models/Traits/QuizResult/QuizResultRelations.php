@@ -6,8 +6,10 @@ use App\Models\Client;
 use App\Models\Product;
 use App\Models\Quiz;
 use App\Models\QuizResultAnswer;
+use App\Models\QuizResultClient;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
  * Trait QuizResultRelations
@@ -36,6 +38,11 @@ trait QuizResultRelations
     public function product(): BelongsTo
     {
         return $this->belongsTo(Product::class, 'product_id');
+    }
+
+    public function quizResultClient(): HasOne
+    {
+        return $this->hasOne(QuizResultClient::class, 'quiz_result_id');
     }
 
     /**

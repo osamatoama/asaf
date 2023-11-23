@@ -5,8 +5,9 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class AnswerResource extends JsonResource
+class QuizResource extends JsonResource
 {
+    public static $wrap = 'quiz';
     /**
      * Transform the resource into an array.
      *
@@ -16,11 +17,9 @@ class AnswerResource extends JsonResource
     {
         return [
             'id'          => $this->resource->id,
-            'question_id' => $this->resource->quiz_question_id,
             'title'       => $this->resource->title,
             'description' => $this->resource->description ?? '',
-            'countable'   => (bool) $this->resource->countable,
-            'image'       => $this->resource->image,
+            'questions'   => new QuestionCollectionResource($this->resource->questions),
         ];
     }
 }
