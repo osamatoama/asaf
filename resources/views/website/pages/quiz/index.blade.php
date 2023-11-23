@@ -3,10 +3,10 @@
 @section('content')
     <div class="user-preferences-form-container" data-quiz-url="{{ route('api.quiz') }}">
         <h1 class="main-heading">اعرف عطرك حسب شخصيتك</h1>
-        <div class="gender-selection">
+        <div class="gender-selection hidden switch-effect">
             <h2>حدد النوع</h2>
             <div class="gender-options">
-                <div class="gender" data-gender-id="1">
+                <div class="gender selected" data-gender-id="1">
                     <div class="img-wrapper">
                         <img src="{{ asset('quiz/images/gender-1.png') }}" alt="male">
                     </div>
@@ -21,13 +21,7 @@
             </div>
             <button class="show-form hidden">ابدأ الأختبار</button>
         </div>
-        <div class="multistep-form-wrapper hidden switch-effect">
-            <span class="back-to-gender-selection">
-                الرجوع لتحديد النوع
-                <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 320 512">
-                    <path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z"/>
-                </svg>
-            </span>
+        <div class="multistep-form-wrapper">
             <div class="steps-header">
                 <div class="steps-wrapper"></div>
             </div>

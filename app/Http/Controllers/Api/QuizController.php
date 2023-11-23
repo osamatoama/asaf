@@ -35,6 +35,9 @@ class QuizController extends Controller
         $phone    = $request->get('phone');
         $email    = $request->get('email');
 
+        $newAnswersIds = array_values($results);
+
+        $quizScore = $this->getQuizAnswersTotalPoints($results);
 
         $client = Client::where('key', $userKey)
             ->when(filled($phone), function ($query) use ($phone) {
@@ -43,10 +46,12 @@ class QuizController extends Controller
                 return $query->orWhere('email', $email);
             })->first();
 
-        $existedClientQuizResult = $quiz->results()
-            ->where('client_id', $client->id)
-            ->latest('id')
-            ->first();
+        $existedClientQuizResults = $quiz->results()
+            ->where('client_id', $client->id ?? 0)
+            ->where('score', $quizScore)
+            ->get();
+
+        $existedClientQuizResult = null;
 
         if (blank($client)) {
             $client = Client::create([
@@ -64,20 +69,23 @@ class QuizController extends Controller
 
             $client = $client->fresh();
 
-            if (blank($existedClientQuizResult)) {
+            if (blank($existedClientQuizResults)) {
                 $resultedProductIsRandom = true;
             } else {
-                $resultAnswersIds = $existedClientQuizResult?->quizResultAnswers()
-                    ->pluck('answer_id')
-                    ->toArray();
+                $hasMatchedAnswers = false;
+                foreach ($existedClientQuizResults as $result) {
+                    $resultAnswersIds = $result->quizResultAnswers()
+                        ->pluck('answer_id')
+                        ->toArray();
 
-                $newAnswersIds = array_values($results);
-
-                if (count($resultAnswersIds) !== count($newAnswersIds)) {
-                    $resultedProductIsRandom = true;
-                } else {
-                    $resultedProductIsRandom = filled(array_diff($resultAnswersIds, $newAnswersIds));
+                    if ((count($resultAnswersIds) === count($newAnswersIds))
+                        && blank(array_diff($resultAnswersIds, $newAnswersIds))) {
+                        $hasMatchedAnswers       = true;
+                        $existedClientQuizResult = $result;
+                    }
                 }
+                
+                $resultedProductIsRandom = !$hasMatchedAnswers;
             }
         }
 
