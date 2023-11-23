@@ -66,7 +66,7 @@ Route::get('get-failed-jobs', function () {
 
 
 Route::get('salla-categories', function () {
-    dd('here!');
+    dd('here!!');
     $user = User::first();
     return (new SallaClient())
         ->setToken($user->getSallaAccessToken())
