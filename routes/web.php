@@ -14,6 +14,11 @@ Route::get('optimize-clear', function () {
     return 'Optimized';
 });
 
+Route::get('project-install', function () {
+    Artisan::call('project:install');
+    return 'Installed';
+});
+
 Route::get('add-migration/{path?}/{database?}', function ($path = '', $database = '') {
     $data = ['--force' => true];
     if (!empty($path) && ($path !== 'default')) {
