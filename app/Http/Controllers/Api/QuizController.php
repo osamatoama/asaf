@@ -7,11 +7,14 @@ use App\Http\Requests\QuizResultsRequest;
 use App\Http\Resources\ProductResource;
 use App\Http\Resources\QuizResource;
 use App\Models\Client;
+use App\Models\Product;
 use App\Models\Quiz;
 use App\Models\QuizQuestion;
 use App\Models\QuizQuestionAnswer;
+use App\Models\QuizResult;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 
 class QuizController extends Controller
 {
@@ -51,8 +54,6 @@ class QuizController extends Controller
             ->where('score', $quizScore)
             ->get();
 
-        $existedClientQuizResult = null;
-
         if (blank($client)) {
             $client = Client::create([
                 'key'   => $userKey,
@@ -61,32 +62,20 @@ class QuizController extends Controller
             ]);
 
             $resultedProductIsRandom = true;
+            $existedClientQuizResult = null;
         } else {
-            $client->update([
-                'phone' => $client->phone ?? $phone,
-                'email' => $client->email ?? $email,
-            ]);
 
-            $client = $client->fresh();
+            $clientUpdateCase = $this->clientUpdateCase(
+                $client,
+                $existedClientQuizResults,
+                $newAnswersIds,
+                $phone,
+                $email
+            );
 
-            if (blank($existedClientQuizResults)) {
-                $resultedProductIsRandom = true;
-            } else {
-                $hasMatchedAnswers = false;
-                foreach ($existedClientQuizResults as $result) {
-                    $resultAnswersIds = $result->quizResultAnswers()
-                        ->pluck('answer_id')
-                        ->toArray();
-
-                    if ((count($resultAnswersIds) === count($newAnswersIds))
-                        && blank(array_diff($resultAnswersIds, $newAnswersIds))) {
-                        $hasMatchedAnswers       = true;
-                        $existedClientQuizResult = $result;
-                    }
-                }
-                
-                $resultedProductIsRandom = !$hasMatchedAnswers;
-            }
+            $client                  = $clientUpdateCase->client;
+            $resultedProductIsRandom = $clientUpdateCase->resultedProductIsRandom;
+            $existedClientQuizResult = $clientUpdateCase->existedClientQuizResult;
         }
 
         $quizScore = $this->getQuizAnswersTotalPoints($results);
@@ -118,30 +107,11 @@ class QuizController extends Controller
         }
 
 
-        $newQuizResult = $quiz->results()->create([
-            'client_id'    => $client->id,
-            'quiz_title'   => $quiz->title,
-            'score'        => $quizScore,
-            'product_id'   => $product->id,
-            'product_name' => $product->name,
-        ]);
+        $newQuizResult = $this->createQuizResult($client, $quiz, $quizScore, $product);
 
-        $newQuizResult->quizResultAnswers()->createMany(
-            array_map(function ($questionId, $answerId) {
-                return [
-                    'question_id'    => $questionId,
-                    'answer_id'      => $answerId,
-                    'question_title' => QuizQuestion::find($questionId)?->title,
-                    'answer_title'   => QuizQuestionAnswer::find($answerId)?->title,
-                ];
-            }, array_keys($results), $results)
-        );
+        $this->createQuizResultAnswers($newQuizResult, $results);
 
-        $newQuizResult->quizResultClient()->create([
-            'key'   => $client->key,
-            'phone' => $client->phone,
-            'email' => $client->email,
-        ]);
+        $this->createQuizResultClient($client, $newQuizResult);
 
         return response()->json([
             'status'   => 200,
@@ -168,5 +138,114 @@ class QuizController extends Controller
         }
 
         return $points;
+    }
+
+    /**
+     * @param Client $client
+     * @param Collection $existedResults
+     * @param array $newAnswersIds
+     * @param string|null $phone
+     * @param string|null $email
+     * @return object
+     */
+    private function clientUpdateCase(
+        Client $client,
+        Collection $existedResults,
+        array $newAnswersIds,
+        string $phone = null,
+        string $email = null
+    ): object {
+        $client->update([
+            'phone' => $client->phone ?? $phone,
+            'email' => $client->email ?? $email,
+        ]);
+
+        $updatedClient = $client->fresh();
+
+        $existedClientQuizResult = null;
+
+        if (blank($existedResults)) {
+            $resultedProductIsRandom = true;
+        } else {
+            $hasMatchedAnswers = false;
+            foreach ($existedResults as $result) {
+                $resultAnswersIds = $result->quizResultAnswers()
+                    ->pluck('answer_id')
+                    ->toArray();
+
+                if ((count($resultAnswersIds) === count($newAnswersIds))
+                    && blank(array_diff($resultAnswersIds, $newAnswersIds))) {
+                    $hasMatchedAnswers       = true;
+                    $existedClientQuizResult = $result;
+                }
+            }
+
+            $resultedProductIsRandom = !$hasMatchedAnswers;
+        }
+
+        return (object) [
+            'client'                 => $updatedClient,
+            'resultedProductIsRandom'=> $resultedProductIsRandom,
+            'existedClientQuizResult'=> $existedClientQuizResult,
+        ];
+    }
+
+    /**
+     * @param Client $client
+     * @param Quiz $quiz
+     * @param int $quizScore
+     * @param Product $product
+     * @return QuizResult
+     */
+    private function createQuizResult(
+        Client $client,
+        Quiz $quiz,
+        int $quizScore,
+        Product $product
+    ): QuizResult {
+        return $quiz->results()->create([
+            'client_id'    => $client->id,
+            'quiz_title'   => $quiz->title,
+            'score'        => $quizScore,
+            'product_id'   => $product->id,
+            'product_name' => $product->name,
+        ]);
+    }
+
+    /**
+     * @param QuizResult $quizResult
+     * @param array $results
+     * @return void
+     */
+    private function createQuizResultAnswers(
+        QuizResult $quizResult,
+        array $results
+    ): void {
+        $quizResult->quizResultAnswers()->createMany(
+            array_map(function ($questionId, $answerId) {
+                return [
+                    'question_id'    => $questionId,
+                    'answer_id'      => $answerId,
+                    'question_title' => QuizQuestion::find($questionId)?->title,
+                    'answer_title'   => QuizQuestionAnswer::find($answerId)?->title,
+                ];
+            }, array_keys($results), $results)
+        );
+    }
+
+    /**
+     * @param Client $client
+     * @param QuizResult $quizResult
+     * @return void
+     */
+    private function createQuizResultClient(
+        Client $client,
+        QuizResult $quizResult
+    ): void {
+        $quizResult->quizResultClient()->create([
+            'key'   => $client->key,
+            'phone' => $client->phone,
+            'email' => $client->email,
+        ]);
     }
 }
