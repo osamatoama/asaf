@@ -14,6 +14,11 @@ Route::get('optimize-clear', function () {
     return 'Optimized';
 });
 
+Route::get('storage-link', function () {
+    Artisan::call('storage:link');
+    return 'Installed';
+});
+
 Route::get('project-install', function () {
     Artisan::call('project:install');
     return 'Installed';
