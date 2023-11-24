@@ -362,18 +362,17 @@ a {
     gap: 40px;
 }
 .product-wrapper {
-    width: calc((100% - 40px) / 2);
+    /*width: calc((100% - 40px) / 2);*/
     display: flex;
     align-items: center;
     gap: 20px;
 }
 .product-wrapper .product-img {
     width: 200px;
-    height: 200px;
+    /*height: 200px;*/
     overflow: hidden;
     border-radius: 15px;
     box-shadow: 0 0 5px 0 #a15e3a5c;
-    border-radius: 15px;
 }
 .product-wrapper .product-img img {
     width: 100%;
