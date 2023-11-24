@@ -15,16 +15,12 @@ class AnswerResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'id'     => $this->resource->id,
-            'answer' => $this->resource->title,
-            'image'  => $this->resource->image,
-        ];
-    }
-
-    private function image(): array
-    {
-        return [
-            'image' => $this->resource->image,
+            'id'          => $this->resource->id,
+            'question_id' => $this->resource->quiz_question_id,
+            'title'       => $this->resource->title,
+            'description' => $this->resource->description ?? '',
+            'countable'   => (bool) $this->resource->countable,
+            'image'       => $this->resource->image,
         ];
     }
 }

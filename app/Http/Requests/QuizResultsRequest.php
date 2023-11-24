@@ -2,10 +2,8 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Gender;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
 class QuizResultsRequest extends FormRequest
 {
@@ -25,11 +23,20 @@ class QuizResultsRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'gender_id' => [
-                'required',
-                Rule::in([Gender::MALE_ID, Gender::FEMALE_ID])
-            ],
-            'results'   => 'required|array|min:1',
+            'user_key' => 'required|string|max:255',
+            'phone'    => 'nullable|digits:9',
+            'email'    => 'nullable|email|max:255',
+            'results'  => 'required|array|min:1',
+        ];
+    }
+
+    public function attributes(): array
+    {
+        return [
+            'user_key' => 'User unique key',
+            'phone'    => 'User phone',
+            'email'    => 'User email',
+            'results'  => 'Quiz answers',
         ];
     }
 }

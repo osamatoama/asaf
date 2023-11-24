@@ -7,6 +7,8 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class ProductResource extends JsonResource
 {
+    public static $wrap = 'product';
+
     /**
      * Transform the resource into an array.
      *
@@ -18,7 +20,7 @@ class ProductResource extends JsonResource
             'name'         => $this->resource->name ?? '',
             'url'          => $this->resource->url ?? '',
             'image'        => $this->resource->image_url ?? '',
-//            'category_url' => $this->resource->category_url ?? '',
+            'description'  => $this->resource->description ?? '',
         ];
     }
 }

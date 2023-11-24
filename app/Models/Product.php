@@ -11,13 +11,14 @@ class Product extends Model
     use ProductRelations, ProductHelpers;
 
     public const PER_PAGE = 4;
+
     protected $fillable = [
-        'gender_id',
         'salla_product_id',
         'name',
         'url',
         'image_url',
         'category_url',
+        'description',
         'details',
     ];
 

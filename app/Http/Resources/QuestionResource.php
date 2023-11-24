@@ -16,6 +16,7 @@ class QuestionResource extends JsonResource
     {
         return [
             'id'        => $this->resource->id,
+            'quiz_id'   => $this->resource->quiz_id,
             'question'  => $this->resource->title,
             'has_image' => $this->resource->has_image,
             'answers'   => new AnswerCollectionResource($this->resource->answers),

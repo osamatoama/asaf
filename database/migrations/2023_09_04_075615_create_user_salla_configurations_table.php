@@ -11,17 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('user_salla_configurations', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('user_id')->nullable();
-            $table->foreign('user_id', 'salla_configurations_user_id')
-                ->references('id')
-                ->on('users')
-                ->onDelete('CASCADE');
-            $table->string('key')->nullable();
-            $table->string('value')->nullable();
-            $table->timestamps();
-        });
+        if (!Schema::hasTable('user_salla_configurations')) {
+            Schema::create('user_salla_configurations', function (Blueprint $table) {
+                $table->id();
+                $table->unsignedBigInteger('user_id')->nullable();
+                $table->foreign('user_id', 'salla_configurations_user_id')
+                    ->references('id')
+                    ->on('users')
+                    ->onDelete('CASCADE');
+                $table->string('key')->nullable();
+                $table->string('value')->nullable();
+                $table->timestamps();
+            });
+        }
     }
 
     /**

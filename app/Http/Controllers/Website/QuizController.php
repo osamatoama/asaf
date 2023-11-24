@@ -9,8 +9,6 @@ class QuizController extends Controller
 {
     public function __invoke()
     {
-        $genders = Gender::quizGenders()->pluck('name', 'id');
-
-        return view('website.pages.quiz.index', compact('genders'));
+        return view('website.pages.quiz.index');
     }
 }

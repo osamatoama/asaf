@@ -2,10 +2,11 @@
 
 namespace App\Models\Traits\Product;
 
-use App\Models\Category;
-use App\Models\Gender;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+
+use App\Models\QuizPoint;
+use App\Models\QuizResult;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * Trait ProductRelations
@@ -13,18 +14,17 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 trait ProductRelations
 {
     /**
-     * @return BelongsTo
+     * @return BelongsToMany
      */
-    public function gender(): BelongsTo
-    {
-        return $this->belongsTo(Gender::class, 'gender_id');
+    public function points(): BelongsToMany {
+        return $this->belongsToMany(QuizPoint::class, 'quiz_point_products', 'product_id', 'quiz_point_id');
     }
 
     /**
-     * @return BelongsToMany
+     * @return HasMany
      */
-    public function categories(): BelongsToMany
+    public function results(): HasMany
     {
-        return $this->belongsToMany(Category::class, 'product_categories', 'product_id', 'category_id');
+        return $this->hasMany(QuizResult::class, 'product_id');
     }
 }

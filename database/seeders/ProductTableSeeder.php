@@ -2,9 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\Category;
-use App\Models\Gender;
 use App\Models\Product;
+use Exception;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Schema;
 
@@ -12,6 +11,7 @@ class ProductTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
+     * @throws Exception
      */
     public function run(): void
     {
@@ -22,7 +22,6 @@ class ProductTableSeeder extends Seeder
         $now = now();
         Product::insert([
             [
-                'gender_id'         => Gender::UNISEX_ID,
                 'name'              => 'كوبن توباكو',
                 'url'               => 'https://laverne.com/ar/jYqGpy',
                 'image_url'         => 'https://cdn.salla.sa/XzOPD/jFqbTiFmPgQnUBhqGV7PCUk6ttugcMhGTB2PFW8V.png',
@@ -31,7 +30,6 @@ class ProductTableSeeder extends Seeder
                 'updated_at'        => $now,
             ],
             [
-                'gender_id'         => Gender::MALE_ID,
                 'name'              => 'بيانكو',
                 'url'               => 'https://laverne.com/ar/qWQYyO',
                 'image_url'         => 'https://cdn.salla.sa/XzOPD/7eFeWDM676ldtdJKRc8cL1E2PPFmH8u9Lyayv5UQ.png',
@@ -40,7 +38,6 @@ class ProductTableSeeder extends Seeder
                 'updated_at'        => $now,
             ],
             [
-                'gender_id'         => Gender::MALE_ID,
                 'name'              => 'توباكو',
                 'url'               => 'https://laverne.com/ar/oOKrVB',
                 'image_url'         => 'https://cdn.salla.sa/XzOPD/D5a9jhLheYCtTcCw6j8R2JjW0nOcDmc6qCgEh3ZN.png',
@@ -49,7 +46,6 @@ class ProductTableSeeder extends Seeder
                 'updated_at'        => $now,
             ],
             [
-                'gender_id'         => Gender::UNISEX_ID,
                 'name'              => 'فانتوم',
                 'url'               => 'https://laverne.com/ar/xjojVg',
                 'image_url'         => 'https://cdn.salla.sa/XzOPD/AnEtsjhsMyGfRqOYWB1Qb1kwQ3P7d5RMOfULeO6w.png',
@@ -58,7 +54,6 @@ class ProductTableSeeder extends Seeder
                 'updated_at'        => $now,
             ],
             [
-                'gender_id'         => Gender::UNISEX_ID,
                 'name'              => 'آي واز هير',
                 'url'               => 'https://laverne.com/ar/BAylBR',
                 'image_url'         => 'https://cdn.salla.sa/XzOPD/lXwLU77zAr70xR2s9ondvTb7LZV7aGK018R2jIZa.png',
@@ -67,7 +62,6 @@ class ProductTableSeeder extends Seeder
                 'updated_at'        => $now,
             ],
             [
-                'gender_id'         => Gender::MALE_ID,
                 'name'              => 'صحارى',
                 'url'               => 'https://laverne.com/ar/jZampKg',
                 'image_url'         => 'https://cdn.salla.sa/XzOPD/AbxIPQ2GWocwd3LANCIQlx4WQCK02yxjjzI8VTJC.png',
@@ -76,7 +70,6 @@ class ProductTableSeeder extends Seeder
                 'updated_at'        => $now,
             ],
             [
-                'gender_id'         => Gender::MALE_ID,
                 'name'              => 'ميموري',
                 'url'               => 'https://laverne.com/ar/ZYRaoPp',
                 'image_url'         => 'https://cdn.salla.sa/XzOPD/T8KLDWwVABwCil8f5fD1qpcPeVguL0uSzwcENoEV.png',
@@ -85,7 +78,6 @@ class ProductTableSeeder extends Seeder
                 'updated_at'        => $now,
             ],
             [
-                'gender_id'         => Gender::MALE_ID,
                 'name'              => 'بوكيه',
                 'url'               => 'https://laverne.com/ar/YgYpDrW',
                 'image_url'         => 'https://cdn.salla.sa/XzOPD/nR3OiRKk8CMzlxSsC260On8YiD9J621l4tI4t6xp.jpg',
@@ -94,7 +86,6 @@ class ProductTableSeeder extends Seeder
                 'updated_at'        => $now,
             ],
             [
-                'gender_id'         => Gender::FEMALE_ID,
                 'name'              => 'لومينوس',
                 'url'               => 'https://laverne.com/ar/pnxdmA',
                 'image_url'         => 'https://cdn.salla.sa/XzOPD/TqtuO7J3YtaLmZa7AEbdTf0fumZJxfCbbPttnJEp.png',
@@ -103,7 +94,6 @@ class ProductTableSeeder extends Seeder
                 'updated_at'        => $now,
             ],
             [
-                'gender_id'         => Gender::FEMALE_ID,
                 'name'              => 'اللور',
                 'url'               => 'https://laverne.com/ar/lGboNdB',
                 'image_url'         => 'https://cdn.salla.sa/XzOPD/EzwvhJsRqHUHnIWgjGzb8JiPrLOdQrAWlr2rU3rA.png',
@@ -112,7 +102,6 @@ class ProductTableSeeder extends Seeder
                 'updated_at'        => $now,
             ],
             [
-                'gender_id'         => Gender::FEMALE_ID,
                 'name'              => 'فوربدن',
                 'url'               => 'https://laverne.com/ar/onQYNGp',
                 'image_url'         => 'https://cdn.salla.sa/XzOPD/ZJOhtf7cwc48m9eUeaVfsPjMc6BHbwmnqgho661Y.png',
@@ -121,7 +110,6 @@ class ProductTableSeeder extends Seeder
                 'updated_at'        => $now,
             ],
             [
-                'gender_id'         => Gender::FEMALE_ID,
                 'name'              => 'مس لافيرن',
                 'url'               => 'https://laverne.com/ar/gZQqbXv',
                 'image_url'         => 'https://cdn.salla.sa/XzOPD/JUkZ8xp7QwgAiyMy49tWpYMiMdQEaLhUGUIHxn1y.png',
@@ -130,7 +118,6 @@ class ProductTableSeeder extends Seeder
                 'updated_at'        => $now,
             ],
             [
-                'gender_id'         => Gender::FEMALE_ID,
                 'name'              => 'ليدي روز',
                 'url'               => 'https://laverne.com/ar/YvGRxn',
                 'image_url'         => 'https://cdn.salla.sa/XzOPD/bGlU1HWwuYhv80C7D2H8g7Ll9VevfZwdEZl3LJxf.jpg',
@@ -139,7 +126,6 @@ class ProductTableSeeder extends Seeder
                 'updated_at'        => $now,
             ],
             [
-                'gender_id'         => Gender::FEMALE_ID,
                 'name'              => 'مسك باتشولي',
                 'url'               => 'https://laverne.com/ar/eDQqGR',
                 'image_url'         => 'https://cdn.salla.sa/XzOPD/mw0UVZkyYrxq6X1RympaOx3VsGgSZz12lbUas6lf.png',
@@ -148,7 +134,6 @@ class ProductTableSeeder extends Seeder
                 'updated_at'        => $now,
             ],
             [
-                'gender_id'         => Gender::FEMALE_ID,
                 'name'              => 'بلانكا',
                 'url'               => 'https://laverne.com/ar/AzPnRgp',
                 'image_url'         => 'https://cdn.salla.sa/XzOPD/n35uNzVxyOobcZzf1wZVqB4lPMnmOhyWpfvbFiCp.png',
@@ -157,7 +142,6 @@ class ProductTableSeeder extends Seeder
                 'updated_at'        => $now,
             ],
             [
-                'gender_id'         => Gender::UNISEX_ID,
                 'name'              => 'بلو لافيرن بخور- 200 مل',
                 'url'               => 'https://laverne.com/ar/KjjRvDy',
                 'image_url'         => 'https://cdn.salla.sa/XzOPD/zB5h8hq1UviMXhMLHY9KAxYOGFJjmArkoFCCvnSR.png',
@@ -166,7 +150,6 @@ class ProductTableSeeder extends Seeder
                 'updated_at'        => $now,
             ],
             [
-                'gender_id'         => Gender::UNISEX_ID,
                 'name'              => 'بلو لافيرن',
                 'url'               => 'https://laverne.com/ar/VwYOxW',
                 'image_url'         => 'https://cdn.salla.sa/XzOPD/TPKRh7vnade10W7pcjTXBat5dSPzvrewOM7cYJ4R.png',
@@ -175,7 +158,6 @@ class ProductTableSeeder extends Seeder
                 'updated_at'        => $now,
             ],
             [
-                'gender_id'         => Gender::UNISEX_ID,
                 'name'              => 'بلو لافيرن سبورت - 200 مل',
                 'url'               => 'https://laverne.com/ar/bRjdjqx',
                 'image_url'         => 'https://cdn.salla.sa/XzOPD/QRRp8elvrtBEzr3hvsNxhjOnrPcVIDAtMz5pRLIb.png',
@@ -184,7 +166,6 @@ class ProductTableSeeder extends Seeder
                 'updated_at'        => $now,
             ],
             [
-                'gender_id'         => Gender::UNISEX_ID,
                 'name'              => 'بلو لافيرن تايقر',
                 'url'               => 'https://laverne.com/ar/zvzbXNE',
                 'image_url'         => 'https://cdn.salla.sa/XzOPD/dX4J7y8JPRdRFv2qZvuFRHM3mZxWLbDscMsJjK9j.png',
@@ -193,14 +174,5 @@ class ProductTableSeeder extends Seeder
                 'updated_at'        => $now,
             ]
         ]);
-
-        Product::all()->each(function ($product) {
-            $product->categories()->attach(
-                Category::inRandomOrder()
-                    ->limit(random_int(1, 3))
-                    ->pluck('id')
-                    ->toArray()
-            );
-        });
     }
 }

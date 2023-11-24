@@ -37,7 +37,7 @@ function generateAnswerMarkup(answers, questionId, hasImages) {
                         </span>`
                             : ""
                     }
-                    <span class="answer">${answer.answer}</span>
+                    <span class="answer">${answer.title}</span>
                 </label>
                 <input type="radio" ${i === 0 ? "checked" : ""} class="answer-inp" id=q-${questionId}-answer-${i + 1}
                     name="q-${questionId}" value="q-${questionId}-answer-${i + 1}">
@@ -105,15 +105,13 @@ function quizRequestHandler() {
             return res.json();
         })
         .then(function (data) {
-            renderStepsHeader(data.questions.length);
-            renderFormQuestions(data.questions);
+            renderStepsHeader(data.quiz.questions.length);
+            renderFormQuestions(data.quiz.questions);
         });
 }
 
-function renderProducts(products) {
-    let productsMarkup = "";
-    products.forEach((product) => {
-        productsMarkup += `
+function renderProduct(product) {
+    return `
         <div class="product-wrapper">
             <a href="${product.url}" class="product-img">
                 <img src="${product.image}" alt="${product.name}">
@@ -124,8 +122,6 @@ function renderProducts(products) {
             </div>
         </div>
         `;
-    });
-    return productsMarkup;
 }
 
 function showLoader() {
@@ -164,7 +160,7 @@ function getProductsHandler(url) {
             accept: "application/json",
         },
         body: JSON.stringify({
-            gender_id: selectedGenderId,
+            user_key: "01234asdf98765",
             results: storedAnswers,
         }),
     });
@@ -177,19 +173,14 @@ function getProductsHandler(url) {
                 document.querySelector('.result-wrapper .loader')?.remove();
                 document.querySelector(".preferences-test-done .products-container").insertAdjacentHTML(
                     "beforeend",
-                    renderProducts(data.products)
+                    renderProduct(data.product)
                 );
-                if (data.meta.current_page === 1) {
-                    document.querySelector(".multistep-form-wrapper").classList.add("hidden");
-                    document.querySelector(".preferences-test-done").classList.remove("hidden");
-                    setTimeout(() => {
-                        document.querySelector(".preferences-test-done").classList.remove("switch-effect");
-                    }, 600);
-                }
-                if (data.links.next) {
-                    showLoader();
-                    productsObserverHandler(data.links.next);
-                }
+
+                document.querySelector(".multistep-form-wrapper").classList.add("hidden");
+                document.querySelector(".preferences-test-done").classList.remove("hidden");
+                setTimeout(() => {
+                    document.querySelector(".preferences-test-done").classList.remove("switch-effect");
+                }, 600);
             }
         });
 }
@@ -305,35 +296,7 @@ genderOptions.forEach((gender, i) => {
     });
 })
 
-showFormBtn.addEventListener('click', () => {
-    genderWrapper.classList.add('switch-effect');
-    setTimeout(() => {
-        genderWrapper.classList.add('hidden');
-    }, 300);
-    setTimeout(() => {
-        quizRequestHandler();
-    }, 400);
-});
-
-document.querySelector('.back-to-gender-selection').addEventListener('click', function () {
-    document.querySelector('.multistep-form-wrapper').classList.add('switch-effect');
-    setTimeout(() => {
-        document.querySelector('.multistep-form-wrapper').classList.add('hidden');
-        showFormBtn.classList.add('hidden');
-        genderWrapper.classList.remove('hidden');
-        genderOptions.forEach((gender) => {
-            gender.classList.remove('selected');
-        })
-        setTimeout(() => {
-            genderWrapper.classList.remove('switch-effect');
-            document.querySelector('.steps-header .steps-wrapper').innerHTML = '';
-            document.querySelector('.multistep-form-wrapper .form-steps-wrapper').innerHTML = '';
-            document.querySelector('.buttons-wrapper').classList.add('no-prev');
-            document.querySelector('.buttons-wrapper').dataset.currentStep = 1;
-            storedAnswers = {};
-        }, 200);
-    }, 600);
-})
+quizRequestHandler();
 
 document.querySelector(".move-to-next-step-btn").addEventListener("click", function (e) {
     switchStepsHandler(e, this);
