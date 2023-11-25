@@ -369,7 +369,7 @@ a {
 }
 .product-wrapper .product-img {
     width: 200px;
-    /*height: 200px;*/
+    height: 200px;
     overflow: hidden;
     border-radius: 15px;
     box-shadow: 0 0 5px 0 #a15e3a5c;
