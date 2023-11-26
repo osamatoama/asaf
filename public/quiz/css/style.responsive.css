@@ -34,10 +34,8 @@
 }
 @media (max-width: 768px) {
     .intro {
-        width: 95%;
         padding: 40px;
         background: #da855759;
-        margin: 50px auto;
     }
 
     .intro .intro-image {

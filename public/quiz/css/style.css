@@ -36,14 +36,14 @@ a {
     background: #dd7239 !important;
 }
 .intro {
+    min-width: 100vw;
+    min-height: 100vh;
     width: 90%;
     display: flex;
     align-items: center;
     gap: 30px;
     padding: 50px;
     background: #da855759;
-    margin: 50px auto;
-    border-radius: 25px;
 }
 .intro .intro-image {
     flex-shrink: 0;
