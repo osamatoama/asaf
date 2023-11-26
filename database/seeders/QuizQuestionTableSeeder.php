@@ -23,7 +23,7 @@ class QuizQuestionTableSeeder extends Seeder
         QuizQuestion::insert([
             [
                 'quiz_id'    => $quiz->id,
-                'title'     => 'اختر بعناية التصنيف الذي يمثلك في العطور',
+                'title'     => 'اختر التصنيف المناسب لك في العطور',
                 'active'     => true,
                 'has_image'  => true,
                 'created_at' => $now,
@@ -31,7 +31,7 @@ class QuizQuestionTableSeeder extends Seeder
             ],
             [
                 'quiz_id'    => $quiz->id,
-                'title'      => 'التصنيف الثاني',
+                'title'      => 'توقيتك المفضل في العطور…؟',
                 'active'     => true,
                 'has_image'  => true,
                 'created_at' => $now,
@@ -39,7 +39,7 @@ class QuizQuestionTableSeeder extends Seeder
             ],
             [
                 'quiz_id'    => $quiz->id,
-                'title'      => 'التصنيف الثالث',
+                'title'      => 'شخصيتك في العطور تميل إلى أن تكون...؟',
                 'active'     => true,
                 'has_image'  => true,
                 'created_at' => $now,
@@ -47,7 +47,7 @@ class QuizQuestionTableSeeder extends Seeder
             ],
             [
                 'quiz_id'    => $quiz->id,
-                'title'      => 'التصنيف الرابع',
+                'title'      => 'شخصيتك تحب...؟',
                 'active'     => true,
                 'has_image'  => true,
                 'created_at' => $now,
@@ -55,7 +55,7 @@ class QuizQuestionTableSeeder extends Seeder
             ],
             [
                 'quiz_id'    => $quiz->id,
-                'title'      => 'التصنيف الخامس',
+                'title'      => 'تميل الى الرائحة...؟',
                 'active'     => true,
                 'has_image'  => true,
                 'created_at' => $now,
@@ -63,7 +63,7 @@ class QuizQuestionTableSeeder extends Seeder
             ],
             [
                 'quiz_id'    => $quiz->id,
-                'title'      => 'التصنيف السادس',
+                'title'      => 'تميل الى الرائحة...؟',
                 'active'     => true,
                 'has_image'  => true,
                 'created_at' => $now,
@@ -71,7 +71,7 @@ class QuizQuestionTableSeeder extends Seeder
             ],
             [
                 'quiz_id'    => $quiz->id,
-                'title'      => 'التصنيف السابع',
+                'title'      => 'تحب العطر…؟',
                 'active'     => true,
                 'has_image'  => true,
                 'created_at' => $now,
@@ -79,7 +79,7 @@ class QuizQuestionTableSeeder extends Seeder
             ],
             [
                 'quiz_id'    => $quiz->id,
-                'title'      => 'التصنيف الثامن',
+                'title'      => 'تميل إلى..؟',
                 'active'     => true,
                 'has_image'  => true,
                 'created_at' => $now,
