@@ -1,26 +1,23 @@
 @extends('website.layouts.main')
 
 @section('content')
-    <div class="user-preferences-form-container" data-quiz-url="{{ route('api.quiz') }}">
-        <h1 class="main-heading">اعرف عطرك حسب شخصيتك</h1>
-        <div class="gender-selection hidden switch-effect">
-            <h2>حدد النوع</h2>
-            <div class="gender-options">
-                <div class="gender selected" data-gender-id="1">
-                    <div class="img-wrapper">
-                        <img src="{{ asset('quiz/images/gender-1.png') }}" alt="male">
-                    </div>
-                    <span>ذكر</span>
-                </div>
-                <div class="gender" data-gender-id="2">
-                    <div class="img-wrapper">
-                        <img src="{{ asset('quiz/images/gender-2.png') }}" alt="female">
-                    </div>
-                    <span>أنثى</span>
-                </div>
-            </div>
-            <button class="show-form hidden">ابدأ الأختبار</button>
+    <div class="intro">
+        <div class="intro-image">
+            <img src="{{ asset('quiz/images/intro.jpg') }}" alt="Perfume Quiz">
         </div>
+        <div class="intro-text">
+            <p class="text-bold-light">محتار بين عطور عسَّاف؟</p>
+            <p class="text-bold-dark">لا تشيل هم عسَّاف يفهمك 😉🐎…</p>
+            <p class="text-normal-dark">حنّا هنا نساعدك لتصنع العطر المثالي الذي يتناسب مع ذائقتك! </p>
+            <p class="text-normal-dark">
+                تم إنشاء هذا الاختبار من فريق أبحاث عسَّاف لنكتشف ذوقك الرهيب في العطور
+                مدة الاختبار لا تتجاوز الدقيقة…
+            </p>
+            <button class="start-quiz">ابدأ الأختبار</button>
+        </div>
+    </div>
+    <div class="user-preferences-form-container hidden switch-effect" data-quiz-url="{{ route('api.quiz') }}">
+        <h1 class="main-heading">اعرف عطرك حسب شخصيتك</h1>
         <div class="multistep-form-wrapper">
             <div class="steps-header">
                 <div class="steps-wrapper"></div>
@@ -38,7 +35,7 @@
         </div>
         <div class="preferences-test-done switch-effect hidden">
             <div class="result-wrapper">
-                <h2 class="result-title">العطر المناسب لشخصيتك</h2>
+                <h2 class="result-title">ذوقك رهيب وعطرك المناسب هو</h2>
                 <div class="products-container"></div>
                 <button class="start-over">إعادة الإختبار</button>
             </div>

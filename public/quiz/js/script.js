@@ -30,14 +30,8 @@ function generateAnswerMarkup(answers, questionId, hasImages) {
         answerMarkup += `
             <div class="answer-wrapper ${i === 0 ? "selected" : ""}" data-id=${answer.id}>
                 <label for=q-${questionId}-answer-${i + 1}>
-                    ${
-                        hasImages
-                            ? `<span class="answer-img">
-                            <img src="${answer.image.thumbnail}" alt="answer-thumb">
-                        </span>`
-                            : ""
-                    }
-                    <span class="answer">${answer.title}</span>
+                    <p class="answer">${answer.title}</p>
+                    <span class="answer-desc">${answer.description}</span>
                 </label>
                 <input type="radio" ${i === 0 ? "checked" : ""} class="answer-inp" id=q-${questionId}-answer-${i + 1}
                     name="q-${questionId}" value="q-${questionId}-answer-${i + 1}">
@@ -107,6 +101,11 @@ function quizRequestHandler() {
         .then(function (data) {
             renderStepsHeader(data.quiz.questions.length);
             renderFormQuestions(data.quiz.questions);
+            document.querySelector(".user-preferences-form-container").classList.remove("hidden");
+            setTimeout(() => {
+                document.querySelector('.intro').remove();
+                document.querySelector(".user-preferences-form-container").classList.remove("switch-effect");
+            }, 600);
         });
 }
 
@@ -117,8 +116,9 @@ function renderProduct(product) {
                 <img src="${product.image}" alt="${product.name}">
             </a>
             <div class="links-wrapper">
-                <a class="product-title" target="_blank" href="${product.url}">${product.name}</a>
-                <a class="see-more"  target="_blank" href="${product.url}">المزيد عن العطر</a>
+                <a href="${product.url}" target="_blank" class="product-title">${product.name}</a>
+                <p class="product-desc">${product.description}</p>
+                <a href="${product.url}" target="_blank" class="see-more">المزيد عن العطر</a>
             </div>
         </div>
         `;
@@ -177,6 +177,7 @@ function getProductsHandler(url) {
                 );
 
                 document.querySelector(".multistep-form-wrapper").classList.add("hidden");
+                document.querySelector('.main-heading').classList.add('hidden');
                 document.querySelector(".preferences-test-done").classList.remove("hidden");
                 setTimeout(() => {
                     document.querySelector(".preferences-test-done").classList.remove("switch-effect");
@@ -294,9 +295,12 @@ genderOptions.forEach((gender, i) => {
             showFormBtn.classList.remove('animate');
         }, 1200);
     });
-})
+});
 
-quizRequestHandler();
+document.querySelector('.start-quiz')?.addEventListener('click', function () {
+    this.classList.add('disabled');
+    quizRequestHandler();
+})
 
 document.querySelector(".move-to-next-step-btn").addEventListener("click", function (e) {
     switchStepsHandler(e, this);
