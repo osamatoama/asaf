@@ -107,7 +107,10 @@
         font-size: 18px;
     }
     .question-wrapper .answers-wrapper .answer-wrapper .answer {
-        font-size: 16px;
+        font-size: 18px;
+    }
+    .question-wrapper .answers-wrapper .answer-wrapper .answer-desc {
+        font-size: 15px;
     }
     .result-title {
         font-size: 30px;
@@ -158,10 +161,10 @@
         width: 35px;
         height: 35px;
     }
-    .steps-header .steps-wrapper .step {
-        padding: 0 12px;
+    .steps-header {
+        padding: 15px 0;
     }
-    .steps-header .steps-wrapper .step.active {
+    .steps-header .steps-wrapper .step {
         padding: 0 10px;
     }
     .steps-header .steps-wrapper .step .step-icon svg {
@@ -184,5 +187,11 @@
     }
     .preferences-test-done .start-over {
         width: 100%;
+    }
+}
+
+@media (max-width: 350px) {
+    .steps-header .steps-wrapper .step {
+        padding: 0 7px;
     }
 }
