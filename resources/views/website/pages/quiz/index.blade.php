@@ -13,7 +13,7 @@
                 تم إنشاء هذا الاختبار من فريق أبحاث عسَّاف لنكتشف ذوقك الرهيب في العطور
                 مدة الاختبار لا تتجاوز الدقيقة…
             </p>
-            <button class="start-quiz">ابدأ الأختبار</button>
+            <button class="start-quiz">اكتشف ذوقك</button>
         </div>
     </div>
     <div class="user-preferences-form-container hidden switch-effect" data-quiz-url="{{ route('api.quiz') }}">
