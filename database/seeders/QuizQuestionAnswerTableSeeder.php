@@ -96,15 +96,15 @@ class QuizQuestionAnswerTableSeeder extends Seeder
             ],
             [
                 'quiz_question_id' => 4,
-                'title'            => 'متوحش',
-                'description'      => 'يمثل التوحش في العطور الشخصيات الواثقة التي تتدفق منها روح الإقدام.',
+                'title'            => 'الإقدام',
+                'description'      => 'عطور للشخصيات الواثقة التي تتدفق منها روح الإقدام.',
                 'countable'        => true,
                 'created_at'       => $now,
                 'updated_at'       => $now,
             ],
             [
                 'quiz_question_id' => 4,
-                'title'            => 'رقيق',
+                'title'            => 'الرِقة',
                 'description'      => 'في العطور هي تمثل الروح ناعمة، التي تتميز في رقتها.',
                 'countable'        => false,
                 'created_at'       => $now,
@@ -112,7 +112,7 @@ class QuizQuestionAnswerTableSeeder extends Seeder
             ],
             [
                 'quiz_question_id' => 5,
-                'title'            => 'خشبية',
+                'title'            => 'الخشبية',
                 'description'      => 'تتسم الرائحة الخشبية بالفخامة والأناقة.',
                 'countable'        => true,
                 'created_at'       => $now,
@@ -120,7 +120,7 @@ class QuizQuestionAnswerTableSeeder extends Seeder
             ],
             [
                 'quiz_question_id' => 5,
-                'title'            => 'زهرية',
+                'title'            => 'الزهرية',
                 'description'      => 'العطور الزهرية هي لوحة فنية من نفحات الأزهار الرائعة و الأنوثة الخالدة.',
                 'countable'        => false,
                 'created_at'       => $now,
@@ -128,7 +128,7 @@ class QuizQuestionAnswerTableSeeder extends Seeder
             ],
             [
                 'quiz_question_id' => 6,
-                'title'            => 'فاكهية',
+                'title'            => 'الفاكهية',
                 'description'      => 'الطابع الفاكهي بالعطور يضفي الانتعاش والبرودة على من يضعه.',
                 'countable'        => true,
                 'created_at'       => $now,
@@ -136,7 +136,7 @@ class QuizQuestionAnswerTableSeeder extends Seeder
             ],
             [
                 'quiz_question_id' => 6,
-                'title'            => 'حلوة',
+                'title'            => 'الحلوة',
                 'description'      => 'تتميز برائحتها الدافئة واللذيذة، التي تضفي لمسة جذابة لشخصيتك!',
                 'countable'        => false,
                 'created_at'       => $now,
@@ -144,7 +144,7 @@ class QuizQuestionAnswerTableSeeder extends Seeder
             ],
             [
                 'quiz_question_id' => 7,
-                'title'            => 'قوي',
+                'title'            => 'القوي',
                 'description'      => 'هي العطور التي تجعل حضور من يرتديها ذو طابعٍ ملكي.',
                 'countable'        => true,
                 'created_at'       => $now,
@@ -152,7 +152,7 @@ class QuizQuestionAnswerTableSeeder extends Seeder
             ],
             [
                 'quiz_question_id' => 7,
-                'title'            => 'خفيف',
+                'title'            => 'الخفيف',
                 'description'      => 'يتميز محب العطور الخفيفة بالإبداع، ويسعى دائمًا للبحث عن الجمال.',
                 'countable'        => false,
                 'created_at'       => $now,
