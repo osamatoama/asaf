@@ -18,6 +18,7 @@ return new class extends Migration
                 $table->unsignedBigInteger('client_id')->nullable();
                 $table->string('quiz_title')->nullable();
                 $table->integer('score')->default(0);
+                $table->unsignedBigInteger('gender_id')->nullable();
                 $table->unsignedBigInteger('product_id')->nullable();
                 $table->string('product_name')->nullable();
                 $table->timestamps();

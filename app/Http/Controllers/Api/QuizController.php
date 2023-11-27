@@ -7,6 +7,7 @@ use App\Http\Requests\QuizResultsRequest;
 use App\Http\Resources\ProductResource;
 use App\Http\Resources\QuizResource;
 use App\Models\Client;
+use App\Models\Gender;
 use App\Models\Product;
 use App\Models\Quiz;
 use App\Models\QuizQuestion;
@@ -14,6 +15,7 @@ use App\Models\QuizQuestionAnswer;
 use App\Models\QuizResult;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 
 class QuizController extends Controller
@@ -38,9 +40,20 @@ class QuizController extends Controller
         $phone    = $request->get('phone');
         $email    = $request->get('email');
 
-        $newAnswersIds = array_values($results);
+        $genderId = $results[0] ?? 0;
+        $gender   = Gender::find($genderId);
 
-        $quizScore = $this->getQuizAnswersTotalPoints($results);
+        if (blank($gender)) {
+            return response()->json([
+                'status'  => 200,
+                'success' => false,
+                'message' => 'تصنيف العطور غير صالح',
+            ]);
+        }
+
+        unset($results[0]);
+
+        $newAnswersIds = array_values($results);
 
         $client = Client::where('key', $userKey)
             ->when(filled($phone), function ($query) use ($phone) {
@@ -50,8 +63,8 @@ class QuizController extends Controller
             })->first();
 
         $existedClientQuizResults = $quiz->results()
+            ->where('gender_id', $genderId)
             ->where('client_id', $client->id ?? 0)
-            ->where('score', $quizScore)
             ->get();
 
         if (blank($client)) {
@@ -78,24 +91,35 @@ class QuizController extends Controller
             $existedClientQuizResult = $clientUpdateCase->existedClientQuizResult;
         }
 
-        $quizScore = $this->getQuizAnswersTotalPoints($results);
-
         if ($resultedProductIsRandom) {
-            $quizPoints = $quiz->points()
-                ->where('points', $quizScore)
-                ->first();
+            $productsIdsArr = [];
 
-            if (blank($quizPoints)) {
-                return response()->json([
-                    'status'  => 200,
-                    'success' => false,
-                    'message' => 'لا توجد عطور تتوافق مع إجاباتك',
-                ]);
+            foreach ($newAnswersIds as $newAnswerId) {
+                if (filled($answer = QuizQuestionAnswer::find($newAnswerId))) {
+                    $productsIdsArr[] = $answer->products()
+                        ->wantedGenders($genderId)
+                        ->pluck('products.id')
+                        ->toArray();
+                }
             }
 
-            $product = $quizPoints?->products()->inRandomOrder()->first();
+            // flatten a multi-dimensional array into a single level array
+            $productsIdsArr = Arr::flatten($productsIdsArr);
+
+            // count the number of occurrences of each value in an array
+            $productsIdsArr = array_count_values($productsIdsArr);
+
+            // get the key of the highest value
+            $maxOccurrence  = max($productsIdsArr);
+
+            // get the keys of the highest values
+            $productsIdsArr = array_keys($productsIdsArr, $maxOccurrence);
+
+            $product   = Product::whereIn('id', $productsIdsArr)->inRandomOrder()->first();
+            $quizScore = $maxOccurrence;
         } else {
-            $product = $existedClientQuizResult?->product;
+            $product   = $existedClientQuizResult?->product;
+            $quizScore = $existedClientQuizResult?->score ?? 0;
         }
 
         if (blank($product)) {
@@ -106,8 +130,7 @@ class QuizController extends Controller
             ]);
         }
 
-
-        $newQuizResult = $this->createQuizResult($client, $quiz, $quizScore, $product);
+        $newQuizResult = $this->createQuizResult($client, $quiz, $quizScore, $product, $genderId);
 
         $this->createQuizResultAnswers($newQuizResult, $results);
 
@@ -118,26 +141,6 @@ class QuizController extends Controller
             'success'  => true,
             'product'  => new ProductResource($product),
         ]);
-    }
-
-    /**
-     * @param array $results
-     * @return int
-     */
-    private function getQuizAnswersTotalPoints(array $results): int
-    {
-        $points = 0;
-        foreach ($results as $questionId => $answerId) {
-            $answer = QuizQuestionAnswer::where('id', $answerId)
-                ->where('quiz_question_id', $questionId)
-                ->first();
-
-            if (filled($answer) && $answer->countable) {
-                $points++;
-            }
-        }
-
-        return $points;
     }
 
     /**
@@ -184,9 +187,9 @@ class QuizController extends Controller
         }
 
         return (object) [
-            'client'                 => $updatedClient,
-            'resultedProductIsRandom'=> $resultedProductIsRandom,
-            'existedClientQuizResult'=> $existedClientQuizResult,
+            'client'                  => $updatedClient,
+            'resultedProductIsRandom' => $resultedProductIsRandom,
+            'existedClientQuizResult' => $existedClientQuizResult,
         ];
     }
 
@@ -195,18 +198,21 @@ class QuizController extends Controller
      * @param Quiz $quiz
      * @param int $quizScore
      * @param Product $product
+     * @param int $genderId
      * @return QuizResult
      */
     private function createQuizResult(
         Client $client,
         Quiz $quiz,
         int $quizScore,
-        Product $product
+        Product $product,
+        int $genderId
     ): QuizResult {
         return $quiz->results()->create([
             'client_id'    => $client->id,
             'quiz_title'   => $quiz->title,
             'score'        => $quizScore,
+            'gender_id'    => $genderId,
             'product_id'   => $product->id,
             'product_name' => $product->name,
         ]);
@@ -221,8 +227,13 @@ class QuizController extends Controller
         QuizResult $quizResult,
         array $results
     ): void {
+
+        if (((int) array_key_first($results)) === 0)  {
+            unset($results[0]);
+        }
+
         $quizResult->quizResultAnswers()->createMany(
-            array_map(function ($questionId, $answerId) {
+            array_map(function (int $questionId, int $answerId) {
                 return [
                     'question_id'    => $questionId,
                     'answer_id'      => $answerId,
