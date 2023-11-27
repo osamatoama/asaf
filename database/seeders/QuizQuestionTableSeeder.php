@@ -23,14 +23,6 @@ class QuizQuestionTableSeeder extends Seeder
         QuizQuestion::insert([
             [
                 'quiz_id'    => $quiz->id,
-                'title'     => 'اختر التصنيف المناسب لك في العطور',
-                'active'     => true,
-                'has_image'  => true,
-                'created_at' => $now,
-                'updated_at' => $now,
-            ],
-            [
-                'quiz_id'    => $quiz->id,
                 'title'      => 'توقيتك المفضل في العطور…؟',
                 'active'     => true,
                 'has_image'  => true,

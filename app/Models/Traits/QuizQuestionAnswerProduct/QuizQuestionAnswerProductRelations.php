@@ -1,22 +1,22 @@
 <?php
 
-namespace App\Models\Traits\QuizPointProduct;
+namespace App\Models\Traits\QuizQuestionAnswerProduct;
 
 use App\Models\Product;
-use App\Models\QuizPoint;
+use App\Models\QuizQuestionAnswer;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
- * Trait QuizPointProductRelations
+ * Trait QuizQuestionAnswerProductRelations
  */
-trait QuizPointProductRelations
+trait QuizQuestionAnswerProductRelations
 {
     /**
      * @return BelongsTo
      */
-    public function point(): BelongsTo
+    public function answer(): BelongsTo
     {
-        return $this->belongsTo(QuizPoint::class, 'quiz_point_id');
+        return $this->belongsTo(QuizQuestionAnswer::class, 'quiz_question_answer_id');
     }
 
     /**

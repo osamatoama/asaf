@@ -14,6 +14,7 @@ return new class extends Migration
         if(!Schema::hasTable('products')) {
             Schema::create('products', function (Blueprint $table) {
                 $table->id();
+                $table->unsignedBigInteger('gender_id')->nullable();
                 $table->string('salla_product_id')->nullable();
                 $table->string('name')->nullable();
                 $table->string('url')->nullable();
@@ -22,6 +23,11 @@ return new class extends Migration
                 $table->longText('description')->nullable();
                 $table->longText('details')->nullable();
                 $table->timestamps();
+
+                $table->foreign('gender_id')
+                    ->references('id')
+                    ->on('genders')
+                    ->onDelete('cascade');
             });
         }
     }
