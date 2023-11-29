@@ -24,30 +24,6 @@ class QuizQuestionAnswerTableSeeder extends Seeder
         QuizQuestionAnswer::insert([
             [
                 'quiz_question_id' => 1,
-                'title'            => 'نسائي',
-                'description'      => null,
-                'countable'        => true,
-                'created_at'       => $now,
-                'updated_at'       => $now,
-            ],
-            [
-                'quiz_question_id' => 1,
-                'title'            => 'رجالي',
-                'description'      => null,
-                'countable'        => true,
-                'created_at'       => $now,
-                'updated_at'       => $now,
-            ],
-            [
-                'quiz_question_id' => 1,
-                'title'            => 'للجنسين',
-                'description'      => null,
-                'countable'        => false,
-                'created_at'       => $now,
-                'updated_at'       => $now,
-            ],
-            [
-                'quiz_question_id' => 2,
                 'title'            => 'صباحي',
                 'description'      => 'عطور تتفتح زهورُ نفحاتها مع إشراقة الصباح',
                 'countable'        => false,
@@ -55,7 +31,7 @@ class QuizQuestionAnswerTableSeeder extends Seeder
                 'updated_at'       => $now,
             ],
             [
-                'quiz_question_id' => 2,
+                'quiz_question_id' => 1,
                 'title'            => 'مسائي',
                 'description'      => 'في ليلةٍ حالكةِ الظلام، تظهر نفحات تتزيّن بك.',
                 'countable'        => false,
@@ -63,7 +39,7 @@ class QuizQuestionAnswerTableSeeder extends Seeder
                 'updated_at'       => $now,
             ],
             [
-                'quiz_question_id' => 2,
+                'quiz_question_id' => 1,
                 'title'            => 'كل الأوقات',
                 'description'      => 'في كل وقت ستجد نفسك بين رائحة مختلفة تتميز بها عن الجميع.',
                 'countable'        => true,
@@ -71,7 +47,7 @@ class QuizQuestionAnswerTableSeeder extends Seeder
                 'updated_at'       => $now,
             ],
             [
-                'quiz_question_id' => 3,
+                'quiz_question_id' => 2,
                 'title'            => 'مُلفِت',
                 'description'      => 'عطور مخصصة لك لتكون بها محور الانتباه ومحط أنظارِ الجميع. ',
                 'countable'        => true,
@@ -79,7 +55,7 @@ class QuizQuestionAnswerTableSeeder extends Seeder
                 'updated_at'       => $now,
             ],
             [
-                'quiz_question_id' => 3,
+                'quiz_question_id' => 2,
                 'title'            => 'غموض',
                 'description'      => 'روائح تضع شخصياتها في هالة هادئة، تزدهر بهم خلف الظلال.',
                 'countable'        => false,
@@ -87,7 +63,7 @@ class QuizQuestionAnswerTableSeeder extends Seeder
                 'updated_at'       => $now,
             ],
             [
-                'quiz_question_id' => 3,
+                'quiz_question_id' => 2,
                 'title'            => 'حساس',
                 'description'      => 'تجمع العطور الحساسة بين الرُقيّ والرِقة.',
                 'countable'        => false,
@@ -95,7 +71,7 @@ class QuizQuestionAnswerTableSeeder extends Seeder
                 'updated_at'       => $now,
             ],
             [
-                'quiz_question_id' => 4,
+                'quiz_question_id' => 3,
                 'title'            => 'الإقدام',
                 'description'      => 'عطور للشخصيات الواثقة التي تتدفق منها روح الإقدام.',
                 'countable'        => true,
@@ -103,7 +79,7 @@ class QuizQuestionAnswerTableSeeder extends Seeder
                 'updated_at'       => $now,
             ],
             [
-                'quiz_question_id' => 4,
+                'quiz_question_id' => 3,
                 'title'            => 'الرِقة',
                 'description'      => 'في العطور هي تمثل الروح ناعمة، التي تتميز في رقتها.',
                 'countable'        => false,
@@ -111,7 +87,7 @@ class QuizQuestionAnswerTableSeeder extends Seeder
                 'updated_at'       => $now,
             ],
             [
-                'quiz_question_id' => 5,
+                'quiz_question_id' => 4,
                 'title'            => 'الخشبية',
                 'description'      => 'تتسم الرائحة الخشبية بالفخامة والأناقة.',
                 'countable'        => true,
@@ -119,7 +95,7 @@ class QuizQuestionAnswerTableSeeder extends Seeder
                 'updated_at'       => $now,
             ],
             [
-                'quiz_question_id' => 5,
+                'quiz_question_id' => 4,
                 'title'            => 'الزهرية',
                 'description'      => 'العطور الزهرية هي لوحة فنية من نفحات الأزهار الرائعة و الأنوثة الخالدة.',
                 'countable'        => false,
@@ -127,7 +103,7 @@ class QuizQuestionAnswerTableSeeder extends Seeder
                 'updated_at'       => $now,
             ],
             [
-                'quiz_question_id' => 6,
+                'quiz_question_id' => 5,
                 'title'            => 'الفاكهية',
                 'description'      => 'الطابع الفاكهي بالعطور يضفي الانتعاش والبرودة على من يضعه.',
                 'countable'        => true,
@@ -135,7 +111,7 @@ class QuizQuestionAnswerTableSeeder extends Seeder
                 'updated_at'       => $now,
             ],
             [
-                'quiz_question_id' => 6,
+                'quiz_question_id' => 5,
                 'title'            => 'الحلوة',
                 'description'      => 'تتميز برائحتها الدافئة واللذيذة، التي تضفي لمسة جذابة لشخصيتك!',
                 'countable'        => false,
@@ -143,7 +119,7 @@ class QuizQuestionAnswerTableSeeder extends Seeder
                 'updated_at'       => $now,
             ],
             [
-                'quiz_question_id' => 7,
+                'quiz_question_id' => 6,
                 'title'            => 'القوي',
                 'description'      => 'هي العطور التي تجعل حضور من يرتديها ذو طابعٍ ملكي.',
                 'countable'        => true,
@@ -151,7 +127,7 @@ class QuizQuestionAnswerTableSeeder extends Seeder
                 'updated_at'       => $now,
             ],
             [
-                'quiz_question_id' => 7,
+                'quiz_question_id' => 6,
                 'title'            => 'الخفيف',
                 'description'      => 'يتميز محب العطور الخفيفة بالإبداع، ويسعى دائمًا للبحث عن الجمال.',
                 'countable'        => false,
@@ -159,7 +135,7 @@ class QuizQuestionAnswerTableSeeder extends Seeder
                 'updated_at'       => $now,
             ],
             [
-                'quiz_question_id' => 8,
+                'quiz_question_id' => 7,
                 'title'            => 'دافئ',
                 'description'      => 'العطور الدافئة تشكل تجربة عاطفية تأسر الحواس وتدفئ القلب.',
                 'countable'        => false,
@@ -167,7 +143,7 @@ class QuizQuestionAnswerTableSeeder extends Seeder
                 'updated_at'       => $now,
             ],
             [
-                'quiz_question_id' => 8,
+                'quiz_question_id' => 7,
                 'title'            => 'منعش',
                 'description'      => 'عطور مفعمة بالحيوية والنشاط، تحمل نسمات من الحمضيات مثل الليمون، البرتقال.',
                 'countable'        => true,
@@ -175,19 +151,5 @@ class QuizQuestionAnswerTableSeeder extends Seeder
                 'updated_at'       => $now,
             ]
         ]);
-
-        QuizQuestion::all()->each(function ($question) {
-            $imagesPath = File::files(public_path('answers-images/' . $question->id));
-            $imgCount   = count($imagesPath);
-            foreach ($question->answers as $key => $answer) {
-                try {
-                    if ($imgCount > 0) {
-                        $answer->addMedia(public_path('answers-images/' . $question->id . '/' . ($key + 1) . '.jpg'))
-                            ->preservingOriginal()
-                            ->toMediaCollection('answer-images');
-                    }
-                } catch (Exception $e) {}
-            }
-        });
     }
 }

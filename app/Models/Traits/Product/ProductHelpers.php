@@ -2,6 +2,8 @@
 
 namespace App\Models\Traits\Product;
 
+use App\Models\Gender;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Fluent;
 use Spatie\Image\Exceptions\InvalidManipulation;
 use Spatie\MediaLibrary\InteractsWithMedia;
@@ -25,6 +27,18 @@ trait ProductHelpers
             'original'  => $media?->getUrl(),
             'thumbnail' => $media?->getUrl('thumbnail'),
         ]);
+    }
+
+    public function scopeWantedGenders(Builder $query, int $genderId): Builder {
+        if ($genderId === Gender::MALE_ID) {
+            return $query->whereIn('gender_id', [Gender::MALE_ID, Gender::UNISEX_ID]);
+        }
+
+        if ($genderId === Gender::FEMALE_ID) {
+            return $query->whereIn('gender_id', [Gender::FEMALE_ID, Gender::UNISEX_ID]);
+        }
+
+        return $query->where('gender_id',Gender::UNISEX_ID);
     }
 
     /**

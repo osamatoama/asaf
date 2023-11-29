@@ -11,15 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        if (!Schema::hasTable('quiz_point_products')) {
-            Schema::create('quiz_point_products', function (Blueprint $table) {
+        if (!Schema::hasTable('quiz_question_answer_products')) {
+            Schema::create('quiz_question_answer_products', function (Blueprint $table) {
                 $table->id();
-                $table->unsignedBigInteger('quiz_point_id')->nullable();
+                $table->unsignedBigInteger('quiz_question_answer_id')->nullable();
                 $table->unsignedBigInteger('product_id')->nullable();
 
-                $table->foreign('quiz_point_id')
+                $table->foreign('quiz_question_answer_id')
                     ->references('id')
-                    ->on('quiz_points')
+                    ->on('quiz_question_answers')
                     ->onDelete('cascade');
                 $table->foreign('product_id')
                     ->references('id')
@@ -34,6 +34,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('quiz_point_products');
+        Schema::dropIfExists('quiz_question_answer_products');
     }
 };

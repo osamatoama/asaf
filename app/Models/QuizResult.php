@@ -15,6 +15,7 @@ class QuizResult extends Model
         'client_id',
         'quiz_title',
         'score',
+        'gender_id',
         'product_id',
         'product_name',
     ];

@@ -2,8 +2,7 @@
 
 namespace App\Models\Traits\Product;
 
-
-use App\Models\QuizPoint;
+use App\Models\QuizQuestionAnswer;
 use App\Models\QuizResult;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -16,8 +15,14 @@ trait ProductRelations
     /**
      * @return BelongsToMany
      */
-    public function points(): BelongsToMany {
-        return $this->belongsToMany(QuizPoint::class, 'quiz_point_products', 'product_id', 'quiz_point_id');
+    public function answers(): BelongsToMany
+    {
+        return $this->belongsToMany(
+            QuizQuestionAnswer::class,
+            'quiz_question_answer_products',
+            'product_id',
+            'quiz_question_answer_id'
+        );
     }
 
     /**

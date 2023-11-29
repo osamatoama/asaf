@@ -10,6 +10,8 @@ class QuizQuestion extends Model
 {
     use QuizQuestionRelations, QuizQuestionHelpers;
 
+    public const GENDER_QUESTION = 'اختر التصنيف المناسب لك في العطور';
+
     protected $fillable = [
         'quiz_id',
         'title',

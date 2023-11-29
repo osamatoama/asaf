@@ -19,8 +19,6 @@ class AnswerResource extends JsonResource
             'question_id' => $this->resource->quiz_question_id,
             'title'       => $this->resource->title,
             'description' => $this->resource->description ?? '',
-            'countable'   => (bool) $this->resource->countable,
-            'image'       => $this->resource->image,
         ];
     }
 }

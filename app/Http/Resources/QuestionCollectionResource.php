@@ -2,6 +2,8 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Gender;
+use App\Models\QuizQuestion;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\ResourceCollection;
@@ -20,6 +22,11 @@ class QuestionCollectionResource extends ResourceCollection
     {
         return $this->collection->map(function ($question) {
             return new QuestionResource($question);
-        });
+        })->prepend([
+            'id'        => 0,
+            'question'  => QuizQuestion::GENDER_QUESTION,
+            'has_image' => false,
+            'answers'   => new GenderCollectionResource(Gender::all()),
+        ]);
     }
 }
