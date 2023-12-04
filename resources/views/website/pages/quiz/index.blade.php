@@ -2,9 +2,12 @@
 
 @section('content')
     <div class="intro">
-        <div class="intro-image">
+        <a href="https://perfume-quiz.valinteca.com/perfume-quiz" class="intro-logo">
+            <img src="{{ asset('quiz/images/logo.png') }}" alt="logo">
+        </a>
+        {{-- <div class="intro-image">
             <img src="{{ asset('quiz/images/intro.jpg') }}" alt="Perfume Quiz">
-        </div>
+        </div> --}}
         <div class="intro-text">
             <p class="text-bold-light">محتار بين عطور عسَّاف؟</p>
             <p class="text-bold-dark">لا تشيل هم عسَّاف يفهمك 😉🐎…</p>

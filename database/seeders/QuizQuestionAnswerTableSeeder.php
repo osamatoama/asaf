@@ -80,8 +80,8 @@ class QuizQuestionAnswerTableSeeder extends Seeder
             ],
             [
                 'quiz_question_id' => 3,
-                'title'            => 'الرِقة',
-                'description'      => 'في العطور هي تمثل الروح ناعمة، التي تتميز في رقتها.',
+                'title'            => 'الهدوء',
+                'description'      => 'في العطور هي تمثل الروح الناعمة، التي تتميز في هدوئها.',
                 'countable'        => false,
                 'created_at'       => $now,
                 'updated_at'       => $now,

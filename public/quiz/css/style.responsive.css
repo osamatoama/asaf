@@ -34,17 +34,21 @@
 }
 @media (max-width: 768px) {
     .intro {
-        padding: 40px;
-        background: #da855759;
+        padding: 10px;
+        /* background: #da855759; */
     }
-
-    .intro .intro-image {
+    .intro .intro-logo img {
+        max-width: 160px;
+    }
+    /* .intro .intro-image {
         max-width: 270px;
         height: 350px;
-    }
+    } */
 
     .intro .intro-text {
         gap: 15px;
+        width: 100%;
+        flex-grow: unset;
     }
 
     .intro .intro-text .text-bold-light {

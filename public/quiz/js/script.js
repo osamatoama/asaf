@@ -118,7 +118,8 @@ function renderProduct(product) {
             <div class="links-wrapper">
                 <a href="${product.url}" target="_blank" class="product-title">${product.name}</a>
                 <p class="product-desc">${product.description}</p>
-                <a href="${product.url}" target="_blank" class="see-more">المزيد عن العطر</a>
+                <p class="discount-code">عشان ذوقك رهيب، تستاهل كود خصم WT</p>
+                <a href="${product.url}" target="_blank" class="see-more">اطلب الآن</a>
             </div>
         </div>
         `;
