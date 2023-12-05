@@ -38,7 +38,7 @@
         </div>
         <div class="preferences-test-done switch-effect hidden">
             <div class="result-wrapper">
-                <h2 class="result-title">ذوقك رهيب وعطرك المناسب هو</h2>
+                <h2 class="result-title">{!! $resultTitle !!}</h2>
                 <div class="products-container"></div>
                 <button class="start-over">إعادة الإختبار</button>
             </div>
