@@ -4,6 +4,8 @@ const genderWrapper = document.querySelector('.gender-selection');
 const genderOptions = document.querySelectorAll('.gender-selection .gender');
 const showFormBtn = document.querySelector('.gender-selection .show-form');
 
+console.log("Hello World!");
+
 function renderStepsHeader(stepsLength) {
     const stepWrapper = document.querySelector(".steps-header .steps-wrapper");
     for (i = 1; i <= stepsLength; i++) {
