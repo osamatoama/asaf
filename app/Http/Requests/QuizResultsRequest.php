@@ -24,7 +24,7 @@ class QuizResultsRequest extends FormRequest
     {
         return [
             'user_key' => 'required|string|max:255',
-            'phone'    => 'nullable|digits:9',
+            'phone'    => 'nullable|digits:12',
             'email'    => 'nullable|email|max:255',
             'results'  => 'required|array|min:1',
         ];
