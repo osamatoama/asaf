@@ -300,10 +300,12 @@ genderOptions.forEach((gender, i) => {
     });
 });
 
-document.querySelector('.start-quiz')?.addEventListener('click', function () {
-    this.classList.add('disabled');
-    quizRequestHandler();
-});
+// document.querySelector('.start-quiz')?.addEventListener('click', function () {
+//     this.classList.add('disabled');
+//     quizRequestHandler();
+// });
+
+quizRequestHandler();
 
 document.querySelector(".move-to-next-step-btn").addEventListener("click", function (e) {
     switchStepsHandler(e, this);
