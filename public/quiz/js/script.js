@@ -103,11 +103,11 @@ function quizRequestHandler() {
         .then(function (data) {
             renderStepsHeader(data.quiz.questions.length);
             renderFormQuestions(data.quiz.questions);
-            document.querySelector('.intro').remove();
-            document.querySelector(".user-preferences-form-container").classList.remove("hidden");
-            setTimeout(() => {
-                document.querySelector(".user-preferences-form-container").classList.remove("switch-effect");
-            }, 600);
+            // document.querySelector('.intro').remove();
+            // document.querySelector(".user-preferences-form-container").classList.remove("hidden");
+            // setTimeout(() => {
+            //     document.querySelector(".user-preferences-form-container").classList.remove("switch-effect");
+            // }, 600);
         });
 }
 
@@ -121,7 +121,7 @@ function renderProduct(product) {
                 <a href="${product.url}" target="_blank" class="product-title">${product.name}</a>
                 <p class="product-desc">${product.description}</p>
                 <p class="discount-code">عشان ذوقك رهيب، تستاهل كود خصم WT</p>
-                <a href="${product.url}" target="_blank" class="see-more">اطلب الآن</a>
+                <a href="${product.url}" class="see-more">اطلب الآن</a>
             </div>
         </div>
         `;
@@ -156,6 +156,8 @@ function productsObserverHandler(nextPageUrl) {
 };
 
 function getProductsHandler(url) {
+    const userData = getuserData();
+    console.log(userData);
     const fetchProductsRes = fetch(url, {
         method: "POST",
         headers: {
@@ -300,6 +302,34 @@ genderOptions.forEach((gender, i) => {
     });
 });
 
+function getuserData() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const email = urlParams.get('email'),
+        phone = urlParams.get('phone');
+
+    let userData;
+
+    // User Is a guest
+    if (!email && !phone) {
+        return userData = null;
+    }
+
+    // User Is Logged In With Email
+    if (email) {
+        return userData = {
+            email,
+            name: email.split('@')[0],
+            phone: phone || null
+        };
+    }
+
+    // User Is Logged In With Phone
+    if (phone) {
+        return userData = {
+            phone,
+        };
+    }
+}
 // document.querySelector('.start-quiz')?.addEventListener('click', function () {
 //     this.classList.add('disabled');
 //     quizRequestHandler();
