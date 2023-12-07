@@ -49,7 +49,7 @@ function renderFormQuestions(questions) {
                 <div class="question-wrapper">
                     <p class="question" data-id="${question.id}">${question.question}</p>
                     <div class="answers-wrapper">
-                        ${generateAnswerMarkup(question.answers,question.id,question.has_image)}
+                        ${generateAnswerMarkup(question.answers, question.id, question.has_image)}
                     </div>
                 </div>
             </div>
@@ -126,7 +126,7 @@ function renderProduct(product) {
 }
 
 function showLoader() {
-    const resultsWrapper = document.querySelector('.result-wrapper')
+    const resultsWrapper = document.querySelector('.result-wrapper');
     const resultsLastChild = document.querySelector('.start-over');
     const loader = document.createElement('span');
     loader.classList.add('loader', 'spin');
@@ -136,9 +136,9 @@ function showLoader() {
     resultsWrapper.insertBefore(loader, resultsLastChild);
 }
 
-function productsObserverHandler (nextPageUrl) {
+function productsObserverHandler(nextPageUrl) {
     const allProducts = document.querySelectorAll(".products-container .product-wrapper");
-    const lastProduct = allProducts[allProducts.length - 1]
+    const lastProduct = allProducts[allProducts.length - 1];
     const productsObserver = new IntersectionObserver(
         (entries) => {
             if (entries[0].isIntersecting) {
@@ -301,7 +301,7 @@ genderOptions.forEach((gender, i) => {
 document.querySelector('.start-quiz')?.addEventListener('click', function () {
     this.classList.add('disabled');
     quizRequestHandler();
-})
+});
 
 document.querySelector(".move-to-next-step-btn").addEventListener("click", function (e) {
     switchStepsHandler(e, this);
@@ -316,3 +316,9 @@ document.querySelector(".submit-form-btn").addEventListener("click", function (e
 });
 
 document.querySelector(".start-over").addEventListener("click", () => location.reload());
+
+
+window.addEventListener('message', function (event) {
+    var origin = event.origin || event.originalEvent.origin;
+    console.log(origin);
+}, false);
