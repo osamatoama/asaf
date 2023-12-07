@@ -158,6 +158,7 @@ function productsObserverHandler(nextPageUrl) {
 function getProductsHandler(url) {
     const userData = getuserData();
     console.log(userData);
+    console.log(storedAnswers);
     const fetchProductsRes = fetch(url, {
         method: "POST",
         headers: {
@@ -165,6 +166,7 @@ function getProductsHandler(url) {
             accept: "application/json",
         },
         body: JSON.stringify({
+            ...userData,
             user_key: "01234asdf98765",
             results: storedAnswers,
         }),
@@ -175,6 +177,7 @@ function getProductsHandler(url) {
         })
         .then(function (data) {
             if (data.success) {
+                console.log(data);
                 document.querySelector('.result-wrapper .loader')?.remove();
                 document.querySelector(".preferences-test-done .products-container").insertAdjacentHTML(
                     "beforeend",
@@ -311,14 +314,16 @@ function getuserData() {
 
     // User Is a guest
     if (email == "null" && phone == "null") {
-        return userData = null;
+        return userData = {
+            email: null,
+            phone: null
+        };
     }
 
     // User Is Logged In With Email
     if (email) {
         return userData = {
             email,
-            name: formatUsername(email.split('@')[0]),
             phone: phone || null
         };
     }
@@ -326,17 +331,11 @@ function getuserData() {
     // User Is Logged In With Phone
     if (phone) {
         return userData = {
+            email: null,
             phone,
         };
     }
 }
-
-function formatUsername(username) {
-    const usernameWithoutNumbers = username.replace(/\d+/g, '');
-
-    return usernameWithoutNumbers;
-}
-
 
 // document.querySelector('.start-quiz')?.addEventListener('click', function () {
 //     this.classList.add('disabled');
