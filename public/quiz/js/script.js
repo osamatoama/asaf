@@ -320,7 +320,8 @@ document.querySelector(".submit-form-btn").addEventListener("click", function (e
 document.querySelector(".start-over").addEventListener("click", () => location.reload());
 
 
-window.addEventListener('message', function (event) {
-    var origin = event.origin || event.originalEvent.origin;
-    console.log(origin);
-}, false);
+// window.addEventListener('message', function (event) {
+//     console.log("message received");
+//     var origin = event.origin || event.originalEvent.origin;
+//     console.log(origin);
+// }, false);
