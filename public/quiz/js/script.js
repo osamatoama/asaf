@@ -4,8 +4,6 @@ const genderWrapper = document.querySelector('.gender-selection');
 const genderOptions = document.querySelectorAll('.gender-selection .gender');
 const showFormBtn = document.querySelector('.gender-selection .show-form');
 
-console.log("Hello World!");
-
 function renderStepsHeader(stepsLength) {
     const stepWrapper = document.querySelector(".steps-header .steps-wrapper");
     for (i = 1; i <= stepsLength; i++) {
@@ -170,11 +168,12 @@ function getProductsHandler(url) {
     const userData = getuserData();
     const user_key = getuserKey();
 
-    console.log(userData);
-    console.log(user_key);
-    console.log(storedAnswers);
+    console.log({
+        ...userData,
+        user_key,
+        results: storedAnswers
+    });
 
-    console.log(storedAnswers);
     const fetchProductsRes = fetch(url, {
         method: "POST",
         headers: {
