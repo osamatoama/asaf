@@ -318,7 +318,7 @@ function getuserData() {
     if (email) {
         return userData = {
             email,
-            name: email.split('@')[0],
+            name: formatUsername(email.split('@')[0]),
             phone: phone || null
         };
     }
@@ -330,6 +330,14 @@ function getuserData() {
         };
     }
 }
+
+function formatUsername(username) {
+    const usernameWithoutNumbers = username.replace(/\d+/g, '');
+
+    return usernameWithoutNumbers;
+}
+
+
 // document.querySelector('.start-quiz')?.addEventListener('click', function () {
 //     this.classList.add('disabled');
 //     quizRequestHandler();
