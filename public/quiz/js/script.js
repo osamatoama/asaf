@@ -323,9 +323,7 @@ genderOptions.forEach((gender, i) => {
 function getuserData() {
     const urlParams = new URLSearchParams(window.location.search);
     const email = urlParams.get('email'),
-        phone = +urlParams.get('phone');
-
-    let userData;
+        phone = urlParams.get('phone');
 
     // User Is a guest
     if (email == "null" && phone == "null") {
@@ -339,7 +337,7 @@ function getuserData() {
     if (email) {
         return userData = {
             email,
-            phone: phone || null
+            phone: +phone || null
         };
     }
 
@@ -347,7 +345,7 @@ function getuserData() {
     if (phone) {
         return userData = {
             email: null,
-            phone,
+            phone: +phone,
         };
     }
 }
