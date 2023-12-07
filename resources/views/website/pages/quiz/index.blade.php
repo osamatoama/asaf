@@ -19,7 +19,7 @@
             <button class="start-quiz">اكتشف ذوقك</button>
         </div>
     </div> -->
-    <div class="user-preferences-form-container hidden switch-effect" data-quiz-url="{{ route('api.quiz') }}">
+    <div class="user-preferences-form-container" data-quiz-url="{{ route('api.quiz') }}">
         <h1 class="main-heading">اعرف عطرك حسب شخصيتك</h1>
         <div class="multistep-form-wrapper">
             <div class="steps-header">
