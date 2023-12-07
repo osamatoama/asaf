@@ -155,9 +155,25 @@ function productsObserverHandler(nextPageUrl) {
     productsObserver.observe(lastProduct);
 };
 
+function getuserKey() {
+    const storedUserKey = localStorage.getItem('user_key');
+
+    if (storedUserKey) {
+        return storedUserKey;
+    } else {
+        const user_key = generateUserKey();
+        localStorage.setItem('user_key', user_key);
+        return user_key;
+    }
+}
 function getProductsHandler(url) {
     const userData = getuserData();
+    const user_key = getuserKey();
+
     console.log(userData);
+    console.log(user_key);
+    console.log(storedAnswers);
+
     console.log(storedAnswers);
     const fetchProductsRes = fetch(url, {
         method: "POST",
@@ -167,7 +183,7 @@ function getProductsHandler(url) {
         },
         body: JSON.stringify({
             ...userData,
-            user_key: "01234asdf98765",
+            user_key,
             results: storedAnswers,
         }),
     });
@@ -308,7 +324,7 @@ genderOptions.forEach((gender, i) => {
 function getuserData() {
     const urlParams = new URLSearchParams(window.location.search);
     const email = urlParams.get('email'),
-        phone = urlParams.get('phone');
+        phone = +urlParams.get('phone');
 
     let userData;
 
@@ -335,6 +351,19 @@ function getuserData() {
             phone,
         };
     }
+}
+
+function generateUserKey() {
+    // Generate a random string of characters
+    const randomString = Math.random().toString(36).substring(2, 10) + Math.random().toString(36).substring(2, 10);
+
+    // Get the current timestamp to ensure uniqueness
+    const timestamp = new Date().getTime();
+
+    // Combine the random string and timestamp to create a unique user key
+    const userKey = randomString + timestamp;
+
+    return userKey;
 }
 
 // document.querySelector('.start-quiz')?.addEventListener('click', function () {
