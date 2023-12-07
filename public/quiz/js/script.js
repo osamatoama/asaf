@@ -310,7 +310,7 @@ function getuserData() {
     let userData;
 
     // User Is a guest
-    if (!email && !phone) {
+    if (email == "null" && phone == "null") {
         return userData = null;
     }
 
