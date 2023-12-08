@@ -101,11 +101,11 @@ function quizRequestHandler() {
         .then(function (data) {
             renderStepsHeader(data.quiz.questions.length);
             renderFormQuestions(data.quiz.questions);
-            // document.querySelector('.intro').remove();
-            // document.querySelector(".user-preferences-form-container").classList.remove("hidden");
-            // setTimeout(() => {
-            //     document.querySelector(".user-preferences-form-container").classList.remove("switch-effect");
-            // }, 600);
+            document.querySelector('.intro').remove();
+            document.querySelector(".user-preferences-form-container").classList.remove("hidden");
+            setTimeout(() => {
+                document.querySelector(".user-preferences-form-container").classList.remove("switch-effect");
+            }, 600);
         });
 }
 
