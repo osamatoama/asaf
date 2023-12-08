@@ -182,7 +182,7 @@ function getProductsHandler(url, btn = null) {
             accept: "application/json",
         },
         body: JSON.stringify({
-            email: btn?.dataset.email || null,
+            email: btn?.dataset.email != "null" || null,
             phone: +btn?.dataset.phone || null,
             user_key,
             results: storedAnswers,
