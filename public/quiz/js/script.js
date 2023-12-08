@@ -164,12 +164,13 @@ function getuserKey() {
         return user_key;
     }
 }
-function getProductsHandler(url) {
-    const userData = getuserData();
+function getProductsHandler(url, btn = null) {
+    // const userData = getuserData();
     const user_key = getuserKey();
 
     console.log({
-        ...userData,
+        email: btn?.dataset.email || null,
+        phone: +btn?.dataset.phone || null,
         user_key,
         results: storedAnswers
     });
@@ -181,7 +182,8 @@ function getProductsHandler(url) {
             accept: "application/json",
         },
         body: JSON.stringify({
-            ...userData,
+            email: btn?.dataset.email || null,
+            phone: +btn?.dataset.phone || null,
             user_key,
             results: storedAnswers,
         }),
@@ -212,7 +214,7 @@ function getProductsHandler(url) {
 function submitAndGetResult(e, submitBtn) {
     e.preventDefault();
     window.scroll({ top: 0, behavior: 'smooth' });
-    getProductsHandler(submitBtn.dataset.url);
+    getProductsHandler(submitBtn.dataset.url, submitBtn);
     document.querySelector(".multistep-form-wrapper").classList.add("switch-effect");
     setTimeout(() => {
         document.querySelector(".multistep-form-wrapper").classList.add("hidden");
