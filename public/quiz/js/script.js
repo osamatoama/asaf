@@ -314,7 +314,7 @@ genderOptions.forEach((gender, i) => {
         }
         selectedGenderId = this.dataset.genderId;
         showFormBtn.classList.remove('hidden');
-        window.scroll({ top: showFormBtn.getBoundingClientRect().top + 50, behavior: 'smooth' });
+        // window.scroll({ top: showFormBtn.getBoundingClientRect().top + 50, behavior: 'smooth' });
         showFormBtn.classList.add('animate');
         setTimeout(() => {
             showFormBtn.classList.remove('animate');
