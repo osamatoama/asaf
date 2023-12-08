@@ -251,10 +251,10 @@ function switchStepsHandler(e, btn) {
                 storedAnswers[questionId] = answerId;
                 formContainer.classList.add("switch-effect");
                 setTimeout(() => {
-                    window.scroll({
-                        top: formContainer.getBoundingClientRect().top,
-                        behavior: "smooth",
-                    });
+                    // window.scroll({
+                    //     top: formContainer.getBoundingClientRect().top,
+                    //     behavior: "smooth",
+                    // });
                     headerCurrentStep.classList.remove("active");
                     formCurrentStep.classList.remove("active");
                     document.querySelector(`.steps-header .step[data-step='${currentStepNum + 1}']`).classList.add("active");
@@ -270,10 +270,10 @@ function switchStepsHandler(e, btn) {
         } else {
             if (answerId && questionId) {
                 storedAnswers[questionId] = answerId;
-                window.scroll({
-                    top: buttonsWrapper.getBoundingClientRect().top + 50,
-                    behavior: "smooth",
-                });
+                // window.scroll({
+                //     top: buttonsWrapper.getBoundingClientRect().top + 50,
+                //     behavior: "smooth",
+                // });
                 buttonsWrapper.querySelector(".submit-form-btn").classList.add("animate");
                 setTimeout(() => {
                     buttonsWrapper.querySelector(".submit-form-btn").classList.remove("animate");
@@ -286,10 +286,10 @@ function switchStepsHandler(e, btn) {
         if (currentStepNum > 1) {
             formContainer.classList.add("switch-effect");
             setTimeout(() => {
-                window.scroll({
-                    top: formContainer.getBoundingClientRect().top,
-                    behavior: "smooth",
-                });
+                // window.scroll({
+                //     top: formContainer.getBoundingClientRect().top,
+                //     behavior: "smooth",
+                // });
                 headerCurrentStep.classList.remove("active");
                 formCurrentStep.classList.remove("active");
                 const prevStep = document.querySelector(`.form-step[data-step='${currentStepNum - 1}']`);
