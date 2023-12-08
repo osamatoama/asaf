@@ -363,12 +363,10 @@ function generateUserKey() {
     return userKey;
 }
 
-// document.querySelector('.start-quiz')?.addEventListener('click', function () {
-//     this.classList.add('disabled');
-//     quizRequestHandler();
-// });
-
-quizRequestHandler();
+document.querySelector('.start-quiz')?.addEventListener('click', function () {
+    this.classList.add('disabled');
+    quizRequestHandler();
+});
 
 document.querySelector(".move-to-next-step-btn").addEventListener("click", function (e) {
     switchStepsHandler(e, this);
@@ -383,10 +381,3 @@ document.querySelector(".submit-form-btn").addEventListener("click", function (e
 });
 
 document.querySelector(".start-over").addEventListener("click", () => location.reload());
-
-
-// window.addEventListener('message', function (event) {
-//     console.log("message received");
-//     var origin = event.origin || event.originalEvent.origin;
-//     console.log(origin);
-// }, false);
