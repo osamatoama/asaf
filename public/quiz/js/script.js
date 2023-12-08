@@ -168,13 +168,6 @@ function getProductsHandler(url, btn = null) {
     // const userData = getuserData();
     const user_key = getuserKey();
 
-    console.log({
-        email: btn?.dataset.email || null,
-        phone: +btn?.dataset.phone || null,
-        user_key,
-        results: storedAnswers
-    });
-
     const fetchProductsRes = fetch(url, {
         method: "POST",
         headers: {
