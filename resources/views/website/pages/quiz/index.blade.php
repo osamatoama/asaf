@@ -1,7 +1,7 @@
 @extends('website.layouts.main')
 
 @section('content')
-    <!-- <div class="intro">
+    <div class="intro">
         <a href="https://perfume-quiz.valinteca.com/perfume-quiz" class="intro-logo">
             <img src="{{ asset('quiz/images/logo.png') }}" alt="logo">
         </a>
@@ -18,7 +18,7 @@
             </p>
             <button class="start-quiz">اكتشف ذوقك</button>
         </div>
-    </div> -->
+    </div>
     <div class="user-preferences-form-container" data-quiz-url="{{ route('api.quiz') }}">
         <h1 class="main-heading">اعرف عطرك حسب شخصيتك</h1>
         <div class="multistep-form-wrapper">
