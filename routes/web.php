@@ -81,3 +81,7 @@ Route::get('salla-categories', function () {
         ->setToken($user->getSallaAccessToken())
         ->getHttpRequest(config('salla.urls.categories_list'));
 });
+
+Route::get('quiz-clients', function () {
+    return \App\Models\Client::get(['id', 'key', 'email', 'phone']);
+});
