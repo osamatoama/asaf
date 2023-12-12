@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use App\Models\Traits\Auditable;
 use App\Models\Traits\Client\ClientHelpers;
 use App\Models\Traits\Client\ClientRelations;
 use Illuminate\Database\Eloquent\Model;
 
 class Client extends Model
 {
-    use ClientRelations, ClientHelpers;
+    use ClientRelations, ClientHelpers, Auditable;
 
     protected $fillable = [
         'key',

@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use App\Models\Traits\Auditable;
 use App\Models\Traits\QuizQuestion\QuizQuestionHelpers;
 use App\Models\Traits\QuizQuestion\QuizQuestionRelations;
 use Illuminate\Database\Eloquent\Model;
 
 class QuizQuestion extends Model
 {
-    use QuizQuestionRelations, QuizQuestionHelpers;
+    use QuizQuestionRelations, QuizQuestionHelpers, Auditable;
 
     public const GENDER_QUESTION = 'اختر التصنيف المناسب لك في العطور';
 

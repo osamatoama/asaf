@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Traits\Auditable;
 use App\Models\Traits\QuizQuestionAnswer\QuizQuestionAnswerHelpers;
 use App\Models\Traits\QuizQuestionAnswer\QuizQuestionAnswerRelations;
 use Illuminate\Database\Eloquent\Model;
@@ -9,7 +10,7 @@ use Spatie\MediaLibrary\HasMedia;
 
 class QuizQuestionAnswer extends Model implements HasMedia
 {
-    use QuizQuestionAnswerRelations, QuizQuestionAnswerHelpers;
+    use QuizQuestionAnswerRelations, QuizQuestionAnswerHelpers, Auditable;
 
     protected $fillable = [
         'quiz_question_id',

@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use App\Models\Traits\Auditable;
 use App\Models\Traits\QuizResultAnswer\QuizResultAnswerHelpers;
 use App\Models\Traits\QuizResultAnswer\QuizResultAnswerRelations;
 use Illuminate\Database\Eloquent\Model;
 
 class QuizResultAnswer extends Model
 {
-    use QuizResultAnswerRelations, QuizResultAnswerHelpers;
+    use QuizResultAnswerRelations, QuizResultAnswerHelpers, Auditable;
 
     protected $fillable = [
         'quiz_result_id',

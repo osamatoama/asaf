@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use App\Models\Traits\Auditable;
 use App\Models\Traits\Product\ProductHelpers;
 use App\Models\Traits\Product\ProductRelations;
 use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
-    use ProductRelations, ProductHelpers;
+    use ProductRelations, ProductHelpers, Auditable;
 
     public const PER_PAGE = 4;
 

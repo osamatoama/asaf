@@ -4,23 +4,17 @@ namespace App\Exceptions;
 
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Session\TokenMismatchException;
+use Symfony\Component\HttpFoundation\Response as Response_2;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
 
 class Handler extends ExceptionHandler
 {
-    /**
-     * The list of the inputs that are never flashed to the session on validation exceptions.
-     *
-     * @var array<int, string>
-     */
-    protected $dontFlash = [
-        'current_password',
-        'password',
-        'password_confirmation',
-    ];
 
     /**
      * Register the exception handling callbacks for the application.
@@ -32,26 +26,75 @@ class Handler extends ExceptionHandler
         });
     }
 
-    public function render($request, Throwable $e)
+    public function render($request, Throwable $e): Response|JsonResponse|RedirectResponse|Response_2
     {
         if($request->expectsJson()) {
-            if ($e instanceof NotFoundHttpException || $e instanceof ModelNotFoundException) {
-                return response()->json([
-                    'status'  => 404,
-                    'success' => false,
-                    'message' => 'Resource not found!',
-                ], 404);
-            }
-
-            if ($e instanceof TokenMismatchException) {
-                return response()->json([
-                    'status'  => 419,
-                    'success' => false,
-                    'message' => 'Page expired!',
-                ], 419);
-            }
+            return $this->renderJson($request, $e);
         }
 
+        if ($this->isDashboardRequest($request)) {
+            return $this->renderDashboard($request, $e);
+        }
+
+        return $this->renderWebsite($request, $e);
+    }
+
+    protected function isDashboardRequest(Request $request): bool
+    {
+        return $request->is('dashboard/*')
+                || in_array($request->route()?->getName(), [
+                    'login',
+                    'logout',
+                    'password.email',
+                    'password.verify-code',
+                    'password.update',
+                ]);
+    }
+
+    /**
+     * @throws Throwable
+     */
+    protected function renderJson(Request $request, Throwable $e): Response|JsonResponse|Response_2|RedirectResponse
+    {
+        if ($e instanceof NotFoundHttpException || $e instanceof ModelNotFoundException) {
+            return response()->dashboard()->json(false, 'Resource not found!', [], 419);
+        }
+
+        if ($e instanceof TokenMismatchException) {
+            return response()->dashboard()->json(false, 'Page expired!', [], 419);
+        }
+
+        return parent::render($request, $e);
+    }
+
+    /**
+     * @throws Throwable
+     */
+    protected function renderDashboard(Request $request, Throwable $e): Response|JsonResponse|Response_2|RedirectResponse
+    {
+        if ($e instanceof NotFoundHttpException || $e instanceof ModelNotFoundException) {
+            return response()->view('dashboard.errors.404', [], 404);
+        }
+
+        if ($e instanceof TokenMismatchException) {
+            return response()->view('dashboard.errors.419', [], 419);
+        }
+
+        return parent::render($request, $e);
+    }
+
+    /**
+     * @throws Throwable
+     */
+    protected function renderWebsite(Request $request, Throwable $e): Response|JsonResponse|Response_2|RedirectResponse
+    {
+        if ($e instanceof NotFoundHttpException || $e instanceof ModelNotFoundException) {
+            return response()->view('dashboard.errors.404', [], 404);
+        }
+
+        if ($e instanceof TokenMismatchException) {
+            return response()->view('dashboard.errors.419', [], 419);
+        }
 
         return parent::render($request, $e);
     }
