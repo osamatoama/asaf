@@ -1,0 +1,6 @@
+{
+    "The :attribute must contain at least one letter.": "The Password must contain at least one uppercase, lowercase letter, number, symbol and minimum 8 characters.",
+    "The :attribute must contain at least one uppercase and one lowercase letter.": "The Password must contain at least one uppercase, lowercase letter, number, symbol and minimum 8 characters.",
+    "The :attribute must contain at least one number.": "The Password must contain at least one uppercase, lowercase letter, number, symbol and minimum 8 characters.",
+    "The :attribute must contain at least one symbol.": "The Password must contain at least one uppercase, lowercase letter, number, symbol and minimum 8 characters."
+}

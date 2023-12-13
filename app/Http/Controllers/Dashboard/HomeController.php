@@ -8,6 +8,7 @@ class HomeController extends Controller
 {
     public function __invoke()
     {
-        abort(403, 'Coming Soon...');
+        $statistics = [];
+        return view('dashboard.pages.home.index', compact('statistics'));
     }
 }

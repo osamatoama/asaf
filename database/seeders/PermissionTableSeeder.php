@@ -8,102 +8,163 @@ use Illuminate\Support\Facades\Schema;
 
 class PermissionTableSeeder extends Seeder
 {
-    public function run()
+    public function run(): void
     {
         Schema::disableForeignKeyConstraints();
         Permission::truncate();
         Schema::enableForeignKeyConstraints();
 
+        $now = now();
         $permissions = [
             [
-                'title' => 'permission_create',
+                'title'      => 'permission_create',
+                'created_at' => $now,
+                'updated_at' => $now
             ],
             [
-                'title' => 'permission_edit',
+                'title'      => 'permission_edit',
+                'created_at' => $now,
+                'updated_at' => $now
             ],
             [
-                'title' => 'permission_show',
+                'title'      => 'permission_show',
+                'created_at' => $now,
+                'updated_at' => $now
             ],
             [
-                'title' => 'permission_delete',
+                'title'      => 'permission_delete',
+                'created_at' => $now,
+                'updated_at' => $now
             ],
             [
-                'title' => 'permission_access',
+                'title'      => 'permission_access',
+                'created_at' => $now,
+                'updated_at' => $now
             ],
             [
-                'title' => 'role_create',
+                'title'      => 'role_create',
+                'created_at' => $now,
+                'updated_at' => $now
             ],
             [
-                'title' => 'role_edit',
+                'title'      => 'role_edit',
+                'created_at' => $now,
+                'updated_at' => $now
             ],
             [
-                'title' => 'role_show',
+                'title'      => 'role_show',
+                'created_at' => $now,
+                'updated_at' => $now
             ],
             [
-                'title' => 'role_delete',
+                'title'      => 'role_delete',
+                'created_at' => $now,
+                'updated_at' => $now
             ],
             [
-                'title' => 'role_access',
+                'title'      => 'role_access',
+                'created_at' => $now,
+                'updated_at' => $now
             ],
             [
-                'title' => 'user_create',
+                'title'      => 'user_create',
+                'created_at' => $now,
+                'updated_at' => $now
             ],
             [
-                'title' => 'user_edit',
+                'title'      => 'user_edit',
+                'created_at' => $now,
+                'updated_at' => $now
             ],
             [
-                'title' => 'user_show',
+                'title'      => 'user_show',
+                'created_at' => $now,
+                'updated_at' => $now
             ],
             [
-                'title' => 'user_delete',
+                'title'      => 'user_delete',
+                'created_at' => $now,
+                'updated_at' => $now
             ],
             [
-                'title' => 'user_access',
+                'title'      => 'user_access',
+                'created_at' => $now,
+                'updated_at' => $now
             ],
             [
-                'title' => 'audit_log_show',
+                'title'      => 'audit_log_show',
+                'created_at' => $now,
+                'updated_at' => $now
             ],
             [
-                'title' => 'audit_log_access',
+                'title'      => 'audit_log_access',
+                'created_at' => $now,
+                'updated_at' => $now
             ],
             [
-                'title' => 'product_create',
+                'title'      => 'product_create',
+                'created_at' => $now,
+                'updated_at' => $now
             ],
             [
-                'title' => 'product_edit',
+                'title'      => 'product_edit',
+                'created_at' => $now,
+                'updated_at' => $now
             ],
             [
-                'title' => 'product_show',
+                'title'      => 'product_show',
+                'created_at' => $now,
+                'updated_at' => $now
             ],
             [
-                'title' => 'product_delete',
+                'title'      => 'product_delete',
+                'created_at' => $now,
+                'updated_at' => $now
             ],
             [
-                'title' => 'product_access',
+                'title'      => 'product_access',
+                'created_at' => $now,
+                'updated_at' => $now
             ],
             [
-                'title' => 'quiz_edit',
+                'title'      => 'quiz_edit',
+                'created_at' => $now,
+                'updated_at' => $now
             ],
             [
-                'title' => 'quiz_show',
+                'title'      => 'quiz_show',
+                'created_at' => $now,
+                'updated_at' => $now
             ],
             [
-                'title' => 'quiz_access',
+                'title'      => 'quiz_access',
+                'created_at' => $now,
+                'updated_at' => $now
             ],
             [
-                'title' => 'gender_show',
+                'title'      => 'gender_show',
+                'created_at' => $now,
+                'updated_at' => $now
             ],
             [
-                'title' => 'gender_access',
+                'title'      => 'gender_access',
+                'created_at' => $now,
+                'updated_at' => $now
             ],
             [
-                'title' => 'client_show',
+                'title'      => 'client_show',
+                'created_at' => $now,
+                'updated_at' => $now
             ],
             [
-                'title' => 'client_access',
+                'title'      => 'client_access',
+                'created_at' => $now,
+                'updated_at' => $now
             ],
             [
-                'title' => 'profile_password_edit',
+                'title'      => 'profile_password_edit',
+                'created_at' => $now,
+                'updated_at' => $now
             ],
         ];
 

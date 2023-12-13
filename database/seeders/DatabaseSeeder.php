@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             QuizQuestionTableSeeder::class,
             QuizQuestionAnswerTableSeeder::class,
             QuizQuestionAnswerProductTableSeeder::class,
+            DashboardDatabaseSeeder::class,
         ]);
     }
 }

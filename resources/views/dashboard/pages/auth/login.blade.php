@@ -18,9 +18,9 @@
                 <input type="email" @class(['form-control form-control-lg', 'is-invalid' => $errors->has('email')]) id="email"
                        name="email" placeholder="@lang('global.login_email')" value="{{ old('email') }}" required>
                 @error('email')
-                <div class="invalid-feedback">
-                    {{ $message }}
-                </div>
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
                 @enderror
             </div>
         </div>

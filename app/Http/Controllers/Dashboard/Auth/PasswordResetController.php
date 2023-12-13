@@ -43,7 +43,7 @@ class PasswordResetController extends Controller
         Mail::to($user->email)->send(new SendPasswordResetCode($code));
 
         return redirect()
-            ->route('password.code', Crypt::encrypt($user->email))//TODO:request signature?
+            ->route('password.code', Crypt::encrypt($user->email))
             ->with('success', __('passwords.sent'));
     }
 

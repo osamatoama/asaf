@@ -5,7 +5,7 @@
                 <a href="#" class="nk-nav-toggle nk-quick-nav-icon" data-target="sidebarMenu"><em class="icon ni ni-menu"></em></a>
             </div>
             <div class="nk-header-brand d-xl-none">
-                <a href="{{ route('website.home') }}" class="logo-link">
+                <a href="{{ route('website.perfume-quiz') }}" class="logo-link">
                     <img class="logo-light logo-img"
                          src="{{ asset('assets/dashboard/images/logos/logo.png') }}"
                          srcset="{{ asset('assets/dashboard/images/logos/logo2x.png') }} 2x"
@@ -18,30 +18,6 @@
             </div>
             <div class="nk-header-tools">
                 <ul class="nk-quick-nav">
-                    @if(count($availableLocales) > 1)
-                        <li class="dropdown language-dropdown me-n1">
-                            <a href="#" class="dropdown-toggle nk-quick-nav-icon" data-bs-toggle="dropdown">
-                                <div class="quick-icon border border-light">
-                                    <img class="icon" src="{{ currentLocaleFlag() }}" alt="{{ currentLocale(true) }}">
-                                </div>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-end dropdown-menu-s1">
-                                <ul class="language-list">
-                                    @foreach($availableLocales as $locale => $properties)
-                                        <li>
-                                            <a href="{{ localeURL($locale) }}" class="language-item">
-                                                <img src="{{ localeFlag($locale) }}"
-                                                     alt="{{ $properties['native'] }}" class="language-flag">
-                                                <span class="language-name">
-                                                    {{ $properties['native'] }}
-                                                </span>
-                                            </a>
-                                        </li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        </li>
-                    @endif
                     <li class="dropdown user-dropdown">
                         <a href="#" class="dropdown-toggle me-n1" data-bs-toggle="dropdown">
                             <div class="user-toggle">
@@ -50,17 +26,11 @@
                                     <div class="status dot dot-lg dot-success"></div>
                                 </div>
                                 <div class="user-info d-none d-xl-block">
-                                    @if(authUser()->hasRole('pending-merchant'))
-                                        <div class="user-status user-status-unverified">
-                                            {{ authUser()->roles()->first()->title }}
-                                        </div>
-                                    @else
-                                        <div class="user-status user-status-active">
-                                            {{ authUser()->roles()->first()->title }}
-                                        </div>
-                                    @endif
+                                    <div class="user-status user-status-active">
+                                        {{ authUser()->roles()->first()->title }}
+                                    </div>
                                     <div class="user-name dropdown-indicator">
-                                        {{ authUser()->name }}
+                                        {{ authUser()?->name }}
                                     </div>
                                 </div>
                             </div>
@@ -72,8 +42,8 @@
                                         <em class="icon ni ni-user-alt"></em>
                                     </div>
                                     <div class="user-info">
-                                        <span class="lead-text">{{ authUser()->name }}</span>
-                                        <span class="sub-text">{{ authUser()->email }}</span>
+                                        <span class="lead-text">{{ authUser()?->name }}</span>
+                                        <span class="sub-text">{{ authUser()?->email }}</span>
                                     </div>
                                 </div>
                             </div>

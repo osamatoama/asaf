@@ -27,8 +27,6 @@
 
 @endcan
 
-
-
 @canany([
     config('models.user.permissions.access'),
     config('models.role.permissions.access'),

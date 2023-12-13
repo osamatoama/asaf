@@ -9,7 +9,11 @@ use App\Http\Controllers\Dashboard\RoleController;
 use App\Http\Controllers\Dashboard\UserController;
 use Illuminate\Support\Facades\Route;
 
-Route::prefix('dashboard')->as('dashboard.')->group(function () {
+Route::prefix('dashboard')->as('dashboard.')->middleware([
+    'authGates',
+    'isActive',
+    'isVerified',
+])->group(function () {
     // Home
     Route::get('', HomeController::class)->name('home');
 
@@ -24,6 +28,12 @@ Route::prefix('dashboard')->as('dashboard.')->group(function () {
         Route::put('/', [ProfileController::class, 'update'])->name('update');
         Route::put('change-password', [ProfileController::class, 'changePassword'])->name('change-password');
         Route::put('toggle-dark-mode', [ProfileController::class, 'toggleDarkMode'])->name('toggle-dark-mode');
+        Route::get('verification', [ProfileController::class, 'getVerification'])
+            ->withoutMiddleware(['isVerified', 'isActive'])
+            ->name('get-verification');
+        Route::post('verification', [ProfileController::class, 'postVerification'])
+            ->withoutMiddleware(['isVerified', 'isActive'])
+            ->name('post-verification');
     });
 
     //Products

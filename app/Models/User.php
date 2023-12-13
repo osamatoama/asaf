@@ -25,6 +25,7 @@ class User extends Authenticatable
         'email',
         'phone',
         'password',
+        'verification_code',
         'verified',
         'active',
         'dark_mode_enabled'
