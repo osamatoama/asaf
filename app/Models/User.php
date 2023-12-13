@@ -20,10 +20,13 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+        'parent_id',
         'name',
         'email',
         'phone',
         'password',
+        'verified',
+        'active',
         'dark_mode_enabled'
     ];
 
@@ -45,6 +48,8 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password'          => 'hashed',
+        'verified'          => 'boolean',
+        'active'            => 'boolean',
         'dark_mode_enabled' => 'boolean',
     ];
 }

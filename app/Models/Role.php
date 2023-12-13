@@ -13,6 +13,7 @@ class Role extends Model
 
     protected $fillable = [
         'title',
+        'related_user_id',
         'slug',
     ];
 

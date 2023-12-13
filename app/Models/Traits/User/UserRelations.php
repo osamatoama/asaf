@@ -4,6 +4,7 @@ namespace App\Models\Traits\User;
 
 use App\Models\Role;
 use App\Models\UserSallaConfiguration;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
@@ -13,6 +14,21 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 trait UserRelations
 {
 
+    /**
+     * @return HasMany
+     */
+    public function children(): HasMany
+    {
+        return $this->hasMany(self::class, 'parent_id');
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function parent(): BelongsTo
+    {
+        return $this->belongsTo(self::class, 'parent_id');
+    }
     /**
      * @return HasMany
      */

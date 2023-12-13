@@ -2,11 +2,15 @@
 
 namespace App\Models\Traits\User;
 
+use App\Models\Traits\Activatable;
+use App\Models\Traits\Verifiable;
+
 /**
  * Trait UserHelpers
  */
 trait UserHelpers
 {
+    use Activatable, Verifiable;
 
     /**
      * @return mixed
@@ -17,6 +21,11 @@ trait UserHelpers
             ->where('key', 'access_token')
             ->first())->value;
     }
+
+    /**
+     * Scopes
+     */
+
 
     public function hasRole(string $role): bool
     {

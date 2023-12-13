@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Dashboard;
+namespace App\Http\Controllers\Dashboard;
 
 use App\Helpers\GlobalConstants;
 use App\Http\Controllers\Controller;
@@ -37,7 +37,7 @@ class ProductController extends Controller
     /**
      * @throws Exception
      */
-    public function index(Request $request)
+    public function index(Request $request): View|Application|Factory|Application_2|Response
     {
         abort_if(Gate::denies($this->permissions['access']), Response::HTTP_FORBIDDEN, '403 Forbidden');
 

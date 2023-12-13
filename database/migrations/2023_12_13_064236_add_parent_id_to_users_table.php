@@ -11,16 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        if (!Schema::hasTable('roles')) {
-            Schema::create('roles', function (Blueprint $table) {
-                $table->id();
-                $table->string('title')->nullable();
-                $table->string('slug')->unique()->nullable();
-                $table->unsignedBigInteger('related_user_id')->nullable();
-                $table->timestamps();
-                $table->softDeletes();
+        if (!Schema::hasColumn('users', 'parent_id')) {
+            Schema::table('users', function (Blueprint $table) {
+                $table->unsignedBigInteger('parent_id')->nullable()->after('id');
 
-                $table->foreign('related_user_id')
+                $table->foreign('parent_id')
                     ->references('id')
                     ->on('users')
                     ->onDelete('cascade');
@@ -33,6 +28,10 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('roles');
+        if (Schema::hasColumn('users', 'parent_id')) {
+            Schema::table('users', function (Blueprint $table) {
+                $table->dropColumn('parent_id');
+            });
+        }
     }
 };
