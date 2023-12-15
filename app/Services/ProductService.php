@@ -88,10 +88,12 @@ class ProductService
 
     public function store(StoreRequest $request): object
     {
+        $data = $request->validated();
+
         DB::beginTransaction();
         try {
-            $product = Product::create($request->validated());
-            if ($request->input('image', false)) {
+            $product = Product::create($data);
+            if (blank($data['image_url'] ?? null) && $request->input('image', false)) {
                 $product->addMedia(storage_path('tmp/uploads/' . basename($request->input('image'))))
                     ->toMediaCollection('product-images');
             }
@@ -114,16 +116,23 @@ class ProductService
 
     public function update(UpdateRequest $request, Product $product): object
     {
+        $data = $request->validated();
+
         DB::beginTransaction();
         try {
-            $product->update($request->validated());
-            $image = $product->image->media ?? false;
-            if (($request->input('image', false))
-                && ((!$image) || ($request->input('image') !== $image->file_name))) {
+            $product->update($data);
 
+            if (filled($data['image_url'] ?? null)) {
                 $product->clearMediaCollection('product-images');
-                $product->addMedia(storage_path('tmp/uploads/' . basename($request->input('image'))))
-                    ->toMediaCollection('product-images');
+            } else {
+                $image = $product->image->media ?? false;
+                if (($request->input('image', false))
+                    && ((!$image) || ($request->input('image') !== $image->file_name))) {
+
+                    $product->clearMediaCollection('product-images');
+                    $product->addMedia(storage_path('tmp/uploads/' . basename($request->input('image'))))
+                        ->toMediaCollection('product-images');
+                }
             }
 
             DB::commit();
@@ -201,7 +210,7 @@ class ProductService
                                 data-src="%s" data-fancybox
                                 alt="%s">',
                     $row->image->thumbnail,
-                    $row->image->default,
+                    $row->image->original,
                     $row->title
                 );
             }

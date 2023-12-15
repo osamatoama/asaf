@@ -16,4 +16,8 @@ class GlobalConstants
     /** @var int */
     public const PAGINATION_DEFAULT_COUNT = 10;
 
+    /** @var int */
+    public const THUMBNAIL_WIDTH = 500;
+    public const THUMBNAIL_HEIGHT = 500;
+
 }

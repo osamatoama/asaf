@@ -12,8 +12,8 @@ class Product extends Model implements HasMedia
 {
     use ProductRelations, ProductHelpers, Auditable;
 
-    public const RECOMMENDED_WIDTH = 2160;
-    public const RECOMMENDED_HEIGHT = 2160;
+    public const RECOMMENDED_WIDTH = 1000;
+    public const RECOMMENDED_HEIGHT = 1000;
 
     protected $fillable = [
         'gender_id',

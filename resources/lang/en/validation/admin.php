@@ -59,7 +59,7 @@ return [
     'banners_required'                        => 'Banners Is Required.',
     'banner_exists'                           => 'Banner Is Not Exist.',
     'image_required'                          => 'Image Is Required.',
-    'image_required_unless'                   => 'Image is required when image url is not provided.',
+    'image_required_unless'                   => 'Image is required when image url is not present.',
     'link_string'                             => 'Link Must Be String.',
     'link_label_string'                       => 'Link Label Must Be String.',
     'order_integer'                           => 'Order Must Be Integer.',

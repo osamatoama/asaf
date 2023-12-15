@@ -61,7 +61,8 @@ class ProductController extends Controller
     {
         abort_if(Gate::denies($this->permissions['create']), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $genders = Gender::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+        $genders = Gender::pluck('name', 'id')
+            ->prepend(trans('global.pleaseSelect'), '');
 
         return view('dashboard.pages.' . $this->routeView . '.create', compact('genders'));
     }
@@ -87,7 +88,10 @@ class ProductController extends Controller
     {
         abort_if(Gate::denies($this->permissions['edit']), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return view('dashboard.pages.' . $this->routeView . '.edit', compact('product'));
+        $genders = Gender::pluck('name', 'id')
+            ->prepend(trans('global.pleaseSelect'), '');
+
+        return view('dashboard.pages.' . $this->routeView . '.edit', compact('product', 'genders'));
     }
 
     public function update(UpdateRequest $request, Product $product): RedirectResponse
@@ -110,6 +114,8 @@ class ProductController extends Controller
     public function show(Product $product): View|Application|Factory|Application_2
     {
         abort_if(Gate::denies($this->permissions['show']), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        $product->load('gender');
 
         return view('dashboard.pages.' . $this->routeView . '.show', compact('product'));
     }

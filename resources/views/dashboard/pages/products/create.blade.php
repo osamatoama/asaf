@@ -102,7 +102,7 @@
                                 <input class="form-control {{ $errors->has('image_url') ? 'is-invalid' : '' }}"
                                        type="text" name="image_url"
                                        id="image_url" value="{{ old('image_url', '') }}"
-                                       required>
+                                >
                                 @error('image_url')
                                     <div class="invalid-feedback">
                                         {{ $message }}
@@ -127,7 +127,7 @@
                                     </div>
                                 </div>
                                 @error('image')
-                                    <div style="color: #e85347 !important;">
+                                    <div style="color: #e85347 !important; font-size: small;">
                                         {{ $message }}
                                     </div>
                                 @enderror

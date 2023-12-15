@@ -60,7 +60,7 @@ return [
     'banners_required'                        => 'لافتات مطلوبة',
     'banner_exists'                           => 'لافتة غير موجودة',
     'image_required'                          => 'الصورة مطلوبة',
-    'image_required_unless'                   => 'الصورة مطلوبة إلا إذا لم يتم إدخال رابط الصورة',
+    'image_required_unless'                   => 'الصورة مطلوبة إذا لم يتم إدخال رابط الصورة',
     'link_string'                             => 'الرابط يجب أن يكون نصاً',
     'link_label_string'                       => 'يجب أن تكون تسمية الرابط نصاً',
     'order_integer'                           => 'يجب أن يكون الطلب عددًا صحيحًا',

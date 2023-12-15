@@ -6,7 +6,7 @@
         {data: 'gender_name', name: 'gender_name', orderable: false, class: 'text-center'},
         {data: 'actions', name: 'actions', searchable: false, orderable: false, class: 'text-center'},
     ]
-    let datatable = initDatatable('#products-table', columns)
+    let datatable = initDatatable('#products-table', columns, {}, 25)
 
     initDatatableDeleteAction(datatable)
 </script>
