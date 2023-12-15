@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use App\Models\Role;
+use App\Models\User;
 use Closure;
 use Illuminate\Support\Facades\Gate;
 
@@ -19,7 +20,7 @@ class AuthGates
                 }
             }
             foreach ($permissionsArray as $title => $roles) {
-                Gate::define($title, function ($user) use ($roles) {
+                Gate::define($title, function (User $user) use ($roles) {
                     return count(array_intersect($user->roles()->pluck('roles.id')->toArray(), $roles)) > 0;
                 });
             }

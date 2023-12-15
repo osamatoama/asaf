@@ -6,12 +6,14 @@ use App\Models\Traits\Auditable;
 use App\Models\Traits\Product\ProductHelpers;
 use App\Models\Traits\Product\ProductRelations;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\MediaLibrary\HasMedia;
 
-class Product extends Model
+class Product extends Model implements HasMedia
 {
     use ProductRelations, ProductHelpers, Auditable;
 
-    public const PER_PAGE = 4;
+    public const RECOMMENDED_WIDTH = 2160;
+    public const RECOMMENDED_HEIGHT = 2160;
 
     protected $fillable = [
         'gender_id',

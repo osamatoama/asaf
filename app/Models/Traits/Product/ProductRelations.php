@@ -2,8 +2,10 @@
 
 namespace App\Models\Traits\Product;
 
+use App\Models\Gender;
 use App\Models\QuizQuestionAnswer;
 use App\Models\QuizResult;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
@@ -12,6 +14,15 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  */
 trait ProductRelations
 {
+
+    /**
+     * @return BelongsTo
+     */
+    public function gender(): BelongsTo
+    {
+        return $this->belongsTo(Gender::class, 'gender_id');
+    }
+
     /**
      * @return BelongsToMany
      */

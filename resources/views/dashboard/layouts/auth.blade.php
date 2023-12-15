@@ -2,9 +2,9 @@
 <html lang="ar" class="js">
 <head>
     <meta charset="utf-8">
-    <meta name="author" content="Gold Boulevard">
+    <meta name="author" content="Perfume Quiz">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Gold Boulevard">
+    <meta name="description" content="Perfume Quiz">
     <meta name="robots" content="noindex,nofollow">
 
     <link rel="shortcut icon" href="{{ asset('assets/dashboard/images/favicon.png') }}">

@@ -1,0 +1,17 @@
+disNone {
+  display: none !important;
+}
+
+disBlock {
+  display: block !important;
+}
+
+.nk-menu-sub .current-page a span {
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
+.paginate_button.active .page-link {
+  font-size: 1.3rem;
+  font-weight: bold;
+}

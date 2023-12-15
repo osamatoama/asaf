@@ -47,7 +47,10 @@ class ProductService
         if ($filter['q'] ?? false) {
             $products = $products->where(function ($q) use ($filter) {
                 $q->where('id', $filter['q'])
-                    ->orWhere('name', 'like', '%' . $filter['q'] . '%');
+                    ->orWhere('name', 'like', '%' . $filter['q'] . '%')
+                    ->orWhereHas('gender', function ($q) use ($filter) {
+                        $q->where('name', 'like', '%' . $filter['q'] . '%');
+                    });
             });
             $params['q'] = $filter['q'];
         }
@@ -203,13 +206,42 @@ class ProductService
                 );
             }
 
+            if (filled($row->image_url)) {
+                return sprintf(
+                    '<img src="%s" class="pointer"
+                                style="border-radius: 10px; width: 50px; height: 50px;"
+                                data-src="%s" data-fancybox
+                                alt="%s">',
+                    $row->image_url,
+                    $row->image_url,
+                    $row->title
+                );
+            }
+
             return '';
         });
-        $table->editColumn('name', function (Product $row) {
-            return $row->name ?? '';
+        $table->addColumn('product_name', function (Product $row) {
+            return sprintf(
+                '<a href="%s" target="_blank">%s</a>',
+                $row->url,
+                ($row->name ?? '---')
+            );
+        });
+        $table->filterColumn('product_name', function ($q, $keyword) {
+            $q->where('name', 'LIKE', "%$keyword%");
         });
 
-        $table->rawColumns(['actions', 'placeholder', 'image']);
+        $table->addColumn('gender_name', function (Product $row) {
+            return $row->gender->name ?? '---';
+        });
+
+        $table->filterColumn('gender_name', function ($q, $keyword) {
+            $q->whereHas('gender', function ($q1) use ($keyword) {
+                $q1->where('name', 'LIKE', "%$keyword%");
+            });
+        });
+
+        $table->rawColumns(['actions', 'placeholder', 'image', 'product_name', 'gender_name']);
 
         return $table->make();
     }

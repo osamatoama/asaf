@@ -6,6 +6,7 @@ use App\Helpers\GlobalConstants;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Dashboard\Product\StoreRequest;
 use App\Http\Requests\Dashboard\Product\UpdateRequest;
+use App\Models\Gender;
 use App\Models\Product;
 use App\Services\ProductService;
 use Exception;
@@ -60,7 +61,9 @@ class ProductController extends Controller
     {
         abort_if(Gate::denies($this->permissions['create']), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return view('dashboard.pages.' . $this->routeView . '.create');
+        $genders = Gender::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+
+        return view('dashboard.pages.' . $this->routeView . '.create', compact('genders'));
     }
 
     public function store(StoreRequest $request): RedirectResponse
