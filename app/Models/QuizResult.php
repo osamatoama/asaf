@@ -24,5 +24,6 @@ class QuizResult extends Model
     protected $casts = [
         'score'      => 'integer',
         'created_at' => 'datetime:Y-m-d H:i:s',
+        'updated_at' => 'datetime:Y-m-d H:i:s',
     ];
 }

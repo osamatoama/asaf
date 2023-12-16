@@ -158,22 +158,28 @@ function initDatatable(element, columns = [], options = {}, pageLength = 10, sor
         order: [sortOptions],
         pageLength: pageLength,
         buttons: [
-            {
-                extend: 'copy',
-                titleAttr: _dictionary.datatable.buttons.copy,
-            },
+            // {
+            //     extend: 'copy',
+            //     titleAttr: _dictionary.datatable.buttons.copy,
+            // },
             {
                 extend: 'excel',
                 titleAttr: _dictionary.datatable.buttons.excel,
+                exportOptions: {
+                    columns: ':visible'
+                }
             },
             {
                 extend: 'csv',
                 titleAttr: _dictionary.datatable.buttons.csv,
+                exportOptions: {
+                    columns: ':visible'
+                }
             },
-            {
-                extend: 'pdf',
-                titleAttr: _dictionary.datatable.buttons.pdf,
-            },
+            // {
+            //     extend: 'pdf',
+            //     titleAttr: _dictionary.datatable.buttons.pdf,
+            // },
             {
                 extend: 'colvis',
                 titleAttr: _dictionary.datatable.buttons.colvis,

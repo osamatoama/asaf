@@ -46,6 +46,52 @@
 @endcanany
 
 @canany([
+    config('models.client.permissions.access'),
+    config('models.quiz.permissions.access')
+])
+
+    <li @class(['nk-menu-item has-sub sidebar-main-menu', 'active current-page' => isMenuOpened([
+        'clients',
+        'quizzes',
+    ])])>
+        <a href="#" class="nk-menu-link nk-menu-toggle">
+            <span class="nk-menu-icon">
+                <em class="icon ni ni-package"></em>
+            </span>
+            <span class="nk-menu-text">
+                إدارة الاختبار
+            </span>
+        </a>
+        <ul class="nk-menu-sub">
+            @can(config('models.quiz.permissions.access'))
+                <li @class(['nk-menu-item','active' => isCurrentPage('dashboard.quizzes.index')])>
+                    <a href="{{ route('dashboard.quizzes.index') }}" class="nk-menu-link">
+                        <span class="nk-menu-text">
+                            اختبار العطور
+                        </span>
+                        <span class="nk-menu-badge bg-info text-white">
+                            {{ \App\Models\Quiz::count() }}
+                        </span>
+                    </a>
+                </li>
+            @endcan
+            @can(config('models.client.permissions.access'))
+                <li @class(['nk-menu-item','active' => isCurrentPage('dashboard.clients.index')])>
+                    <a href="{{ route('dashboard.clients.index') }}" class="nk-menu-link">
+                        <span class="nk-menu-text">
+                            العملاء
+                        </span>
+                        <span class="nk-menu-badge bg-info text-white">
+                            {{ \App\Models\Client::count() }}
+                        </span>
+                    </a>
+                </li>
+            @endcan
+        </ul>
+    </li>
+@endcanany
+
+@canany([
     config('models.user.permissions.access'),
     config('models.role.permissions.access'),
     config('models.audit-log.permissions.access')

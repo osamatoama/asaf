@@ -53,5 +53,6 @@ class User extends Authenticatable
         'active'            => 'boolean',
         'dark_mode_enabled' => 'boolean',
         'created_at'        => 'datetime:Y-m-d H:i:s',
+        'updated_at'        => 'datetime:Y-m-d H:i:s',
     ];
 }
