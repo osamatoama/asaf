@@ -27,7 +27,7 @@
                                 <td>
                                     <ul>
                                         @foreach ($quiz -> questions as $question)
-                                            <li class="card mb-4 p-2">
+                                            <li class="card mt-2 mb-4 p-2">
                                                 <span style="font-size: x-large; font-weight: bold;">{{ $loop->iteration.' - '.$question -> title }}</span>
                                                 <ul>
                                                     @foreach ($question -> answers as $answer)
