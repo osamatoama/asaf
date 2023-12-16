@@ -12,7 +12,7 @@ class HelperServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function register()
+    public function register(): void
     {
         foreach (glob(app_path('Helpers/*.php')) as $filename) {
             if (Str::endsWith($filename, ['GlobalConstants.php', 'Helper.php'])) {
@@ -28,7 +28,7 @@ class HelperServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         //
     }

@@ -12,13 +12,17 @@ use App\Services\UserService;
 use Exception;
 use Gate;
 use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View as ViewAlias;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection as CollectionAlias;
+use Illuminate\Foundation\Application as ApplicationAlias;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator as LengthAwarePaginatorAlias;
 use Illuminate\Support\Collection;
-use Illuminate\View\View;
 use Symfony\Component\HttpFoundation\Response;
 
 class UserController extends Controller
@@ -58,7 +62,7 @@ class UserController extends Controller
 
     /**
      * @param Request $request
-     * @return Factory|View|JsonResponse
+     * @return Application|Collection|Factory|LengthAwarePaginator|Builder|CollectionAlias|ApplicationAlias|LengthAwarePaginatorAlias|JsonResponse|User|ViewAlias
      * @throws Exception
      */
     public function index(Request $request)

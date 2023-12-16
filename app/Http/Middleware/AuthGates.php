@@ -11,7 +11,7 @@ class AuthGates
 {
     public function handle($request, Closure $next)
     {
-        if (auth()->check()) {
+        if (auth('admin')->check()) {
             $roles            = Role::with('permissions')->get();
             $permissionsArray = [];
             foreach ($roles as $role) {

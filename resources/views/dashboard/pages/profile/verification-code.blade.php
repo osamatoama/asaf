@@ -16,7 +16,7 @@
             </label>
             <div class="form-control-wrap">
                 <input type="text" @class(['form-control form-control-lg', 'is-invalid' => $errors->has('code')]) id="code"
-                       name="code" placeholder="@lang('global.verification_code')" value="{{ old('code') }}" required>
+                       name="code" placeholder="@lang('global.verification_code')" value="{{ old('code') }}" required autofocus>
                 @error('code')
                     <div class="invalid-feedback">
                         {{ $message }}

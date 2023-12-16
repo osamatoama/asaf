@@ -16,7 +16,7 @@ class ProfileController extends Controller
 {
     public function edit()
     {
-        abort_if(Gate::denies('profile_password_edit'), 403);
+        abort_if(Gate::denies('profile_password_edit'), 403, 'ليس لديك صلاحية');
 
         return view('dashboard.pages.profile.edit', [
             'user' => authUser(),
@@ -64,18 +64,22 @@ class ProfileController extends Controller
      */
     public function getVerification()
     {
-        $user  = authUser();
-        $email = $user?->email;
+        if (session()->missing('errors')) {
+            $user = authUser();
 
-        $code = randomCode();
+            abort_if($user?->isVerified(), 403, 'الحساب مفعل بالفعل');
 
-        $user?->update([
-            'verification_code' => $code,
-        ]);
+            $email = $user?->email;
+            $code = $user->verification_code ?? randomCode();
 
-        Mail::to($email)->send(new SendVerificationCode($code));
+            $user?->update([
+                'verification_code' => $code,
+            ]);
 
-        session()->flash('success_message', 'تم إرسال كود التحقق الى بريدك الإلكتروني');
+            Mail::to($email)->send(new SendVerificationCode($code));
+
+            session()->flash('success_message', 'تم إرسال كود التحقق الى بريدك الإلكتروني');
+        }
 
         return view('dashboard.pages.profile.verification-code');
     }
@@ -83,6 +87,9 @@ class ProfileController extends Controller
     public function postVerification(CodeVerificationRequest $request): RedirectResponse
     {
         $user = authUser();
+
+        abort_if($user?->isVerified(), 403, 'الحساب مفعل بالفعل');
+
         if ($user?->verification_code !== $request->get('code')) {
             return back()->withErrors(['code' => 'كود التحقق غير صحيح']);
         }

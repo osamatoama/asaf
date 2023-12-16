@@ -42,7 +42,7 @@ class ProductController extends Controller
      */
     public function index(Request $request): View|Application|Factory|ApplicationAlias|Response
     {
-        abort_if(Gate::denies($this->permissions['access']), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies($this->permissions['access']), Response::HTTP_FORBIDDEN, 'ليس لديك صلاحية');
 
         if ($request->ajax() || $request->expectsJson()) {
             return $this->productService
@@ -61,7 +61,7 @@ class ProductController extends Controller
 
     public function create(): View|Application|Factory|ApplicationAlias
     {
-        abort_if(Gate::denies($this->permissions['create']), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies($this->permissions['create']), Response::HTTP_FORBIDDEN, 'ليس لديك صلاحية');
 
         $genders = $this->genderService->getPluckGenders(['asc' => true])
             ->prepend(trans('global.pleaseSelect'), '');
@@ -71,7 +71,7 @@ class ProductController extends Controller
 
     public function store(StoreRequest $request): RedirectResponse
     {
-        abort_if(Gate::denies($this->permissions['create']), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies($this->permissions['create']), Response::HTTP_FORBIDDEN, 'ليس لديك صلاحية');
 
         $store = $this->productService->store($request);
 
@@ -88,7 +88,7 @@ class ProductController extends Controller
 
     public function edit(Product $product): View|Application|Factory|ApplicationAlias
     {
-        abort_if(Gate::denies($this->permissions['edit']), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies($this->permissions['edit']), Response::HTTP_FORBIDDEN, 'ليس لديك صلاحية');
 
         $genders = $this->genderService->getPluckGenders(['asc' => true])
             ->prepend(trans('global.pleaseSelect'), '');
@@ -98,7 +98,7 @@ class ProductController extends Controller
 
     public function update(UpdateRequest $request, Product $product): RedirectResponse
     {
-        abort_if(Gate::denies($this->permissions['edit']), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies($this->permissions['edit']), Response::HTTP_FORBIDDEN, 'ليس لديك صلاحية');
 
         $update = $this->productService->update($request, $product);
 
@@ -115,7 +115,7 @@ class ProductController extends Controller
 
     public function show(Product $product): View|Application|Factory|ApplicationAlias
     {
-        abort_if(Gate::denies($this->permissions['show']), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies($this->permissions['show']), Response::HTTP_FORBIDDEN, 'ليس لديك صلاحية');
 
         $product->load('gender');
 
@@ -124,7 +124,7 @@ class ProductController extends Controller
 
     public function destroy(Product $product)
     {
-        abort_if(Gate::denies($this->permissions['delete']), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies($this->permissions['delete']), Response::HTTP_FORBIDDEN, 'ليس لديك صلاحية');
 
         if (request()?->ajax() || request()?->expectsJson()) {
             return response()->json($this->productService->destroy($product));

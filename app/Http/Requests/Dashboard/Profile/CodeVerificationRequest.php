@@ -22,8 +22,8 @@ class CodeVerificationRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'name.required' => __('validation/admin.verification_code_required'),
-            'name.digits'   => __('validation/admin.verification_code_digits'),
+            'code.required' => __('validation/admin.verification_code_required'),
+            'code.digits'   => __('validation/admin.verification_code_digits'),
         ];
     }
 }

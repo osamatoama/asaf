@@ -31,12 +31,12 @@
             @can(config('models.gender.permissions.access'))
                 <li @class(['nk-menu-item','active' => isCurrentPage('dashboard.genders.index')])>
                     <a href="{{ route('dashboard.genders.index') }}" class="nk-menu-link">
-                                <span class="nk-menu-text">
-                                    الأنواع
-                                </span>
+                        <span class="nk-menu-text">
+                            الأنواع
+                        </span>
                         <span class="nk-menu-badge bg-info text-white">
-                        {{ \App\Models\Gender::count() }}
-                    </span>
+                            {{ \App\Models\Gender::count() }}
+                        </span>
                     </a>
                 </li>
             @endcan
@@ -67,6 +67,9 @@
                         <span class="nk-menu-text">
                             الأذونات
                         </span>
+                        <span class="nk-menu-badge bg-info text-white">
+                            {{ \App\Models\Role::whereNotNull('related_user_id')->count() }}
+                        </span>
                     </a>
                 </li>
             @endcan
@@ -75,6 +78,9 @@
                     <a href="{{ route('dashboard.users.index') }}" class="nk-menu-link">
                         <span class="nk-menu-text">
                             موظفين لوحة التحكم
+                        </span>
+                        <span class="nk-menu-badge bg-info text-white">
+                            {{ \App\Models\Admin::whereNotNull('parent_id')->count() }}
                         </span>
                     </a>
                 </li>

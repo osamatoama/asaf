@@ -64,7 +64,7 @@ class RoleController extends Controller
      */
     public function index(Request $request): View|Factory|Application|JsonResponse|LengthAwarePaginator
     {
-        abort_if(Gate::denies($this->permissions['access']), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies($this->permissions['access']), Response::HTTP_FORBIDDEN, 'ليس لديك صلاحية');
 
         if ($request->ajax() || $request->expectsJson()) {
             return $this->roleService
@@ -86,7 +86,7 @@ class RoleController extends Controller
      */
     public function create()
     {
-        abort_if(Gate::denies($this->permissions['create']), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies($this->permissions['create']), Response::HTTP_FORBIDDEN, 'ليس لديك صلاحية');
 
         $permissions = $this->getPermissions();
 
@@ -99,7 +99,7 @@ class RoleController extends Controller
      */
     public function store(StoreRequest $request): RedirectResponse
     {
-        abort_if(Gate::denies($this->permissions['create']), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies($this->permissions['create']), Response::HTTP_FORBIDDEN, 'ليس لديك صلاحية');
 
         $store = $this->roleService->store($request);
 
@@ -120,7 +120,7 @@ class RoleController extends Controller
      */
     public function edit(Role $role)
     {
-        abort_if(Gate::denies($this->permissions['edit']) || Role::isMainRole($role), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies($this->permissions['edit']) || Role::isMainRole($role), Response::HTTP_FORBIDDEN, 'ليس لديك صلاحية');
 
         $rolePermissions = $role->permissions()->pluck('permissions.id')->toArray();
         $permissions     = $this->getPermissions();
@@ -136,7 +136,7 @@ class RoleController extends Controller
      */
     public function update(UpdateRequest $request, Role $role): RedirectResponse
     {
-        abort_if(Gate::denies($this->permissions['edit']), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies($this->permissions['edit']), Response::HTTP_FORBIDDEN, 'ليس لديك صلاحية');
 
         $update = $this->roleService->update($request, $role);
 
@@ -157,7 +157,7 @@ class RoleController extends Controller
      */
     public function show(Role $role)
     {
-        abort_if(Gate::denies($this->permissions['show']) || Role::isMainRole($role), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies($this->permissions['show']) || Role::isMainRole($role), Response::HTTP_FORBIDDEN, 'ليس لديك صلاحية');
 
         $role->load('permissions');
 
@@ -174,7 +174,7 @@ class RoleController extends Controller
             || !in_array($role->related_user_id, [
                 (authId() ?? 0),
                 (authUser()->parent_id ?? 0),
-            ]), Response::HTTP_FORBIDDEN, '403 Forbidden');
+            ]), Response::HTTP_FORBIDDEN, 'ليس لديك صلاحية');
 
         if (request()?->ajax() || request()?->expectsJson()) {
             return response()->json($this->roleService->destroy($role));

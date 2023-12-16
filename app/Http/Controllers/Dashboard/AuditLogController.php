@@ -27,7 +27,7 @@ class AuditLogController extends Controller
 
     public function index(Request $request)
     {
-        abort_if(Gate::denies($this->permissions['access']), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies($this->permissions['access']), Response::HTTP_FORBIDDEN, 'ليس لديك صلاحية');
 
         if ($request->ajax() || $request->expectsJson()) {
             return $this->auditLogService
@@ -46,7 +46,7 @@ class AuditLogController extends Controller
 
     public function show(AuditLog $auditLog)
     {
-        abort_if(Gate::denies($this->permissions['show']), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies($this->permissions['show']), Response::HTTP_FORBIDDEN, 'ليس لديك صلاحية');
 
         return view('dashboard.pages.' . $this->routeView . '.show', compact('auditLog'));
     }

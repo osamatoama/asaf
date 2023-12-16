@@ -32,7 +32,7 @@ class GenderController extends Controller
 
     public function index(Request $request): View|Application|Factory|ApplicationAlias|Response
     {
-        abort_if(Gate::denies($this->permissions['access']), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies($this->permissions['access']), Response::HTTP_FORBIDDEN, 'ليس لديك صلاحية');
 
         if ($request->ajax() || $request->expectsJson()) {
             return $this->genderService
@@ -51,7 +51,7 @@ class GenderController extends Controller
 
     public function show(Gender $gender): View|Factory|Application|ApplicationAlias|Response
     {
-        abort_if(Gate::denies($this->permissions['show']), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies($this->permissions['show']), Response::HTTP_FORBIDDEN, 'ليس لديك صلاحية');
 
         $gender->loadCount('products');
 
