@@ -18,7 +18,6 @@ return new class extends Migration
                 $table->string('slug')->unique()->nullable();
                 $table->unsignedBigInteger('related_user_id')->nullable();
                 $table->timestamps();
-                $table->softDeletes();
 
                 $table->foreign('related_user_id')
                     ->references('id')

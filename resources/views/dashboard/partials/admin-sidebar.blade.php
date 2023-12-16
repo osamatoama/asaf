@@ -61,16 +61,6 @@
             </span>
         </a>
         <ul class="nk-menu-sub">
-            @can(config('models.user.permissions.access'))
-                <li @class(['nk-menu-item','active' => isCurrentPage('dashboard.users.*')])>
-                    <a href="{{ route('dashboard.users.index') }}" class="nk-menu-link">
-                        <span class="nk-menu-text">
-                            موظفين لوحة التحكم
-                        </span>
-                    </a>
-                </li>
-            @endcan
-
             @can(config('models.role.permissions.access'))
                 <li @class(['nk-menu-item','active' => isCurrentPage('dashboard.roles.*')])>
                     <a href="{{ route('dashboard.roles.index') }}" class="nk-menu-link">
@@ -80,7 +70,15 @@
                     </a>
                 </li>
             @endcan
-
+            @can(config('models.user.permissions.access'))
+                <li @class(['nk-menu-item','active' => isCurrentPage('dashboard.users.*')])>
+                    <a href="{{ route('dashboard.users.index') }}" class="nk-menu-link">
+                        <span class="nk-menu-text">
+                            موظفين لوحة التحكم
+                        </span>
+                    </a>
+                </li>
+            @endcan
             @can(config('models.audit-log.permissions.access'))
                 <li @class(['nk-menu-item','active' => isCurrentPage('dashboard.audit-logs.*')])>
                     <a href="{{ route('dashboard.audit-logs.index') }}" class="nk-menu-link">

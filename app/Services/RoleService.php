@@ -10,8 +10,8 @@ use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Pagination\LengthAwarePaginator as LengthAwarePaginator_2;
-use Illuminate\Support\Collection as Support_Collection;
+use Illuminate\Pagination\LengthAwarePaginator as LengthAwarePaginatorAlias;
+use Illuminate\Support\Collection as CollectionAlias;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -45,10 +45,10 @@ class RoleService
     /**
      * @param int|null $authId
      * @param array $filter
-     * @return Role|LengthAwarePaginator|Builder|Collection|LengthAwarePaginator_2|Support_Collection|JsonResponse
+     * @return Role|LengthAwarePaginator|Builder|Collection|LengthAwarePaginatorAlias|CollectionAlias|JsonResponse
      * @throws Exception
      */
-    public function getRoles(?int $authId, array $filter = []): Role|LengthAwarePaginator|Builder|Collection|LengthAwarePaginator_2|Support_Collection|JsonResponse
+    public function getRoles(?int $authId, array $filter = []): Role|LengthAwarePaginator|Builder|Collection|LengthAwarePaginatorAlias|CollectionAlias|JsonResponse
     {
         $roles = Role::select(['id', 'title'])
             ->with('permissions')

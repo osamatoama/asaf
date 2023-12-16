@@ -122,7 +122,7 @@ class RoleController extends Controller
     {
         abort_if(Gate::denies($this->permissions['edit']) || Role::isMainRole($role), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $rolePermissions = $role->permissions->pluck('id')->toArray();
+        $rolePermissions = $role->permissions()->pluck('permissions.id')->toArray();
         $permissions     = $this->getPermissions();
 
         return view('dashboard.pages.' . $this->routeView . '.edit',
