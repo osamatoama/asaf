@@ -3,6 +3,8 @@
 namespace App\Services;
 
 use App\Models\AuditLog;
+use Exception;
+use Illuminate\Http\JsonResponse;
 use Yajra\DataTables\Facades\DataTables;
 
 class AuditLogService
@@ -20,6 +22,9 @@ class AuditLogService
         $this->routeName   = config('models.audit-log.route_name') ?? '';
     }
 
+    /**
+     * @throws Exception
+     */
     public function getAuditLogs($filter = [])
     {
         $auditLogs = AuditLog::query();
@@ -58,7 +63,10 @@ class AuditLogService
         return $auditLogs->get();
     }
 
-    private function prepareDatatable($query)
+    /**
+     * @throws Exception
+     */
+    private function prepareDatatable($query): JsonResponse
     {
         $table = Datatables::of($query);
 
@@ -81,22 +89,22 @@ class AuditLogService
         });
 
         $table->editColumn('id', function ($row) {
-            return $row->id ?? '';
+            return $row->id ?? '---';
         });
         $table->editColumn('description', function ($row) {
-            return $row->description ?? '';
+            return $row->description ?? '---';
         });
         $table->editColumn('subject_id', function ($row) {
-            return $row->subject_id ?? '';
+            return $row->subject_id ?? '---';
         });
         $table->editColumn('subject_type', function ($row) {
-            return $row->subject_type ?? '';
+            return $row->subject_type ?? '---';
         });
         $table->editColumn('user_id', function ($row) {
-            return $row->user_id ?? '';
+            return $row->user_id ?? '---';
         });
         $table->editColumn('host', function ($row) {
-            return $row->host ?? '';
+            return $row->host ?? '---';
         });
 
         $table->rawColumns(['actions', 'placeholder']);

@@ -52,5 +52,6 @@ class User extends Authenticatable
         'verified'          => 'boolean',
         'active'            => 'boolean',
         'dark_mode_enabled' => 'boolean',
+        'created_at'        => 'datetime:Y-m-d H:i:s',
     ];
 }

@@ -11,6 +11,7 @@ class AuditLog extends Model
      */
     protected $casts = [
         'properties' => 'collection',
+        'created_at' => 'datetime:Y-m-d H:i:s',
     ];
 
     protected $fillable = [
@@ -21,6 +22,4 @@ class AuditLog extends Model
         'properties',
         'host',
     ];
-
-    protected $dateFormat = 'Y-m-d H:i:s';
 }

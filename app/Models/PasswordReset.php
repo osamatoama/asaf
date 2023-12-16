@@ -15,4 +15,8 @@ class PasswordReset extends Model
         'code',
         'created_at',
     ];
+
+    protected $casts = [
+        'created_at' => 'datetime:Y-m-d H:i:s',
+    ];
 }

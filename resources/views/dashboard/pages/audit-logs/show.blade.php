@@ -5,7 +5,7 @@
         <div class="nk-block-between">
             <div class="nk-block-head-content">
                 <h3 class="nk-block-title page-title">
-                    @lang('global.show') @lang('cruds.auditLog.title_singular')
+                    عرض تفاصيل السجل
                 </h3>
             </div>
         </div>
@@ -18,7 +18,7 @@
                         <tbody>
                         <tr>
                             <th>
-                                @lang('cruds.auditLog.fields.id')
+                                تسلسل
                             </th>
                             <td>
                                 {{ $auditLog->id }}
@@ -26,23 +26,23 @@
                         </tr>
                         <tr>
                             <th>
-                                @lang('cruds.auditLog.fields.description')
+                                الوصف
                             </th>
                             <td>
-                                {{ $auditLog->description ?? '' }}
+                                {{ $auditLog->description ?? '---' }}
                             </td>
                         </tr>
                         <tr>
                             <th>
-                                @lang('cruds.auditLog.fields.subject_id')
+                                معرف الموضوع
                             </th>
                             <td>
-                                {{ $auditLog->subject_id ?? '' }}
+                                {{ $auditLog->subject_id ?? '---' }}
                             </td>
                         </tr>
                         <tr>
                             <th>
-                                @lang('cruds.auditLog.fields.subject_type')
+                                نوع الموضوع
                             </th>
                             <td>
                                 {{ $auditLog->subject_type ?? '' }}
@@ -50,31 +50,31 @@
                         </tr>
                         <tr>
                             <th>
-                                @lang('cruds.auditLog.fields.user_id')
+                                معرف المستخدم
                             </th>
                             <td>
-                                {{ $auditLog->user_id ?? '' }}
+                                {{ $auditLog->user_id ?? '---' }}
                             </td>
                         </tr>
                         <tr>
                             <th>
-                                @lang('cruds.auditLog.fields.properties')
+                                الخصائص
                             </th>
                             <td>
-                                {{ $auditLog->properties ?? '' }}
+                                {{ $auditLog->properties ?? '---' }}
                             </td>
                         </tr>
                         <tr>
                             <th>
-                                @lang('cruds.auditLog.fields.host')
+                                المضيف
                             </th>
                             <td>
-                                {{ $auditLog->host ?? '' }}
+                                {{ $auditLog->host ?? '---' }}
                             </td>
                         </tr>
                         <tr>
                             <th>
-                                @lang('cruds.auditLog.fields.created_at')
+                                أنشأ في
                             </th>
                             <td>
                                 {{ $auditLog->created_at }}

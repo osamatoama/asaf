@@ -5,7 +5,7 @@
         <div class="nk-block-between">
             <div class="nk-block-head-content">
                 <h3 class="nk-block-title page-title">
-                    @lang('global.list') @lang('cruds.auditLog.title')
+                    قائمة سجلات النشاط
                 </h3>
             </div>
         </div>
@@ -17,13 +17,13 @@
                        data-url="{{ route('dashboard.audit-logs.index') }}">
                     <thead>
                     <tr>
-                        <th class="text-center">@lang('cruds.auditLog.fields.id')</th>
-                        <th class="text-center">@lang('cruds.auditLog.fields.user_id')</th>
-                        <th class="text-center">@lang('cruds.auditLog.fields.subject_id')</th>
-                        <th>@lang('cruds.auditLog.fields.subject_type')</th>
-                        <th>@lang('cruds.auditLog.fields.description')</th>
-                        <th>@lang('cruds.auditLog.fields.host')</th>
-                        <th>@lang('cruds.auditLog.fields.created_at')</th>
+                        <th class="text-center">تسلسل</th>
+                        <th class="text-center">معرف المستخدم</th>
+                        <th class="text-center">معرف الموضوع</th>
+                        <th>نوع الموضوع</th>
+                        <th>الوصف</th>
+                        <th>المضيف</th>
+                        <th>أنشأ في</th>
                         <th class="text-center">@lang('global.Actions')</th>
                     </tr>
                     </thead>

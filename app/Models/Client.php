@@ -17,5 +17,7 @@ class Client extends Model
         'email',
     ];
 
-    protected $dateFormat = 'Y-m-d H:i:s';
+    protected $casts = [
+        'created_at' => 'datetime:Y-m-d H:i:s',
+    ];
 }

@@ -20,8 +20,7 @@ class QuizQuestionAnswer extends Model implements HasMedia
     ];
 
     protected $casts = [
-        'countable' => 'boolean'
+        'countable'  => 'boolean',
+        'created_at' => 'datetime:Y-m-d H:i:s',
     ];
-
-    protected $dateFormat = 'Y-m-d H:i:s';
 }

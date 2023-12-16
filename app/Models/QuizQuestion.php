@@ -21,9 +21,8 @@ class QuizQuestion extends Model
     ];
 
     protected $casts = [
-        'active'    => 'boolean',
-        'has_image' => 'boolean',
+        'active'     => 'boolean',
+        'has_image'  => 'boolean',
+        'created_at' => 'datetime:Y-m-d H:i:s',
     ];
-
-    protected $dateFormat = 'Y-m-d H:i:s';
 }
