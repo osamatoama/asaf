@@ -4,11 +4,9 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Helpers\GlobalConstants;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Dashboard\Product\StoreRequest;
-use App\Http\Requests\Dashboard\Product\UpdateRequest;
-use App\Models\Product;
-use App\Services\GenderService;
-use App\Services\ProductService;
+use App\Http\Requests\Dashboard\Quiz\UpdateRequest;
+use App\Models\Quiz;
+use App\Services\QuizService;
 use Exception;
 use Gate;
 use Illuminate\Contracts\Foundation\Application as ApplicationAlias;
@@ -24,17 +22,15 @@ class QuizController extends Controller
     private string $routeView;
     private string $routeName;
     private array $permissions;
-    private ProductService $productService;
-    private GenderService $genderService;
+    private QuizService $quizService;
 
 
-    public function __construct(ProductService $productService, GenderService $genderService)
+    public function __construct(QuizService $quizService)
     {
-        $this->routeView      = config('models.product.route_view') ?? '';
-        $this->routeName      = config('models.product.route_name') ?? '';
-        $this->permissions    = config('models.product.permissions') ?? [];
-        $this->productService = $productService;
-        $this->genderService  = $genderService;
+        $this->routeView      = config('models.quiz.route_view') ?? '';
+        $this->routeName      = config('models.quiz.route_name') ?? '';
+        $this->permissions    = config('models.quiz.permissions') ?? [];
+        $this->quizService    = $quizService;
     }
 
     /**
@@ -45,62 +41,34 @@ class QuizController extends Controller
         abort_if(Gate::denies($this->permissions['access']), Response::HTTP_FORBIDDEN, 'ليس لديك صلاحية');
 
         if ($request->ajax() || $request->expectsJson()) {
-            return $this->productService
-                ->getProducts(['requestType' => 'datatable']);
+            return $this->quizService
+                ->getQuizzes(['requestType' => 'datatable']);
         }
 
-        $products = $this->productService
-            ->getProducts([
+        $quizzes = $this->quizService
+            ->getQuizzes([
                 'q'        => $request->q ?? null,
                 'paginate' => (int)($request->paginate ?? GlobalConstants::PAGINATION_DEFAULT_COUNT),
                 'page'     => (int)($request->page ?? 1),
             ]);
 
-        return view('dashboard.pages.' . $this->routeView . '.index', compact('products'));
+        return view('dashboard.pages.' . $this->routeView . '.index', compact('quizzes'));
     }
 
-    public function create(): View|Application|Factory|ApplicationAlias
-    {
-        abort_if(Gate::denies($this->permissions['create']), Response::HTTP_FORBIDDEN, 'ليس لديك صلاحية');
-
-        $genders = $this->genderService->getPluckGenders(['asc' => true])
-            ->prepend(trans('global.pleaseSelect'), '');
-
-        return view('dashboard.pages.' . $this->routeView . '.create', compact('genders'));
-    }
-
-    public function store(StoreRequest $request): RedirectResponse
-    {
-        abort_if(Gate::denies($this->permissions['create']), Response::HTTP_FORBIDDEN, 'ليس لديك صلاحية');
-
-        $store = $this->productService->store($request);
-
-        if ($store->success) {
-            return redirect()
-                ->route('dashboard.' . $this->routeName . '.index')
-                ->with('success_message', $store->message);
-        }
-
-        return back()
-            ->withInput($request->input())
-            ->with('error_message', $store->message);
-    }
-
-    public function edit(Product $product): View|Application|Factory|ApplicationAlias
+    public function edit(Quiz $quiz): View|Application|Factory|ApplicationAlias
     {
         abort_if(Gate::denies($this->permissions['edit']), Response::HTTP_FORBIDDEN, 'ليس لديك صلاحية');
 
-        $genders = $this->genderService->getPluckGenders(['asc' => true])
-            ->prepend(trans('global.pleaseSelect'), '');
+        abort(403, 'Coming Soon...');
 
-        return view('dashboard.pages.' . $this->routeView . '.edit', compact('product', 'genders'));
+        return view('dashboard.pages.' . $this->routeView . '.edit', compact('quiz'));
     }
 
-    public function update(UpdateRequest $request, Product $product): RedirectResponse
+    public function update(UpdateRequest $request, Quiz $quiz): RedirectResponse
     {
         abort_if(Gate::denies($this->permissions['edit']), Response::HTTP_FORBIDDEN, 'ليس لديك صلاحية');
 
-        $update = $this->productService->update($request, $product);
+        $update = $this->quizService->update($request, $quiz);
 
         if ($update->success) {
             return redirect()
@@ -113,23 +81,12 @@ class QuizController extends Controller
             ->with('error_message', $update->message);
     }
 
-    public function show(Product $product): View|Application|Factory|ApplicationAlias
+    public function show(Quiz $quiz): View|Application|Factory|ApplicationAlias
     {
         abort_if(Gate::denies($this->permissions['show']), Response::HTTP_FORBIDDEN, 'ليس لديك صلاحية');
 
-        $product->load('gender');
+        $quiz->load('questions.answers')->loadCount('results');
 
-        return view('dashboard.pages.' . $this->routeView . '.show', compact('product'));
-    }
-
-    public function destroy(Product $product)
-    {
-        abort_if(Gate::denies($this->permissions['delete']), Response::HTTP_FORBIDDEN, 'ليس لديك صلاحية');
-
-        if (request()?->ajax() || request()?->expectsJson()) {
-            return response()->json($this->productService->destroy($product));
-        }
-
-        abort(Response::HTTP_NOT_FOUND, '404 Not Found');
+        return view('dashboard.pages.' . $this->routeView . '.show', compact('quiz'));
     }
 }
