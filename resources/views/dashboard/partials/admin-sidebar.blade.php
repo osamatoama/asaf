@@ -4,7 +4,8 @@
 ])
 
     <li @class(['nk-menu-item has-sub sidebar-main-menu', 'active current-page' => isMenuOpened([
-        'products'
+        'products',
+        'genders'
     ])])>
         <a href="#" class="nk-menu-link nk-menu-toggle">
             <span class="nk-menu-icon">
