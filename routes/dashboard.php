@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Dashboard\AuditLogController;
+use App\Http\Controllers\Dashboard\GenderController;
 use App\Http\Controllers\Dashboard\DropzoneController;
 use App\Http\Controllers\Dashboard\HomeController;
 use App\Http\Controllers\Dashboard\ProductController;
@@ -34,6 +35,12 @@ Route::prefix('dashboard')->as('dashboard.')->middleware([
         Route::post('verification', [ProfileController::class, 'postVerification'])
             ->withoutMiddleware(['isVerified', 'isActive'])
             ->name('post-verification');
+    });
+
+    //Genders
+    Route::group(['prefix' => 'genders', 'as' => 'genders.'], function () {
+        Route::get('', [GenderController::class, 'index'])->name('index');
+        Route::get('{gender}', [GenderController::class, 'show'])->name('show');
     });
 
     //Products

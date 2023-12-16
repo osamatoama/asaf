@@ -6,8 +6,13 @@ use App\Http\Requests\Dashboard\Product\StoreRequest;
 use App\Http\Requests\Dashboard\Product\UpdateRequest;
 use App\Models\Product;
 use Exception;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Pagination\LengthAwarePaginator as LengthAwarePaginatorAlias;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Collection as CollectionAlias;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -29,9 +34,9 @@ class ProductService
     /**
      * @throws Exception
      */
-    public function getProducts(array $filter = [])
+    public function getProducts(array $filter = []): Product|LengthAwarePaginator|Builder|Collection|LengthAwarePaginatorAlias|CollectionAlias|JsonResponse
     {
-        $products = Product::query();
+        $products = Product::with('media');
 
         if (($filter['requestType'] ?? false) && ($filter['requestType'] === 'datatable')) {
             return $this->prepareDatatable($products);
@@ -53,6 +58,11 @@ class ProductService
                     });
             });
             $params['q'] = $filter['q'];
+        }
+
+        if ($filter['gender_id'] ?? false) {
+            $products = $products->where('gender_id', $filter['gender_id']);
+            $params['gender_id'] = $filter['gender_id'];
         }
 
         if ($filter['pluck'] ?? false) {
@@ -78,7 +88,7 @@ class ProductService
     /**
      * @throws Exception
      */
-    public function getPluckProducts(array $filter = []): JsonResponse
+    public function getPluckProducts(array $filter = []): Collection|LengthAwarePaginator|Builder|LengthAwarePaginatorAlias|JsonResponse|CollectionAlias|Product
     {
         $filter = Arr::except($filter, 'requestType');
         $filter['pluck'] = true;
@@ -211,7 +221,7 @@ class ProductService
                                 alt="%s">',
                     $row->image->thumbnail,
                     $row->image->original,
-                    $row->title
+                    $row->name
                 );
             }
 
@@ -223,7 +233,7 @@ class ProductService
                                 alt="%s">',
                     $row->image_url,
                     $row->image_url,
-                    $row->title
+                    $row->name
                 );
             }
 

@@ -1,4 +1,7 @@
-@can(config('models.product.permissions.access'))
+@canany([
+    config('models.product.permissions.access'),
+    config('models.gender.permissions.access')
+])
 
     <li @class(['nk-menu-item has-sub sidebar-main-menu', 'active current-page' => isMenuOpened([
         'products'
@@ -8,24 +11,38 @@
                 <em class="icon ni ni-package"></em>
             </span>
             <span class="nk-menu-text">
-                المنتجات
+                إدارة المنتجات
             </span>
         </a>
         <ul class="nk-menu-sub">
-            <li @class(['nk-menu-item','active' => isCurrentPage('dashboard.products.index')])>
-                <a href="{{ route('dashboard.products.index') }}" class="nk-menu-link">
+            @can(config('models.product.permissions.access'))
+                <li @class(['nk-menu-item','active' => isCurrentPage('dashboard.products.index')])>
+                    <a href="{{ route('dashboard.products.index') }}" class="nk-menu-link">
+                                    <span class="nk-menu-text">
+                                        المنتجات
+                                    </span>
+                        <span class="nk-menu-badge bg-info text-white">
+                            {{ \App\Models\Product::count() }}
+                        </span>
+                    </a>
+                </li>
+            @endcan
+            @can(config('models.gender.permissions.access'))
+                <li @class(['nk-menu-item','active' => isCurrentPage('dashboard.genders.index')])>
+                    <a href="{{ route('dashboard.genders.index') }}" class="nk-menu-link">
                                 <span class="nk-menu-text">
-                                    قائمة المنتجات
+                                    الأنواع
                                 </span>
-                    <span class="nk-menu-badge bg-info text-white">
-                        {{ \App\Models\Product::count() }}
+                        <span class="nk-menu-badge bg-info text-white">
+                        {{ \App\Models\Gender::count() }}
                     </span>
-                </a>
-            </li>
+                    </a>
+                </li>
+            @endcan
         </ul>
     </li>
 
-@endcan
+@endcanany
 
 @canany([
     config('models.user.permissions.access'),
