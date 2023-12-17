@@ -59,6 +59,9 @@ class ProductController extends Controller
         return view('dashboard.pages.' . $this->routeView . '.index', compact('products'));
     }
 
+    /**
+     * @throws Exception
+     */
     public function create(): View|Application|Factory|ApplicationAlias
     {
         abort_if(Gate::denies($this->permissions['create']), Response::HTTP_FORBIDDEN, 'ليس لديك صلاحية');
@@ -86,6 +89,9 @@ class ProductController extends Controller
             ->with('error_message', $store->message);
     }
 
+    /**
+     * @throws Exception
+     */
     public function edit(Product $product): View|Application|Factory|ApplicationAlias
     {
         abort_if(Gate::denies($this->permissions['edit']), Response::HTTP_FORBIDDEN, 'ليس لديك صلاحية');
