@@ -12,7 +12,7 @@
     </div>
     <div class="nk-block">
         <div class="row g-gs">
-            @include('dashboard.pages.home.partials.admin')
+            @include('dashboard.pages.home.partials.statistics')
         </div>
     </div>
 @endsection
