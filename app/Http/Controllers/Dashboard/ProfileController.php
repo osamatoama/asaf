@@ -19,13 +19,13 @@ class ProfileController extends Controller
         abort_if(Gate::denies('profile_password_edit'), 403, 'ليس لديك صلاحية');
 
         return view('dashboard.pages.profile.edit', [
-            'user' => authUser(),
+            'user' => authUser('admin'),
         ]);
     }
 
     public function update(UpdateRequest $request): RedirectResponse
     {
-        authUser()?->update([
+        authUser('admin')?->update([
             'name'  => $request->get('name'),
             'email' => $request->get('email'),
         ]);
@@ -37,7 +37,7 @@ class ProfileController extends Controller
 
     public function changePassword(ChangePasswordRequest $request): RedirectResponse
     {
-        authUser()?->update([
+        authUser('admin')?->update([
             'password' => bcrypt($request->get('password')),
         ]);
 
@@ -49,8 +49,8 @@ class ProfileController extends Controller
     public function toggleDarkMode()
     {
         if (request()?->expectsJson()) {
-            authUser()?->update([
-                'dark_mode_enabled' => !authUser()?->dark_mode_enabled
+            authUser('admin')?->update([
+                'dark_mode_enabled' => !authUser('admin')?->dark_mode_enabled
             ]);
 
             return response()->noContent();
@@ -65,7 +65,7 @@ class ProfileController extends Controller
     public function getVerification()
     {
         if (session()->missing('errors')) {
-            $user = authUser();
+            $user = authUser('admin');
 
             abort_if($user?->isVerified(), 403, 'الحساب مفعل بالفعل');
 
@@ -86,7 +86,7 @@ class ProfileController extends Controller
 
     public function postVerification(CodeVerificationRequest $request): RedirectResponse
     {
-        $user = authUser();
+        $user = authUser('admin');
 
         abort_if($user?->isVerified(), 403, 'الحساب مفعل بالفعل');
 
