@@ -6,6 +6,7 @@ use App\Helpers\GlobalConstants;
 use App\Http\Controllers\Controller;
 use App\Models\AuditLog;
 use App\Services\AuditLogService;
+use Exception;
 use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -25,6 +26,9 @@ class AuditLogController extends Controller
         $this->auditLogService  = $auditLogService;
     }
 
+    /**
+     * @throws Exception
+     */
     public function index(Request $request)
     {
         abort_if(Gate::denies($this->permissions['access']), Response::HTTP_FORBIDDEN, 'ليس لديك صلاحية');
