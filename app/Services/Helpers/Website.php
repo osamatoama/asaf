@@ -23,12 +23,7 @@ class Website
 
     public function assets(string $path = ''): string
     {
-        $path = 'assets/website/' . ltrim($path, '/');
-        if (!app()->isLocal()) {
-            $path .= config('version.assets');
-        }
-
-        return asset($path);
+        return asset('assets/website/' . ltrim($path, '/'));
     }
 
     public function localeFlag(string $locale): string

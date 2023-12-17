@@ -13,10 +13,13 @@ class UserTableSeeder extends Seeder
     public function run(): void
     {
         $user = User::create([
-            'name'     => 'Admin',
-            'email'    => 'z3797ytf9p4h0uxs@email.partners',
+            'name'     => 'Quiz Administration',
+            'email'    => 'admin@admin.com',
+//            'email'    => 'z3797ytf9p4h0uxs@email.partners',
             'phone'    => '+966500000000',
             'password' => bcrypt('12345678'),
+            'verified' => true,
+            'active'   => true,
         ]);
 
         $user->sallaConfigurations()->createMany([

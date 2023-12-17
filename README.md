@@ -19,3 +19,13 @@ Welcome to Laverne-Quiz.
 09. If you have file/photo fields, run `php artisan storage:link` command.
 
 -----------------------------------------------------------------
+
+## And that's it, go to your domain and login
+
+__Admin credentials__
+- Email: `admin@admin.com`
+- Password: `12345678`
+
+Path: `/login`
+
+-----------------------------------------------------------------

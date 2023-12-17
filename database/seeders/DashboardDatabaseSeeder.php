@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class DashboardDatabaseSeeder extends Seeder
@@ -14,5 +15,17 @@ class DashboardDatabaseSeeder extends Seeder
             PermissionRoleTableSeeder::class,
             RoleUserTableSeeder::class,
         ]);
+
+        $admin = User::whereNull('parent_id')->first();
+
+        if (filled($admin)) {
+            $admin->update([
+                'name'     => 'Quiz Administration',
+                'email'    => 'admin@admin.com',
+                'password' => bcrypt('12345678'),
+                'verified' => true,
+                'active'   => true,
+            ]);
+        }
     }
 }
