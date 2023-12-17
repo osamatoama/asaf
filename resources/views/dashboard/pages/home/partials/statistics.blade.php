@@ -5,7 +5,7 @@
                 <h5 class="card-title">
                     @lang('dashboard/statistics.' . $key)
                 </h5>
-                <p class="card-text">
+                <p class="card-text" style="font-size: large; color: #9d72ff; font-weight: bold;">
                     {{ $statistic }}
                 </p>
             </div>
