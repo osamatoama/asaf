@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Gender;
 use App\Services\GenderService;
 use App\Services\ProductService;
+use Exception;
 use Gate;
 use Illuminate\Contracts\Foundation\Application as ApplicationAlias;
 use Illuminate\Contracts\View\Factory;
@@ -30,6 +31,9 @@ class GenderController extends Controller
         $this->genderService  = $genderService;
     }
 
+    /**
+     * @throws Exception
+     */
     public function index(Request $request): View|Application|Factory|ApplicationAlias|Response
     {
         abort_if(Gate::denies($this->permissions['access']), Response::HTTP_FORBIDDEN, 'ليس لديك صلاحية');
@@ -49,6 +53,9 @@ class GenderController extends Controller
         return view('dashboard.pages.' . $this->routeView . '.index', compact('genders'));
     }
 
+    /**
+     * @throws Exception
+     */
     public function show(Gender $gender): View|Factory|Application|ApplicationAlias|Response
     {
         abort_if(Gate::denies($this->permissions['show']), Response::HTTP_FORBIDDEN, 'ليس لديك صلاحية');
