@@ -68,6 +68,8 @@ class QuizController extends Controller
     {
         abort_if(Gate::denies($this->permissions['edit']), Response::HTTP_FORBIDDEN, 'ليس لديك صلاحية');
 
+        abort(403, 'Coming Soon...');
+
         $update = $this->quizService->update($request, $quiz);
 
         if ($update->success) {
