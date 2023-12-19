@@ -3,11 +3,11 @@
 namespace App\Services;
 
 use Exception;
-use App\Models\QuizQuestion;
+use App\Models\QuizQuestionAnswer;
 use Illuminate\Support\Facades\DB;
-use App\Http\Requests\Dashboard\QuizQuestion\UpdateRequest;
+use App\Http\Requests\Dashboard\QuizQuestionAnswer\UpdateRequest;
 
-class QuizQuestionService
+class QuizQuestionAnswerService
 {
     private string $routeView;
 
@@ -17,23 +17,23 @@ class QuizQuestionService
 
     public function __construct()
     {
-        $this->routeView   = config('models.quiz-question.route_view') ?? '';
-        $this->permissions = config('models.quiz-question.permissions') ?? [];
-        $this->routeName   = config('models.quiz-question.route_name') ?? '';
+        $this->routeView   = config('models.quiz-question-answer.route_view') ?? '';
+        $this->permissions = config('models.quiz-question-answer.permissions') ?? [];
+        $this->routeName   = config('models.quiz-question-answer.route_name') ?? '';
     }
 
-    public function update(UpdateRequest $request, QuizQuestion $quizQuestion): object
+    public function update(UpdateRequest $request, QuizQuestionAnswer $quizQuestionAnswer): object
     {
         DB::beginTransaction();
 
         try {
-            $quizQuestion->update($request->validated());
+            $quizQuestionAnswer->update($request->validated());
 
             DB::commit();
 
             return (object)[
                 'success' => true,
-                'message' => 'تم تعديل السؤال بنجاح',
+                'message' => 'تم تعديل الإجابة بنجاح',
             ];
         } catch (Exception $e) {
             DB::rollBack();
@@ -45,22 +45,19 @@ class QuizQuestionService
         }
     }
 
-    public function destroy(QuizQuestion $quizQuestion): object
+    public function destroy(QuizQuestionAnswer $quizQuestionAnswer): object
     {
         DB::beginTransaction();
 
         try {
-            // foreach ($quizQuestion->answers as $answer) {
-            //     $answer->products()->sync([]);
-            //     $answer->delete();
-            // }
-            // $quizQuestion->delete();
+            // $quizQuestionAnswer->products()->sync([]);
+            // $quizQuestionAnswer->delete();
 
-            // DB::commit();
+            DB::commit();
 
             return (object)[
                 'success' => true,
-                'message' => 'تم حذف السؤال بنجاح',
+                'message' => 'تم حذف الإجابة بنجاح',
             ];
         } catch (Exception $e) {
             DB::rollBack();

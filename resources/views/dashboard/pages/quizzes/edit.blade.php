@@ -71,26 +71,26 @@
                             <div class="question-wrapper card mt-2 mb-4 p-2">
                                 <div class="d-flex justify-content-between">
                                     <div class="d-flex align-items-start flex-grow-1">
-                                        <div id="question-title-show-{{ $question->id }}" class="question-title-show">
+                                        <div id="question-show-{{ $question->id }}" class="question-show">
                                             <span class="question-title fs-20px fw-bold">
                                                 {{ $question->title }}
                                             </span>
 
                                             <span
-                                                class="edit-question-title-btn" style="cursor: pointer" data-id="{{ $question->id }}"
+                                                class="edit-question-btn" style="cursor: pointer" data-id="{{ $question->id }}"
                                             >
                                                 <em class="icon ni ni-edit fs-20px text-info"></em>
                                             </span>
                                         </div>
 
-                                        <div id="question-title-edit-{{ $question->id }}" class="question-title-edit d-flex align-items-center d-none">
+                                        <div id="question-edit-{{ $question->id }}" class="question-edit d-flex align-items-center d-none">
                                             <input
-                                                class="question-title-input form-control fs-20px" type="text" name="title"
+                                                class="question-title-input form-control resizable fs-20px" type="text" name="title"
                                                 value="{{ $question->title }}" required
                                             />
 
                                             <button
-                                                class="save-question-title-btn btn btn-sm btn-primary ms-1"
+                                                class="save-question-btn btn btn-sm btn-primary ms-1"
                                                 data-id="{{ $question->id }}"
                                                 data-action="{{ route('dashboard.quiz-questions.update', $question->id) }}"
                                             >
@@ -98,7 +98,7 @@
                                             </button>
 
                                             <button
-                                                class="discard-question-title-btn btn btn-sm btn-danger ms-1"
+                                                class="discard-question-btn btn btn-sm btn-danger ms-1"
                                                 data-id="{{ $question->id }}"
                                             >
                                                 إلغاء
@@ -115,14 +115,57 @@
                                         </span>
                                     </div>
                                 </div>
+
+                                <hr>
+
                                 <ul>
                                     @foreach ($question->answers as $answer)
-                                        <li class="my-2">
+                                        <li class="answer-wrapper my-2">
                                             <div class="row">
                                                 <div class="col-md-3">
-                                                    <span class="mx-4" style="font-size: medium;">{{ '- '.$answer->title }}</span>
+                                                    <div id="answer-show-{{ $answer->id }}" class="answer-show">
+                                                        <span class="answer-title ms-4 fw-bold fs-16px">{{ $answer->title }}</span>
+
+                                                        <span
+                                                            class="edit-answer-btn" style="cursor: pointer" data-id="{{ $answer->id }}"
+                                                        >
+                                                            <em class="icon ni ni-edit fs-20px text-info"></em>
+                                                        </span>
+
+                                                        <span class="answer-description mx-4 d-block text-muted">
+                                                            {{ $answer->description }}
+                                                        </span>
+                                                    </div>
+
+                                                    <div id="answer-edit-{{ $answer->id }}" class="answer-edit d-none">
+                                                        <div>
+                                                            <input
+                                                                class="answer-title-input form-control fs-16px mb-1" type="text" name="title"
+                                                                value="{{ $answer->title }}" required
+                                                            />
+
+                                                            <textarea class="form-control answer-description-input mb-1" name="description" rows="4">{{ $answer->description }}</textarea>
+                                                        </div>
+
+                                                        <div>
+                                                            <button
+                                                                class="save-answer-btn btn btn-sm btn-primary ms-1"
+                                                                data-id="{{ $answer->id }}"
+                                                                data-action="{{ route('dashboard.quiz-question-answers.update', $answer->id) }}"
+                                                            >
+                                                                حفظ
+                                                            </button>
+
+                                                            <button
+                                                                class="discard-answer-btn btn btn-sm btn-danger ms-1"
+                                                                data-id="{{ $answer->id }}"
+                                                            >
+                                                                إلغاء
+                                                            </button>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div class="col-md-9">
+                                                <div class="col-md-7">
                                                     @forelse($answer->products as $product)
                                                         <a href="{{ route('dashboard.products.show', $product) }}"
                                                         target="_blank"
@@ -132,6 +175,14 @@
                                                     @empty
                                                         ---
                                                     @endforelse
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <span
+                                                        class="delete-answer-btn" style="cursor: pointer"
+                                                        data-action="{{ route('dashboard.quiz-question-answers.destroy', $answer->id) }}"
+                                                    >
+                                                        <em class="icon ni ni-trash fs-20px text-danger"></em>
+                                                    </span>
                                                 </div>
                                             </div>
                                         </li>
@@ -242,10 +293,16 @@
 
     <script>
         const questionTitleInputClass = '.question-title-input'
+        const resizableInputClass = 'input.resizable'
         const deleteQuestionBtnClass = '.delete-question-btn'
-        const editQuestionTitleBtnClass = '.edit-question-title-btn'
-        const discardQuestionTitleBtnClass = '.discard-question-title-btn'
-        const saveQuestionTitleBtnClass = '.save-question-title-btn'
+        const deleteAnswerBtnClass = '.delete-answer-btn'
+        const editQuestionBtnClass = '.edit-question-btn'
+        const discardQuestionBtnClass = '.discard-question-btn'
+        const saveQuestionBtnClass = '.save-question-btn'
+        const answerTitleInputClass = '.answer-title-input'
+        const editAnswerBtnClass = '.edit-answer-btn'
+        const discardAnswerBtnClass = '.discard-answer-btn'
+        const saveAnswerBtnClass = '.save-answer-btn'
 
         function resizeTextInput(input) {
             const el = $(input)
@@ -254,24 +311,24 @@
         }
 
         $(document).ready(function() {
-            $(questionTitleInputClass).each((i, el) => {
+            $(resizableInputClass).each((i, el) => {
                 resizeTextInput(el)
             })
         })
 
-        $(document).on('keydown', questionTitleInputClass, function() {
+        $(document).on('keydown', resizableInputClass, function() {
             resizeTextInput(this)
         })
 
-        $(document).on('click', editQuestionTitleBtnClass, function() {
+        $(document).on('click', editQuestionBtnClass, function() {
             const el = $(this)
             const dataId = el.data('id')
 
-            $(`#question-title-show-${dataId}`).addClass('d-none')
-            $(`#question-title-edit-${dataId}`).removeClass('d-none')
+            $(`#question-show-${dataId}`).addClass('d-none')
+            $(`#question-edit-${dataId}`).removeClass('d-none')
         })
 
-        $(document).on('click', saveQuestionTitleBtnClass, function() {
+        $(document).on('click', saveQuestionBtnClass, function() {
             const el = $(this)
             const dataId = el.data('id')
             const questionTitle = el.siblings('.question-title-input').val()
@@ -284,16 +341,16 @@
 
             axios.post(el.data('action'), formData)
                 .then((response) => {
-                    $(`#question-title-show-${dataId}`).find('.question-title').text(questionTitle)
-                    $(`#question-title-show-${dataId}`).removeClass('d-none')
-                    $(`#question-title-edit-${dataId}`).addClass('d-none')
+                    $(`#question-show-${dataId}`).find('.question-title').text(questionTitle)
+                    $(`#question-show-${dataId}`).removeClass('d-none')
+                    $(`#question-edit-${dataId}`).addClass('d-none')
                     NioApp.Toast(response.data.message, 'success', {position: 'top-left'})
                 })
                 .catch((error) => {
                     if (error.response.status == 422) {
                         // Show validation errors
                     } else {
-                        NioApp.Toast(error.response.data.error, 'error', {position: 'top-left'})
+                        NioApp.Toast(error.response.data.error || 'حدث خطأ أثناء العملية', 'error', {position: 'top-left'})
                     }
                 })
                 .finally(() => {
@@ -301,12 +358,61 @@
                 })
         })
 
-        $(document).on('click', discardQuestionTitleBtnClass, function() {
+        $(document).on('click', discardQuestionBtnClass, function() {
             const el = $(this)
             const dataId = el.data('id')
 
-            $(`#question-title-show-${dataId}`).removeClass('d-none')
-            $(`#question-title-edit-${dataId}`).addClass('d-none')
+            $(`#question-show-${dataId}`).removeClass('d-none')
+            $(`#question-edit-${dataId}`).addClass('d-none')
+        })
+
+        $(document).on('click', editAnswerBtnClass, function() {
+            const el = $(this)
+            const dataId = el.data('id')
+
+            $(`#answer-show-${dataId}`).addClass('d-none')
+            $(`#answer-edit-${dataId}`).removeClass('d-none')
+        })
+
+        $(document).on('click', saveAnswerBtnClass, function() {
+            const el = $(this)
+            const dataId = el.data('id')
+            const answerTitle = $(`#answer-edit-${dataId} .answer-title-input`).val()
+            const answerDescription = $(`#answer-edit-${dataId} .answer-description-input`).val()
+
+            el.addClass('disabled')
+
+            let formData = new FormData
+            formData.append('_method', 'PUT')
+            formData.append('title', answerTitle)
+            formData.append('description', answerDescription)
+
+            axios.post(el.data('action'), formData)
+                .then((response) => {
+                    $(`#answer-show-${dataId}`).find('.answer-title').text(response.data.data.title)
+                    $(`#answer-show-${dataId}`).find('.answer-description').text(response.data.data.description)
+                    $(`#answer-show-${dataId}`).removeClass('d-none')
+                    $(`#answer-edit-${dataId}`).addClass('d-none')
+                    NioApp.Toast(response.data.message, 'success', {position: 'top-left'})
+                })
+                .catch((error) => {
+                    if (error.response.status == 422) {
+                        // Show validation errors
+                    } else {
+                        NioApp.Toast(error.response.data.error || 'حدث خطأ أثناء العملية', 'error', {position: 'top-left'})
+                    }
+                })
+                .finally(() => {
+                    el.removeClass('disabled')
+                })
+        })
+
+        $(document).on('click', discardAnswerBtnClass, function() {
+            const el = $(this)
+            const dataId = el.data('id')
+
+            $(`#answer-show-${dataId}`).removeClass('d-none')
+            $(`#answer-edit-${dataId}`).addClass('d-none')
         })
 
         $(document).on('click', deleteQuestionBtnClass, function() {
@@ -333,7 +439,39 @@
                         })
                         .catch((error) => {
                             el.removeClass('disabled')
-                            NioApp.Toast(error.response.data.error, 'error', {position: 'top-left'})
+                            NioApp.Toast(error.response.data.error || 'حدث خطأ أثناء العملية', 'error', {position: 'top-left'})
+                        })
+                } else {
+                    el.removeClass('disabled')
+                }
+            })
+        })
+
+        $(document).on('click', deleteAnswerBtnClass, function() {
+            const el = $(this)
+            el.addClass('disabled')
+
+            Swal.fire({
+                title: 'هل أنت متأكد من حذف الإجابة',
+                text: 'سيتم حذف المنتجات التابعة للإجابة أيضاً',
+                icon: 'warning',
+                showCancelButton: true,
+                cancelButtonText: 'تراجع',
+                confirmButtonText: 'تأكيد الحذف',
+            }).then(function (result) {
+                if (result.value) {
+
+                    let formData = new FormData
+                    formData.append('_method', 'DELETE')
+
+                    axios.post(el.data('action'), formData)
+                        .then((response) => {
+                            el.closest('.answer-wrapper').remove()
+                            NioApp.Toast(response.data.message, 'success', {position: 'top-left'})
+                        })
+                        .catch((error) => {
+                            el.removeClass('disabled')
+                            NioApp.Toast(error.response.data.error || 'حدث خطأ أثناء العملية', 'error', {position: 'top-left'})
                         })
                 } else {
                     el.removeClass('disabled')

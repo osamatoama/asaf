@@ -12,6 +12,7 @@ use App\Http\Controllers\Dashboard\ProfileController;
 use App\Http\Controllers\Dashboard\AuditLogController;
 use App\Http\Controllers\Dashboard\DropzoneController;
 use App\Http\Controllers\Dashboard\QuizQuestionController;
+use App\Http\Controllers\Dashboard\QuizQuestionAnswerController;
 
 Route::prefix('dashboard')->as('dashboard.')->middleware([
     'authGates',
@@ -54,6 +55,9 @@ Route::prefix('dashboard')->as('dashboard.')->middleware([
         ->except(['create', 'store', 'destroy']);
 
     Route::resource('quiz-questions', QuizQuestionController::class)
+        ->only(['update', 'destroy']);
+
+    Route::resource('quiz-question-answers', QuizQuestionAnswerController::class)
         ->only(['update', 'destroy']);
 
     //Clients
