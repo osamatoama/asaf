@@ -6,6 +6,7 @@ use App\Helpers\GlobalConstants;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Dashboard\Quiz\UpdateRequest;
 use App\Models\Quiz;
+use App\Services\ProductService;
 use App\Services\QuizService;
 use Exception;
 use Gate;
@@ -61,9 +62,9 @@ class QuizController extends Controller
 
         $quiz->load('questions.answers')->loadCount('results');
 
-        // abort(403, 'Coming Soon...');
+        $productOptions = (new ProductService)->getProductsForSelectOptions();
 
-        return view('dashboard.pages.' . $this->routeView . '.edit', compact('quiz'));
+        return view('dashboard.pages.' . $this->routeView . '.edit', compact('quiz', 'productOptions'));
     }
 
     public function update(UpdateRequest $request, Quiz $quiz): RedirectResponse

@@ -28,6 +28,11 @@ trait QuizQuestionAnswerHelpers
         ]);
     }
 
+    public function getProductIdsAttribute(): array
+    {
+        return $this->products->pluck('id')->toArray();
+    }
+
     public function scopeCountable(Builder $query): Builder
     {
         return $query->where('countable', true);

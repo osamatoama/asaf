@@ -58,7 +58,7 @@ Route::prefix('dashboard')->as('dashboard.')->middleware([
         ->only(['update', 'destroy']);
 
     Route::resource('quiz-question-answers', QuizQuestionAnswerController::class)
-        ->only(['update', 'destroy']);
+        ->only(['store', 'update', 'destroy']);
 
     //Clients
     Route::group(['prefix' => 'clients', 'as' => 'clients.'], function () {

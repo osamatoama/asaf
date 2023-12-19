@@ -2,6 +2,12 @@
 
 @push('styles')
     <link rel="stylesheet" href="{{ asset('dashboard_theme/assets/css/editors/quill.rtl.css') }}">
+    <style>
+        textarea.resize-none {
+            resize: none;
+            min-height: initial;
+        }
+    </style>
 @endpush
 
 @section('content')
@@ -11,13 +17,6 @@
                 <h5 class="card-title">تعديل الاختبار #{{ $quiz->id }}</h5>
             </div>
             <div class="card-body">
-
-                {{-- <form method="POST"
-                    action="{{ route('dashboard.quizzes.update', $quiz->id) }}"
-                    enctype="multipart/form-data"
-                >
-                    @method('PUT')
-                    @csrf --}}
 
                     <div class="row g-gs">
                         <div class="col-12 mt-3">
@@ -68,127 +67,7 @@
                         <h5>الأسئلة والإجابات</h5>
 
                         @foreach ($quiz->questions as $question)
-                            <div class="question-wrapper card mt-2 mb-4 p-2">
-                                <div class="d-flex justify-content-between">
-                                    <div class="d-flex align-items-start flex-grow-1">
-                                        <div id="question-show-{{ $question->id }}" class="question-show">
-                                            <span class="question-title fs-20px fw-bold">
-                                                {{ $question->title }}
-                                            </span>
-
-                                            <span
-                                                class="edit-question-btn" style="cursor: pointer" data-id="{{ $question->id }}"
-                                            >
-                                                <em class="icon ni ni-edit fs-20px text-info"></em>
-                                            </span>
-                                        </div>
-
-                                        <div id="question-edit-{{ $question->id }}" class="question-edit d-flex align-items-center d-none">
-                                            <input
-                                                class="question-title-input form-control resizable fs-20px" type="text" name="title"
-                                                value="{{ $question->title }}" required
-                                            />
-
-                                            <button
-                                                class="save-question-btn btn btn-sm btn-primary ms-1"
-                                                data-id="{{ $question->id }}"
-                                                data-action="{{ route('dashboard.quiz-questions.update', $question->id) }}"
-                                            >
-                                                حفظ
-                                            </button>
-
-                                            <button
-                                                class="discard-question-btn btn btn-sm btn-danger ms-1"
-                                                data-id="{{ $question->id }}"
-                                            >
-                                                إلغاء
-                                            </button>
-                                        </div>
-                                    </div>
-
-                                    <div class="mx-3">
-                                        <span
-                                            class="delete-question-btn" style="cursor: pointer"
-                                            data-action="{{ route('dashboard.quiz-questions.destroy', $question->id) }}"
-                                        >
-                                            <em class="icon ni ni-trash fs-20px text-danger"></em>
-                                        </span>
-                                    </div>
-                                </div>
-
-                                <hr>
-
-                                <ul>
-                                    @foreach ($question->answers as $answer)
-                                        <li class="answer-wrapper my-2">
-                                            <div class="row">
-                                                <div class="col-md-3">
-                                                    <div id="answer-show-{{ $answer->id }}" class="answer-show">
-                                                        <span class="answer-title ms-4 fw-bold fs-16px">{{ $answer->title }}</span>
-
-                                                        <span
-                                                            class="edit-answer-btn" style="cursor: pointer" data-id="{{ $answer->id }}"
-                                                        >
-                                                            <em class="icon ni ni-edit fs-20px text-info"></em>
-                                                        </span>
-
-                                                        <span class="answer-description mx-4 d-block text-muted">
-                                                            {{ $answer->description }}
-                                                        </span>
-                                                    </div>
-
-                                                    <div id="answer-edit-{{ $answer->id }}" class="answer-edit d-none">
-                                                        <div>
-                                                            <input
-                                                                class="answer-title-input form-control fs-16px mb-1" type="text" name="title"
-                                                                value="{{ $answer->title }}" required
-                                                            />
-
-                                                            <textarea class="form-control answer-description-input mb-1" name="description" rows="4">{{ $answer->description }}</textarea>
-                                                        </div>
-
-                                                        <div>
-                                                            <button
-                                                                class="save-answer-btn btn btn-sm btn-primary ms-1"
-                                                                data-id="{{ $answer->id }}"
-                                                                data-action="{{ route('dashboard.quiz-question-answers.update', $answer->id) }}"
-                                                            >
-                                                                حفظ
-                                                            </button>
-
-                                                            <button
-                                                                class="discard-answer-btn btn btn-sm btn-danger ms-1"
-                                                                data-id="{{ $answer->id }}"
-                                                            >
-                                                                إلغاء
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-7">
-                                                    @forelse($answer->products as $product)
-                                                        <a href="{{ route('dashboard.products.show', $product) }}"
-                                                        target="_blank"
-                                                        class="badge text-white bg-info">
-                                                            <span>{{ $product->name }}</span>
-                                                        </a>
-                                                    @empty
-                                                        ---
-                                                    @endforelse
-                                                </div>
-                                                <div class="col-md-2">
-                                                    <span
-                                                        class="delete-answer-btn" style="cursor: pointer"
-                                                        data-action="{{ route('dashboard.quiz-question-answers.destroy', $answer->id) }}"
-                                                    >
-                                                        <em class="icon ni ni-trash fs-20px text-danger"></em>
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    @endforeach
-                                </ul>
-                            </div>
+                            @include('dashboard.pages.quizzes.partials.edit.question')
                         @endforeach
                     </div>
 
@@ -206,7 +85,6 @@
                             </button>
                         </div>
                     </div>
-                {{-- </form> --}}
 
                 {{-- <div class="table-responsive">
                     <table class="table table-bordered" style="border-top: 1px solid #d7d7d7">
@@ -299,10 +177,10 @@
         const editQuestionBtnClass = '.edit-question-btn'
         const discardQuestionBtnClass = '.discard-question-btn'
         const saveQuestionBtnClass = '.save-question-btn'
-        const answerTitleInputClass = '.answer-title-input'
         const editAnswerBtnClass = '.edit-answer-btn'
         const discardAnswerBtnClass = '.discard-answer-btn'
         const saveAnswerBtnClass = '.save-answer-btn'
+        const addAnswerBtnClass = '.add-answer-btn'
 
         function resizeTextInput(input) {
             const el = $(input)
@@ -370,15 +248,16 @@
             const el = $(this)
             const dataId = el.data('id')
 
-            $(`#answer-show-${dataId}`).addClass('d-none')
-            $(`#answer-edit-${dataId}`).removeClass('d-none')
+            $(`#answer-${dataId} .answer-show`).addClass('d-none')
+            $(`#answer-${dataId} .answer-edit`).removeClass('d-none')
         })
 
         $(document).on('click', saveAnswerBtnClass, function() {
             const el = $(this)
             const dataId = el.data('id')
-            const answerTitle = $(`#answer-edit-${dataId} .answer-title-input`).val()
-            const answerDescription = $(`#answer-edit-${dataId} .answer-description-input`).val()
+            const answerTitle = $(`#answer-${dataId} .answer-edit input[name='title']`).val()
+            const answerDescription = $(`#answer-${dataId} .answer-edit textarea[name='description']`).val()
+            const answerProductIds = $(`#answer-${dataId} .answer-edit select[name='product_ids']`).val()
 
             el.addClass('disabled')
 
@@ -386,13 +265,13 @@
             formData.append('_method', 'PUT')
             formData.append('title', answerTitle)
             formData.append('description', answerDescription)
+            formData.append('product_ids', answerProductIds)
 
             axios.post(el.data('action'), formData)
                 .then((response) => {
-                    $(`#answer-show-${dataId}`).find('.answer-title').text(response.data.data.title)
-                    $(`#answer-show-${dataId}`).find('.answer-description').text(response.data.data.description)
-                    $(`#answer-show-${dataId}`).removeClass('d-none')
-                    $(`#answer-edit-${dataId}`).addClass('d-none')
+                    $(`#answer-${dataId}`).replaceWith(response.data.data.html)
+                    initSelect2($(`#answer-${dataId}`).find('.select2'))
+                    $(`#answer-${dataId} .answer-edit`).addClass('d-none')
                     NioApp.Toast(response.data.message, 'success', {position: 'top-left'})
                 })
                 .catch((error) => {
@@ -411,8 +290,8 @@
             const el = $(this)
             const dataId = el.data('id')
 
-            $(`#answer-show-${dataId}`).removeClass('d-none')
-            $(`#answer-edit-${dataId}`).addClass('d-none')
+            $(`#answer-${dataId} .answer-show`).removeClass('d-none')
+            $(`#answer-${dataId} .answer-edit`).addClass('d-none')
         })
 
         $(document).on('click', deleteQuestionBtnClass, function() {
@@ -449,6 +328,8 @@
 
         $(document).on('click', deleteAnswerBtnClass, function() {
             const el = $(this)
+            const dataId = el.data('id')
+
             el.addClass('disabled')
 
             Swal.fire({
@@ -466,7 +347,7 @@
 
                     axios.post(el.data('action'), formData)
                         .then((response) => {
-                            el.closest('.answer-wrapper').remove()
+                            $(`#answer-${dataId}`).remove()
                             NioApp.Toast(response.data.message, 'success', {position: 'top-left'})
                         })
                         .catch((error) => {
@@ -477,6 +358,58 @@
                     el.removeClass('disabled')
                 }
             })
+        })
+
+        $('select.select2').each(function() {
+            initSelect2($(this))
+        })
+
+        function initSelect2(el) {
+            let options = {}
+
+            options.dir = $('html').attr('lang') == 'ar' ? 'rtl' : 'ltr'
+            if (el.attr('data-placeholder')) {
+                options.placeholder = el.attr('data-placeholder')
+            }
+
+            el.select2(options)
+        }
+
+        $(document).on('click', addAnswerBtnClass, function() {
+            const el = $(this)
+            const questionId = el.data('question-id')
+            const answerTitle = $(`#add-answer-${questionId} input[name='title']`).val()
+            const answerDescription = $(`#add-answer-${questionId} textarea[name='description']`).val()
+            const answerProductIds = $(`#add-answer-${questionId} select[name='product_ids']`).val()
+
+            el.addClass('disabled')
+
+            let formData = new FormData
+            formData.append('quiz_question_id', questionId)
+            formData.append('title', answerTitle)
+            formData.append('description', answerDescription)
+            formData.append('product_ids', answerProductIds)
+
+            axios.post(el.data('action'), formData)
+                .then((response) => {
+                    $(response.data.data.html).insertBefore(`#add-answer-${questionId}`)
+                    initSelect2($(`#answer-${response.data.data.id}`).find('.select2'))
+                    NioApp.Toast(response.data.message, 'success', {position: 'top-left'})
+
+                    $(`#add-answer-${questionId} input[name='title']`).val(null)
+                    $(`#add-answer-${questionId} textarea[name='description']`).val(null)
+                    $(`#add-answer-${questionId} select[name='product_ids']`).val(null)
+                })
+                .catch((error) => {
+                    if (error.response.status == 422) {
+                        // Show validation errors
+                    } else {
+                        NioApp.Toast(error.response.data.error || 'حدث خطأ أثناء العملية', 'error', {position: 'top-left'})
+                    }
+                })
+                .finally(() => {
+                    el.removeClass('disabled')
+                })
         })
     </script>
 @endpush

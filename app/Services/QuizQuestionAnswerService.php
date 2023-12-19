@@ -5,6 +5,7 @@ namespace App\Services;
 use Exception;
 use App\Models\QuizQuestionAnswer;
 use Illuminate\Support\Facades\DB;
+use App\Http\Requests\Dashboard\QuizQuestionAnswer\StoreRequest;
 use App\Http\Requests\Dashboard\QuizQuestionAnswer\UpdateRequest;
 
 class QuizQuestionAnswerService
@@ -22,12 +23,43 @@ class QuizQuestionAnswerService
         $this->routeName   = config('models.quiz-question-answer.route_name') ?? '';
     }
 
+    public function store(StoreRequest $request): object
+    {
+        $data = $request->validated();
+
+        DB::beginTransaction();
+        try {
+            $data = $request->validated();
+
+            $quizQuestionAnswer = QuizQuestionAnswer::create($data);
+            $quizQuestionAnswer->products()->sync($data['product_ids']);
+
+            DB::commit();
+
+            return (object)[
+                'success' => true,
+                'message' => 'تم إضافة الإجابة بنجاح',
+                'model' => $quizQuestionAnswer,
+            ];
+        } catch (Exception $e) {
+            DB::rollBack();
+
+            return (object) [
+                'success' => false,
+                'message' => __('global.Something went wrong Please try again'),
+            ];
+        }
+    }
+
     public function update(UpdateRequest $request, QuizQuestionAnswer $quizQuestionAnswer): object
     {
         DB::beginTransaction();
 
         try {
-            $quizQuestionAnswer->update($request->validated());
+            $data = $request->validated();
+
+            $quizQuestionAnswer->update($data);
+            $quizQuestionAnswer->products()->sync($data['product_ids']);
 
             DB::commit();
 

@@ -4,7 +4,7 @@ namespace App\Http\Requests\Dashboard\QuizQuestionAnswer;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateRequest extends FormRequest
+class StoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -29,6 +29,7 @@ class UpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'quiz_question_id' => ['required', 'exists:quiz_questions,id'],
             'title' => ['required', 'string'],
             'description' => ['nullable', 'string'],
             'product_ids' => ['array'],

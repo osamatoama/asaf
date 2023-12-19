@@ -96,6 +96,14 @@ class ProductService
         return $this->getProducts($filter);
     }
 
+    /**
+     * @throws Exception
+     */
+    public function getProductsForSelectOptions(): \Illuminate\Support\Collection
+    {
+        return Product::pluck('name', 'id');
+    }
+
     public function store(StoreRequest $request): object
     {
         $data = $request->validated();

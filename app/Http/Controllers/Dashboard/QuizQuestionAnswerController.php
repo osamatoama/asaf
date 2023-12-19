@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\Services\ProductService;
 use Illuminate\Http\JsonResponse;
 use App\Models\QuizQuestionAnswer;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Dashboard\QuizQuestionAnswer\StoreRequest;
 use Illuminate\Support\Facades\Gate;
 use App\Services\QuizQuestionAnswerService;
 use Symfony\Component\HttpFoundation\Response;
@@ -26,6 +28,34 @@ class QuizQuestionAnswerController extends Controller
         $this->quizQuestionAnswerService    = $quizQuestionAnswerService;
     }
 
+    public function store(StoreRequest $request): JsonResponse
+    {
+        abort_if(Gate::denies($this->permissions['create']), Response::HTTP_FORBIDDEN, 'ليس لديك صلاحية');
+
+        $store = $this->quizQuestionAnswerService->store($request);
+
+        $compactData = [
+            'answer' => $store->model,
+            'productOptions' => (new ProductService)->getProductsForSelectOptions()
+        ];
+
+        if ($store->success) {
+            return response()->json([
+                'success' => true,
+                'message' => $store->message,
+                'data' => [
+                    'id' => $store->model->id,
+                    'html' => view('dashboard.pages.quizzes.partials.edit.answer')->with($compactData)->render(),
+                ]
+            ]);
+        }
+
+        return response()->json([
+            'success' => false,
+            'message' => $store->message,
+        ]);
+    }
+
     public function update(UpdateRequest $request, QuizQuestionAnswer $quizQuestionAnswer): JsonResponse
     {
         abort_if(Gate::denies($this->permissions['edit']), Response::HTTP_FORBIDDEN, 'ليس لديك صلاحية');
@@ -33,13 +63,17 @@ class QuizQuestionAnswerController extends Controller
         $update = $this->quizQuestionAnswerService->update($request, $quizQuestionAnswer);
         $quizQuestionAnswer->refresh();
 
+        $compactData = [
+            'answer' => $quizQuestionAnswer,
+            'productOptions' => (new ProductService)->getProductsForSelectOptions()
+        ];
+
         if ($update->success) {
             return response()->json([
                 'success' => true,
                 'message' => $update->message,
                 'data' => [
-                    'title' => $quizQuestionAnswer->title,
-                    'description' => $quizQuestionAnswer->description,
+                    'html' => view('dashboard.pages.quizzes.partials.edit.answer')->with($compactData)->render(),
                 ]
             ]);
         }
