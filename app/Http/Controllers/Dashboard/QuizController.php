@@ -59,7 +59,9 @@ class QuizController extends Controller
     {
         abort_if(Gate::denies($this->permissions['edit']), Response::HTTP_FORBIDDEN, 'ليس لديك صلاحية');
 
-        abort(403, 'Coming Soon...');
+        $quiz->load('questions.answers')->loadCount('results');
+
+        // abort(403, 'Coming Soon...');
 
         return view('dashboard.pages.' . $this->routeView . '.edit', compact('quiz'));
     }

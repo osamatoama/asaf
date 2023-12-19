@@ -1,16 +1,17 @@
 <?php
 
-use App\Http\Controllers\Dashboard\AuditLogController;
-use App\Http\Controllers\Dashboard\ClientController;
-use App\Http\Controllers\Dashboard\GenderController;
-use App\Http\Controllers\Dashboard\DropzoneController;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dashboard\HomeController;
-use App\Http\Controllers\Dashboard\ProductController;
-use App\Http\Controllers\Dashboard\ProfileController;
 use App\Http\Controllers\Dashboard\QuizController;
 use App\Http\Controllers\Dashboard\RoleController;
 use App\Http\Controllers\Dashboard\UserController;
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Dashboard\ClientController;
+use App\Http\Controllers\Dashboard\GenderController;
+use App\Http\Controllers\Dashboard\ProductController;
+use App\Http\Controllers\Dashboard\ProfileController;
+use App\Http\Controllers\Dashboard\AuditLogController;
+use App\Http\Controllers\Dashboard\DropzoneController;
+use App\Http\Controllers\Dashboard\QuizQuestionController;
 
 Route::prefix('dashboard')->as('dashboard.')->middleware([
     'authGates',
@@ -51,6 +52,9 @@ Route::prefix('dashboard')->as('dashboard.')->middleware([
     //Quizzes
     Route::resource('quizzes', QuizController::class)
         ->except(['create', 'store', 'destroy']);
+
+    Route::resource('quiz-questions', QuizQuestionController::class)
+        ->only(['update', 'destroy']);
 
     //Clients
     Route::group(['prefix' => 'clients', 'as' => 'clients.'], function () {

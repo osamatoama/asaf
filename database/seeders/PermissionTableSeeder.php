@@ -166,6 +166,26 @@ class PermissionTableSeeder extends Seeder
                 'created_at' => $now,
                 'updated_at' => $now
             ],
+            [
+                'title'      => 'quiz_question_create',
+                'created_at' => $now,
+                'updated_at' => $now
+            ],
+            [
+                'title'      => 'quiz_question_show',
+                'created_at' => $now,
+                'updated_at' => $now
+            ],
+            [
+                'title'      => 'quiz_question_edit',
+                'created_at' => $now,
+                'updated_at' => $now
+            ],
+            [
+                'title'      => 'quiz_question_delete',
+                'created_at' => $now,
+                'updated_at' => $now
+            ],
         ];
 
         Permission::insert($permissions);
