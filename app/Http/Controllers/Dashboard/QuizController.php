@@ -2,21 +2,21 @@
 
 namespace App\Http\Controllers\Dashboard;
 
-use App\Helpers\GlobalConstants;
-use App\Http\Controllers\Controller;
-use App\Http\Requests\Dashboard\Quiz\UpdateRequest;
-use App\Models\Quiz;
-use App\Services\ProductService;
-use App\Services\QuizService;
 use Exception;
-use Gate;
-use Illuminate\Contracts\Foundation\Application as ApplicationAlias;
-use Illuminate\Contracts\View\Factory;
-use Illuminate\Contracts\View\View;
-use Illuminate\Foundation\Application;
-use Illuminate\Http\RedirectResponse;
+use App\Models\Quiz;
 use Illuminate\Http\Request;
+use App\Services\QuizService;
+use App\Helpers\GlobalConstants;
+use App\Services\ProductService;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Contracts\View\View;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Foundation\Application;
 use Symfony\Component\HttpFoundation\Response;
+use App\Http\Requests\Dashboard\Quiz\UpdateRequest;
+use Illuminate\Contracts\Foundation\Application as ApplicationAlias;
 
 class QuizController extends Controller
 {
@@ -67,23 +67,23 @@ class QuizController extends Controller
         return view('dashboard.pages.' . $this->routeView . '.edit', compact('quiz', 'productOptions'));
     }
 
-    public function update(UpdateRequest $request, Quiz $quiz): RedirectResponse
+    public function update(UpdateRequest $request, Quiz $quiz): JsonResponse
     {
         abort_if(Gate::denies($this->permissions['edit']), Response::HTTP_FORBIDDEN, 'ليس لديك صلاحية');
-
-        abort(403, 'Coming Soon...');
 
         $update = $this->quizService->update($request, $quiz);
 
         if ($update->success) {
-            return redirect()
-                ->route('dashboard.' . $this->routeName . '.index')
-                ->with('success_message', $update->message);
+            return response()->json([
+                'success' => true,
+                'message' => $update->message,
+            ]);
         }
 
-        return back()
-            ->withInput($request->input())
-            ->with('error_message', $update->message);
+        return response()->json([
+            'success' => false,
+            'message' => $update->message,
+        ]);
     }
 
     public function show(Quiz $quiz): View|Application|Factory|ApplicationAlias

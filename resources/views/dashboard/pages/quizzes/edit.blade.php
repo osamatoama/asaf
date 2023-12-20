@@ -14,76 +14,100 @@
 @endpush
 
 @section('content')
-    <div class="card h-100">
-        <div class="card-inner">
-            <div class="card-head">
-                <h5 class="card-title">تعديل الاختبار #{{ $quiz->id }}</h5>
+    <div class="nk-block-head nk-block-head-sm">
+        <div class="nk-block-between">
+            <div class="nk-block-head-content">
+                <h3 class="nk-block-title page-title">تعديل الاختبار #{{ $quiz->id }}</h3>
             </div>
-            <div class="card-body">
-                <div class="row g-gs">
-                    <div class="col-12 mt-3">
-                        <div class="form-group">
-                            <label class="form-label required" for="title">
-                                اسم الاختبار
-                            </label>
-                            <div class="form-control-wrap">
-                                <input class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}"
-                                    type="text" name="title"
-                                    id="title" value="{{ $quiz->title }}"
-                                    required>
-                                @error('title')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
-                            <span class="help-block">&nbsp;</span>
-                        </div>
-                    </div>
 
-                    <div class="col-12 mt-1">
-                        <div class="form-group">
-                            <label class="form-label required" for="description">
-                                وصف الاختبار
-                            </label>
-                            <div class="form-control-wrap">
-                                <textarea class="d-none" id="description"
-                                            name="description">{!! $quiz->description !!}</textarea>
-                                <div @class(['quill form-control', 'is-invalid' => $errors->has('description')])>{!! $quiz->description !!}</div>
-                                @error('description')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
-                            <span class="help-block">
-                                &nbsp;
-                            </span>
-                        </div>
-                    </div>
+            <div class="nk-block-head-content">
+                <a href="{{ route('dashboard.quizzes.index') }}" class="btn btn-lg btn-icon btn-warning p-2 text-white">
+                    <span>
+                        <em class="ni ni-arrow-right"></em>
+                        {{ trans('global.back_to_list') }}
+                    </span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="nk-block">
+        <div class="card h-100">
+            <div class="card-inner">
+                <div class="card-head">
+                    <h5 class="card-title">البيانات</h5>
+
+                    <button class="save-info-btn btn btn-icon btn-primary text-white px-2 py-1" data-action="{{ route('dashboard.quizzes.update', $quiz->id) }}">
+                        حفظ البيانات
+                    </button>
                 </div>
 
                 <hr>
 
-                <div class="row g-gs">
-                    <h5>الأسئلة والإجابات</h5>
+                <div class="card-body">
+                    <div id="quiz-info" class="row g-gs">
+                        <div class="col-12 mt-3">
+                            <div class="form-group">
+                                <label class="form-label required" for="title">
+                                    اسم الاختبار
+                                </label>
+                                <div class="form-control-wrap">
+                                    <input class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}"
+                                        type="text" name="title"
+                                        id="title" value="{{ $quiz->title }}"
+                                        required>
+                                    @error('title')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                                <span class="help-block">&nbsp;</span>
+                            </div>
+                        </div>
 
-                    @foreach ($quiz->questions as $question)
-                        @include('dashboard.pages.quizzes.partials.edit.question')
-                    @endforeach
+                        <div class="col-12 mt-1">
+                            <div class="form-group">
+                                <label class="form-label required" for="description">
+                                    وصف الاختبار
+                                </label>
+                                <div class="form-control-wrap">
+                                    <textarea class="d-none" id="description"
+                                                name="description">{!! $quiz->description !!}</textarea>
+                                    <div @class(['quill form-control', 'is-invalid' => $errors->has('description')])>{!! $quiz->description !!}</div>
+                                    @error('description')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                                <span class="help-block">
+                                    &nbsp;
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-                    @include('dashboard.pages.quizzes.partials.edit.add-question')
+    <div class="nk-block">
+        <div class="card h-100">
+            <div class="card-inner">
+                <div class="card-head">
+                    <h5 class="card-title">الأسئلة والإجابات</h5>
                 </div>
 
-                <div class="row">
-                    <div class="form-group">
-                        <a href="{{ route('dashboard.quizzes.index') }}"
-                        class=" dropdown-toggle btn btn-lg btn-icon btn-warning p-2 text-white">
-                            <span>
-                                <em class="ni ni-arrow-left"></em>
-                                {{ trans('global.back_to_list') }}
-                            </span>
-                        </a>
+                <hr>
+
+                <div class="card-body">
+                    <div class="row g-gs">
+                        @foreach ($quiz->questions as $question)
+                            @include('dashboard.pages.quizzes.partials.edit.question')
+                        @endforeach
+
+                        @include('dashboard.pages.quizzes.partials.edit.add-question')
                     </div>
                 </div>
             </div>
@@ -121,6 +145,8 @@
     </script>
 
     <script>
+        const quizInfo = $('#quiz-info')
+        const saveInfoBtnClass = '.save-info-btn'
         const resizableInputClass = 'input.resizable'
         const deleteQuestionBtnClass = '.delete-question-btn'
         const deleteAnswerBtnClass = '.delete-answer-btn'
@@ -155,6 +181,34 @@
 
             $(`#question-show-${dataId}`).addClass('d-none')
             $(`#question-edit-${dataId}`).removeClass('d-none')
+        })
+
+        $(document).on('click', saveInfoBtnClass, function() {
+            const el = $(this)
+            const quizTitle = $(`#quiz-info input[name='title']`).val()
+            const quizDescription = $(`#quiz-info textarea[name='description']`).val()
+
+            el.addClass('disabled')
+
+            let formData = new FormData
+            formData.append('_method', 'PUT')
+            formData.append('title', quizTitle)
+            formData.append('description', quizDescription)
+
+            axios.post(el.data('action'), formData)
+                .then((response) => {
+                    NioApp.Toast(response.data.message, 'success', {position: 'top-left'})
+                })
+                .catch((error) => {
+                    if (error.response.status == 422) {
+                        // Show validation errors
+                    } else {
+                        NioApp.Toast(error.response.data.error || 'حدث خطأ أثناء العملية', 'error', {position: 'top-left'})
+                    }
+                })
+                .finally(() => {
+                    el.removeClass('disabled')
+                })
         })
 
         $(document).on('click', saveQuestionBtnClass, function() {
