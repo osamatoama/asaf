@@ -1,4 +1,4 @@
-<div class="question-wrapper card mt-2 mb-4 p-2">
+<div id="question-{{ $question->id }}" class="question card mt-2 mb-4 p-2">
     <div class="d-flex justify-content-between">
         <div class="d-flex align-items-start flex-grow-1">
             <div id="question-show-{{ $question->id }}" class="question-show">
@@ -39,6 +39,7 @@
         <div class="mx-3">
             <span
                 class="delete-question-btn" style="cursor: pointer"
+                data-id="{{ $question->id }}"
                 data-action="{{ route('dashboard.quiz-questions.destroy', $question->id) }}"
             >
                 <em class="icon ni ni-trash fs-20px text-danger"></em>

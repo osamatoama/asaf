@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Models\QuizQuestion;
+use App\Services\ProductService;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Gate;
 use App\Services\QuizQuestionService;
 use Symfony\Component\HttpFoundation\Response;
+use App\Http\Requests\Dashboard\QuizQuestion\StoreRequest;
 use App\Http\Requests\Dashboard\QuizQuestion\UpdateRequest;
 
 class QuizQuestionController extends Controller
@@ -24,6 +26,34 @@ class QuizQuestionController extends Controller
         $this->routeName      = config('models.quiz-question.route_name') ?? '';
         $this->permissions    = config('models.quiz-question.permissions') ?? [];
         $this->quizQuestionService    = $quizQuestionService;
+    }
+
+    public function store(StoreRequest $request): JsonResponse
+    {
+        abort_if(Gate::denies($this->permissions['create']), Response::HTTP_FORBIDDEN, 'ليس لديك صلاحية');
+
+        $store = $this->quizQuestionService->store($request);
+
+        $compactData = [
+            'question' => $store->model,
+            'productOptions' => (new ProductService)->getProductsForSelectOptions()
+        ];
+
+        if ($store->success) {
+            return response()->json([
+                'success' => true,
+                'message' => $store->message,
+                'data' => [
+                    'id' => $store->model->id,
+                    'html' => view('dashboard.pages.quizzes.partials.edit.question')->with($compactData)->render(),
+                ]
+            ]);
+        }
+
+        return response()->json([
+            'success' => false,
+            'message' => $store->message,
+        ]);
     }
 
     public function update(UpdateRequest $request, QuizQuestion $quizQuestion): JsonResponse

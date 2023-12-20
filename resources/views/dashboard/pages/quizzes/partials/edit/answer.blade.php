@@ -14,11 +14,7 @@
 
         <div class="col-md-7">
             @forelse($answer->products as $product)
-                <a href="{{ route('dashboard.products.show', $product) }}"
-                target="_blank"
-                class="badge text-white bg-info">
-                    <span>{{ $product->name }}</span>
-                </a>
+                <span class="badge text-white bg-info">{{ $product->name }}</span>
             @empty
                 ---
             @endforelse

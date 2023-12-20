@@ -55,7 +55,7 @@ Route::prefix('dashboard')->as('dashboard.')->middleware([
         ->except(['create', 'store', 'destroy']);
 
     Route::resource('quiz-questions', QuizQuestionController::class)
-        ->only(['update', 'destroy']);
+        ->only(['store', 'update', 'destroy']);
 
     Route::resource('quiz-question-answers', QuizQuestionAnswerController::class)
         ->only(['store', 'update', 'destroy']);
