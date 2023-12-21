@@ -1,13 +1,13 @@
 <div id="question-{{ $question->id }}" class="question card mt-4 p-2">
     <div class="d-flex justify-content-between">
         <div class="d-flex align-items-start flex-grow-1">
-            <div id="question-show-{{ $question->id }}" class="question-show">
+            <div id="question-show-{{ $question->id }}" class="question-show ms-4">
                 <span class="question-title fs-20px fw-bold">
                     {{ $question->title }}
                 </span>
 
                 <span
-                    class="edit-question-btn" style="cursor: pointer" data-id="{{ $question->id }}"
+                    class="edit-question-btn cursor-pointer" data-id="{{ $question->id }}"
                 >
                     <em class="icon ni ni-edit fs-20px text-info"></em>
                 </span>
@@ -38,7 +38,7 @@
 
         <div class="mx-3">
             <span
-                class="delete-question-btn" style="cursor: pointer"
+                class="delete-question-btn cursor-pointer"
                 data-id="{{ $question->id }}"
                 data-action="{{ route('dashboard.quiz-questions.destroy', $question->id) }}"
             >

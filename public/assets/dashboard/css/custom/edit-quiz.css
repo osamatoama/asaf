@@ -14,3 +14,7 @@ input.resizable {
 .ql-toolbar.is-invalid, .select2-selection.is-invalid {
     border-color: #e85347;
 }
+
+.cursor-pointer {
+    cursor: pointer;
+}

@@ -30,7 +30,7 @@
             </div>
 
             <div class="col-md-2">
-                <button type="submit" class="btn btn-sm btn-success ms-1" data-question-id="{{ $question->id }}">إضافة</button>
+                <button type="submit" class="btn btn-sm btn-success ms-1">إضافة</button>
             </div>
         </div>
     </form>
@@ -50,7 +50,6 @@
             const descriptionInput = el.find(`textarea[name='description']`)
             const productIdsInput = el.find(`select[name='product_ids\\[\\]']`)
             const questionId = questionIdInput.val()
-            console.log(productIdsInput.val())
 
             hideFormValidationErrors(el)
             submitButton.addClass('disabled')

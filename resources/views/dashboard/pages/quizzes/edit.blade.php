@@ -55,13 +55,9 @@
     <script>
         const resizableInputClass = 'input.resizable'
         const deleteQuestionBtnClass = '.delete-question-btn'
-        const deleteAnswerBtnClass = '.delete-answer-btn'
         const editQuestionBtnClass = '.edit-question-btn'
         const discardQuestionBtnClass = '.discard-question-btn'
         const saveQuestionBtnClass = '.save-question-btn'
-        const editAnswerBtnClass = '.edit-answer-btn'
-        const discardAnswerBtnClass = '.discard-answer-btn'
-        const saveAnswerBtnClass = '.save-answer-btn'
         const addQuestionBtnClass = '.add-question-btn'
 
 
@@ -122,56 +118,6 @@
             $(`#question-edit-${dataId}`).addClass('d-none')
         })
 
-        $(document).on('click', editAnswerBtnClass, function() {
-            const el = $(this)
-            const dataId = el.data('id')
-
-            $(`#answer-${dataId} .answer-show`).addClass('d-none')
-            $(`#answer-${dataId} .answer-edit`).removeClass('d-none')
-        })
-
-        $(document).on('click', saveAnswerBtnClass, function() {
-            const el = $(this)
-            const dataId = el.data('id')
-            const answerTitle = $(`#answer-${dataId} .answer-edit input[name='title']`).val()
-            const answerDescription = $(`#answer-${dataId} .answer-edit textarea[name='description']`).val()
-            const answerProductIds = $(`#answer-${dataId} .answer-edit select[name='product_ids']`).val()
-
-            el.addClass('disabled')
-
-            let formData = new FormData
-            formData.append('_method', 'PUT')
-            formData.append('title', answerTitle)
-            formData.append('description', answerDescription)
-            formData.append('product_ids', answerProductIds)
-
-            axios.post(el.data('action'), formData)
-                .then((response) => {
-                    $(`#answer-${dataId}`).replaceWith(response.data.data.html)
-                    initSelect2($(`#answer-${dataId}`).find('.select2'))
-                    $(`#answer-${dataId} .answer-edit`).addClass('d-none')
-                    successToast(response.data.message)
-                })
-                .catch((error) => {
-                    if (error.response.status == 422) {
-                        // Show validation errors
-                    } else {
-                        errorToast(error.response.data.error)
-                    }
-                })
-                .finally(() => {
-                    el.removeClass('disabled')
-                })
-        })
-
-        $(document).on('click', discardAnswerBtnClass, function() {
-            const el = $(this)
-            const dataId = el.data('id')
-
-            $(`#answer-${dataId} .answer-show`).removeClass('d-none')
-            $(`#answer-${dataId} .answer-edit`).addClass('d-none')
-        })
-
         $(document).on('click', deleteQuestionBtnClass, function() {
             const el = $(this)
             const questionId = el.data('id')
@@ -193,40 +139,6 @@
                     axios.post(el.data('action'), formData)
                         .then((response) => {
                             $(`#question-${questionId}`).remove()
-                            successToast(response.data.message)
-                        })
-                        .catch((error) => {
-                            el.removeClass('disabled')
-                            errorToast(error.response.data.error)
-                        })
-                } else {
-                    el.removeClass('disabled')
-                }
-            })
-        })
-
-        $(document).on('click', deleteAnswerBtnClass, function() {
-            const el = $(this)
-            const dataId = el.data('id')
-
-            el.addClass('disabled')
-
-            Swal.fire({
-                title: 'هل أنت متأكد من حذف الإجابة',
-                text: 'سيتم حذف المنتجات التابعة للإجابة أيضاً',
-                icon: 'warning',
-                showCancelButton: true,
-                cancelButtonText: 'تراجع',
-                confirmButtonText: 'تأكيد الحذف',
-            }).then(function (result) {
-                if (result.value) {
-
-                    let formData = new FormData
-                    formData.append('_method', 'DELETE')
-
-                    axios.post(el.data('action'), formData)
-                        .then((response) => {
-                            $(`#answer-${dataId}`).remove()
                             successToast(response.data.message)
                         })
                         .catch((error) => {
