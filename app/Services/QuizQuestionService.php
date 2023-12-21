@@ -75,13 +75,13 @@ class QuizQuestionService
         DB::beginTransaction();
 
         try {
-            // foreach ($quizQuestion->answers as $answer) {
-            //     $answer->products()->sync([]);
-            //     $answer->delete();
-            // }
-            // $quizQuestion->delete();
+            foreach ($quizQuestion->answers as $answer) {
+                $answer->products()->sync([]);
+                $answer->delete();
+            }
+            $quizQuestion->delete();
 
-            // DB::commit();
+            DB::commit();
 
             return (object)[
                 'success' => true,

@@ -6,40 +6,33 @@
                     {{ $question->title }}
                 </span>
 
-                <span
-                    class="edit-question-btn cursor-pointer" data-id="{{ $question->id }}"
-                >
+                <span class="edit-question-btn cursor-pointer" data-question-id="{{ $question->id }}">
                     <em class="icon ni ni-edit fs-20px text-info"></em>
                 </span>
             </div>
 
-            <div id="question-edit-{{ $question->id }}" class="question-edit d-flex align-items-center d-none">
-                <input
-                    class="question-title-input form-control resizable fs-20px" type="text" name="title"
-                    value="{{ $question->title }}" required
-                />
+            <form class="edit-question-form" action="{{ route('dashboard.quiz-questions.update', $question->id) }}">
+                @method('PUT')
 
-                <button
-                    class="save-question-btn btn btn-sm btn-primary ms-1"
-                    data-id="{{ $question->id }}"
-                    data-action="{{ route('dashboard.quiz-questions.update', $question->id) }}"
-                >
-                    حفظ
-                </button>
+                <input type="hidden" name="question_id" value="{{ $question->id }}">
 
-                <button
-                    class="discard-question-btn btn btn-sm btn-danger ms-1"
-                    data-id="{{ $question->id }}"
-                >
-                    إلغاء
-                </button>
-            </div>
+                <div id="question-edit-{{ $question->id }}" class="question-edit d-flex align-items-center d-none">
+                    <div class="form-group mb-0 ms-4">
+                        <input class="form-control resizable fs-20px" type="text" name="title" value="{{ $question->title }}" />
+                        <div class="invalid-feedback"></div>
+                    </div>
+
+                    <button type="submit" class="btn btn-sm btn-primary ms-1">حفظ</button>
+
+                    <button class="discard-question-btn btn btn-sm btn-danger ms-1" data-question-id="{{ $question->id }}">إلغاء</button>
+                </div>
+            </form>
         </div>
 
         <div class="mx-3">
             <span
                 class="delete-question-btn cursor-pointer"
-                data-id="{{ $question->id }}"
+                data-question-id="{{ $question->id }}"
                 data-action="{{ route('dashboard.quiz-questions.destroy', $question->id) }}"
             >
                 <em class="icon ni ni-trash fs-20px text-danger"></em>
@@ -57,3 +50,10 @@
         @include('dashboard.pages.quizzes.partials.edit.add-answer')
     </ul>
 </div>
+
+@if(! request()->expectsJson())
+    @pushOnce('scripts')
+        @include('dashboard.pages.quizzes.partials.edit.scripts.edit-question')
+        @include('dashboard.pages.quizzes.partials.edit.scripts.delete-question')
+    @endPushOnce
+@endif

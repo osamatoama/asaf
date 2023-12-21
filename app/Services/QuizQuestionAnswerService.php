@@ -82,8 +82,8 @@ class QuizQuestionAnswerService
         DB::beginTransaction();
 
         try {
-            // $quizQuestionAnswer->products()->sync([]);
-            // $quizQuestionAnswer->delete();
+            $quizQuestionAnswer->products()->sync([]);
+            $quizQuestionAnswer->delete();
 
             DB::commit();
 
