@@ -14,13 +14,6 @@ class StoreRequest extends FormRequest
         return true;
     }
 
-    protected function prepareForValidation()
-    {
-        $this->merge([
-            'product_ids' => filled($this->product_ids) ? explode(',', $this->product_ids) : [],
-        ]);
-    }
-
     /**
      * Get the validation rules that apply to the request.
      *
@@ -32,8 +25,24 @@ class StoreRequest extends FormRequest
             'quiz_question_id' => ['required', 'exists:quiz_questions,id'],
             'title' => ['required', 'string'],
             'description' => ['nullable', 'string'],
-            'product_ids' => ['array'],
+            'product_ids' => ['array', 'min:1'],
             'product_ids.*' => ['required', 'exists:products,id'],
+        ];
+    }
+
+    public function attributes()
+    {
+        return [
+            'title' => 'الإجابة',
+            'description' => 'وصف الإجابة',
+            'product_ids' => 'المنتجات',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'product_ids.min' => 'اختر منتج واحد على الأقل',
         ];
     }
 }

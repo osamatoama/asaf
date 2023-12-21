@@ -12,14 +12,31 @@ class UpdateRequest extends FormRequest
         return Gate::allows(config('models.quiz.permissions.edit'));
     }
 
+    protected function prepareForValidation()
+    {
+        if ($this->description == "<p><br></p>") {
+            $this->merge([
+                'description' => null,
+            ]);
+        }
+    }
+
     /**
      * @return array
      */
     public function rules(): array
     {
         return [
-            'title' => 'required|string|max:191',
-            'description' => 'nullable|string',
+            'title' => ['required', 'string', 'max:191'],
+            'description' => ['required', 'string'],
+        ];
+    }
+
+    public function attributes()
+    {
+        return [
+            'title' => 'الاسم',
+            'description' => 'الوصف',
         ];
     }
 }

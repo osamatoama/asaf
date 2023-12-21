@@ -1,4 +1,4 @@
-<div id="add-question" class="add-question card mt-2 mb-4 p-2">
+<div id="add-question" class="add-question card mt-4 p-2">
     <div class="d-flex align-items-center justify-content-between">
         <input class="form-control resizable fs-20px" type="text" name="title" placeholder="السؤال" required />
 
@@ -11,3 +11,7 @@
         </button>
     </div>
 </div>
+
+@push('scripts')
+
+@endpush

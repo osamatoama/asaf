@@ -1,4 +1,4 @@
-<div id="question-{{ $question->id }}" class="question card mt-2 mb-4 p-2">
+<div id="question-{{ $question->id }}" class="question card mt-4 p-2">
     <div class="d-flex justify-content-between">
         <div class="d-flex align-items-start flex-grow-1">
             <div id="question-show-{{ $question->id }}" class="question-show">
