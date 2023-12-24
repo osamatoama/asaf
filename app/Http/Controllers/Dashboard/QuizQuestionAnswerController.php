@@ -45,6 +45,7 @@ class QuizQuestionAnswerController extends Controller
                 'message' => $store->message,
                 'data' => [
                     'id' => $store->model->id,
+                    'answers_count' => $store->questionAnswersCount,
                     'html' => view('dashboard.pages.quizzes.partials.edit.answer')->with($compactData)->render(),
                 ]
             ]);
@@ -53,7 +54,7 @@ class QuizQuestionAnswerController extends Controller
         return response()->json([
             'success' => false,
             'message' => $store->message,
-        ]);
+        ], 500);
     }
 
     public function update(UpdateRequest $request, QuizQuestionAnswer $quizQuestionAnswer): JsonResponse
@@ -81,7 +82,7 @@ class QuizQuestionAnswerController extends Controller
         return response()->json([
             'success' => false,
             'message' => $update->message,
-        ]);
+        ], 500);
     }
 
     public function destroy(QuizQuestionAnswer $quizQuestionAnswer): JsonResponse
@@ -94,12 +95,15 @@ class QuizQuestionAnswerController extends Controller
             return response()->json([
                 'success' => true,
                 'message' => $destroy->message,
+                'data' => [
+                    'answers_count' => $destroy->questionAnswersCount,
+                ],
             ]);
         }
 
         return response()->json([
             'success' => false,
             'message' => $destroy->message,
-        ]);
+        ], 500);
     }
 }

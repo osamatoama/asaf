@@ -30,7 +30,10 @@
             </div>
 
             <div class="col-md-2">
-                <button type="submit" class="btn btn-sm btn-success ms-1">إضافة</button>
+                <button type="submit" class="btn btn-sm btn-outline-success ms-1">
+                    <em class="icon ni ni-plus-circle-fill me-1"></em>
+                    إضافة
+                </button>
             </div>
         </div>
     </form>

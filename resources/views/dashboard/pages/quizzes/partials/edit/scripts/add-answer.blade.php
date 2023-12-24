@@ -11,6 +11,7 @@
         const descriptionInput = el.find(`textarea[name='description']`)
         const productIdsInput = el.find(`select[name='product_ids\\[\\]']`)
         const questionId = questionIdInput.val()
+        const questionWrapper = $(`#question-${questionId}`)
 
         hideFormValidationErrors(el)
         submitButton.addClass('disabled')
@@ -19,6 +20,12 @@
             .then((response) => {
                 $(response.data.data.html).insertBefore(`#add-answer-${questionId}`)
                 initSelect2($(`#answer-${response.data.data.id}`).find('.select2'))
+
+                if (response.data.data.answers_count == 1) {
+                    questionWrapper.removeClass('opacity-03')
+                    questionWrapper.find('.toggle-active-question-btn').prop('checked', true)
+                }
+
                 successToast(response.data.message)
 
                 resetForm(el)
@@ -39,7 +46,7 @@
                         }
                     }
                 } else {
-                    errorToast(error.response.data.error)
+                    errorToast(error.response.data.message)
                 }
             })
             .finally(() => {

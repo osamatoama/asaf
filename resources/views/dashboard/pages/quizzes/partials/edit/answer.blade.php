@@ -16,7 +16,7 @@
 
         <div class="col-md-7">
             @forelse($answer->products as $product)
-                <span class="badge text-white bg-info">{{ $product->name }}</span>
+                <span class="badge bg-outline-primary">{{ $product->name }}</span>
             @empty
                 ---
             @endforelse
@@ -65,9 +65,15 @@
             </div>
 
             <div class="col-md-2">
-                <button type="submit" class="btn btn-sm btn-primary ms-1">حفظ</button>
+                <button type="submit" class="btn btn-sm btn-outline-success ms-1 mb-1">
+                    <em class="icon ni ni-save me-1"></em>
+                    حفظ
+                </button>
 
-                <button class="discard-answer-btn btn btn-sm btn-danger ms-1" data-answer-id="{{ $answer->id }}">إلغاء</button>
+                <button class="discard-answer-btn btn btn-sm btn-outline-danger ms-1 mb-1" data-answer-id="{{ $answer->id }}">
+                    <em class="icon ni ni-cross me-1"></em>
+                    إلغاء
+                </button>
             </div>
         </div>
     </form>

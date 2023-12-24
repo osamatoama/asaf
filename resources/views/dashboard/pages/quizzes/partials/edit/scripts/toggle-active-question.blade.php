@@ -5,7 +5,21 @@
         const el = $(this)
         const isChecked = el.prop('checked')
         const questionId = el.data('question-id')
+        const questionWrapper = $(`#question-${questionId}`)
+        const answersCount = questionWrapper.find('.answer').length
         el.addClass('disabled')
+
+        if (answersCount == 0 && isChecked) {
+            Swal.fire({
+                text: 'لا يمكن تفعيل السؤال قبل إضافة إجابة واحدة على الأقل',
+                icon: 'error',
+                confirmButtonText: 'حسناً',
+            }).then(function (result) {
+                el.prop('checked', ! isChecked)
+            })
+
+            return
+        }
 
         Swal.fire({
             title: isChecked ? 'تفعيل السؤال' : 'إلغاء تفعيل السؤال',
@@ -22,9 +36,6 @@
 
                 axios.post(el.data('action'), formData)
                     .then((response) => {
-                        console.log(response)
-                        console.log(isChecked)
-
                         if (! isChecked) {
                             $(`#question-${questionId}`).addClass('opacity-03')
                         } else {
@@ -34,7 +45,7 @@
                     })
                     .catch((error) => {
                         el.prop('checked', ! isChecked)
-                        errorToast(error.response.data.error)
+                        errorToast(error.response.data.message)
                     })
             } else {
                 el.prop('checked', ! isChecked)

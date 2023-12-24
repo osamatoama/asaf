@@ -83,7 +83,7 @@ class QuizController extends Controller
         return response()->json([
             'success' => false,
             'message' => $update->message,
-        ]);
+        ], 500);
     }
 
     public function show(Quiz $quiz): View|Application|Factory|ApplicationAlias

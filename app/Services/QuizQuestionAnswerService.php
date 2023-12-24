@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use Exception;
+use App\Models\QuizQuestion;
 use App\Models\QuizQuestionAnswer;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\Dashboard\QuizQuestionAnswer\StoreRequest;
@@ -31,8 +32,17 @@ class QuizQuestionAnswerService
         try {
             $data = $request->validated();
 
+            // Store answer with related products
             $quizQuestionAnswer = QuizQuestionAnswer::create($data);
             $quizQuestionAnswer->products()->sync($data['product_ids']);
+
+            // Activate Question after adding first answer
+            $question = QuizQuestion::find($data['quiz_question_id']);
+            $questionAnswersCount = $question?->answers->count();
+
+            if ($questionAnswersCount == 1) {
+                $question->activate();
+            }
 
             DB::commit();
 
@@ -40,6 +50,7 @@ class QuizQuestionAnswerService
                 'success' => true,
                 'message' => 'تم إضافة الإجابة بنجاح',
                 'model' => $quizQuestionAnswer,
+                'questionAnswersCount' => $questionAnswersCount,
             ];
         } catch (Exception $e) {
             DB::rollBack();
@@ -82,14 +93,23 @@ class QuizQuestionAnswerService
         DB::beginTransaction();
 
         try {
+            // Delete answer with related products
             $quizQuestionAnswer->products()->sync([]);
             $quizQuestionAnswer->delete();
+
+            // Deactivate Question when no remaining answers
+            $questionAnswersCount = $quizQuestionAnswer->question->answers->count();
+
+            if ($questionAnswersCount == 0) {
+                $quizQuestionAnswer->question->deactivate();
+            }
 
             DB::commit();
 
             return (object)[
                 'success' => true,
                 'message' => 'تم حذف الإجابة بنجاح',
+                'questionAnswersCount' => $questionAnswersCount,
             ];
         } catch (Exception $e) {
             DB::rollBack();

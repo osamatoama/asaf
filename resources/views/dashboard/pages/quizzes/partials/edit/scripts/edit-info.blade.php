@@ -56,7 +56,7 @@
                         }
                     }
                 } else {
-                    errorToast(error.response.data.error)
+                    errorToast(error.response.data.message)
                 }
             })
             .finally(() => {

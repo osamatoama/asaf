@@ -2,7 +2,7 @@
 
 @push('styles')
     <link rel="stylesheet" href="{{ asset('dashboard_theme/assets/css/editors/quill.rtl.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/dashboard/css/custom/edit-quiz.css') }}?version=1.0.1">
+    <link rel="stylesheet" href="{{ asset('assets/dashboard/css/custom/edit-quiz.css') }}?version=1.0.2">
 @endpush
 
 @section('content')

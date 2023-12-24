@@ -20,6 +20,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::prefix('v1')->as('api.')->group(function () {
+    Route::get('quiz/info', [QuizController::class, 'info'])->name('quiz.info');
     Route::get('quiz', [QuizController::class, 'index'])->name('quiz');
     Route::post('results', [QuizController::class, 'results'])->name('results');
 

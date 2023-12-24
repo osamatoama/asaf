@@ -486,5 +486,5 @@ return [
     'AM'     => 'صباحاً',
     'PM'     => 'مساءً',
 
-    'Something went wrong Please try again' => 'حدث خطأ ما! من فضلك حاول مرة أخرى.',
+    'Something went wrong Please try again' => 'حدث خطأ ما ! من فضلك حاول مرة أخرى',
 ];

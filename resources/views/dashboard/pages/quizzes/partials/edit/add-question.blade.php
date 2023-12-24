@@ -9,7 +9,10 @@
                 <div class="invalid-feedback"></div>
             </div>
 
-            <button type="submit" class="btn btn-sm btn-success ms-1">إضافة سؤال</button>
+            <button type="submit" class="btn btn-outline-success ms-1">
+                <em class="icon ni ni-plus-circle-fill me-1"></em>
+                إضافة
+            </button>
         </div>
     </form>
 </div>

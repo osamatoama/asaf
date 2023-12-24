@@ -26,7 +26,7 @@
                     })
                     .catch((error) => {
                         el.removeClass('disabled')
-                        errorToast(error.response.data.error)
+                        errorToast(error.response.data.message)
                     })
             } else {
                 el.removeClass('disabled')

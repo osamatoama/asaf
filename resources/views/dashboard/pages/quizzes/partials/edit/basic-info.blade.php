@@ -5,8 +5,9 @@
         <div class="card-header d-flex justify-content-between align-items-center py-3">
             <h5 class="card-title mb-0">البيانات</h5>
 
-            <button type="submit" class="save-info-btn btn btn-icon btn-primary text-white px-2 py-1">
-                حفظ البيانات
+            <button type="submit" class="save-info-btn btn btn-outline-success">
+                <em class="icon ni ni-save me-1"></em>
+                حفظ
             </button>
         </div>
 

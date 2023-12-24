@@ -8,15 +8,14 @@
         {{-- <div class="intro-image">
             <img src="{{ asset('quiz/images/intro.jpg') }}" alt="Perfume Quiz">
         </div> --}}
-        <div class="intro-text">
-            <p class="text-bold-light">{{ $quiz->title }}</p>
-
-            @if(filled($quiz->description))
-                <p>
-                    {!! $quiz->description !!}
-                </p>
-            @endif
-
+        <div class="intro-text" data-quiz-info-url="{{ route('api.quiz.info') }}">
+            <p class="text-bold-light">محتار بين عطور عسَّاف؟</p>
+            <p class="text-bold-dark">لا تشيل هم عسَّاف يفهمك 😉🐎…</p>
+            <p class="text-normal-dark">حنّا هنا نساعدك لتصنع العطر المثالي الذي يتناسب مع ذائقتك! </p>
+            <p class="text-normal-dark">
+                تم إنشاء هذا الاختبار من فريق أبحاث عسَّاف لنكتشف ذوقك الرهيب في العطور
+                مدة الاختبار لا تتجاوز الدقيقة…
+            </p>
             <button class="start-quiz">اكتشف ذوقك</button>
         </div>
     </div>

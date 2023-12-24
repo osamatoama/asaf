@@ -53,7 +53,7 @@ class QuizQuestionController extends Controller
         return response()->json([
             'success' => false,
             'message' => $store->message,
-        ]);
+        ], 500);
     }
 
     public function update(UpdateRequest $request, QuizQuestion $quizQuestion): JsonResponse
@@ -75,7 +75,7 @@ class QuizQuestionController extends Controller
         return response()->json([
             'success' => false,
             'message' => $update->message,
-        ]);
+        ], 500);
     }
 
     public function destroy(QuizQuestion $quizQuestion): JsonResponse
@@ -94,7 +94,7 @@ class QuizQuestionController extends Controller
         return response()->json([
             'success' => false,
             'message' => $destroy->message,
-        ]);
+        ], 500);
     }
 
     public function toggleActive(QuizQuestion $quizQuestion): JsonResponse
@@ -113,6 +113,6 @@ class QuizQuestionController extends Controller
         return response()->json([
             'success' => false,
             'message' => $update->message,
-        ]);
+        ], 500);
     }
 }

@@ -24,16 +24,22 @@
                             <div class="invalid-feedback"></div>
                         </div>
 
-                        <button type="submit" class="btn btn-sm btn-primary ms-1">حفظ</button>
+                        <button type="submit" class="btn btn-sm btn-outline-success ms-1">
+                            <em class="icon ni ni-save me-1"></em>
+                            حفظ
+                        </button>
 
-                        <button class="discard-question-btn btn btn-sm btn-danger ms-1" data-question-id="{{ $question->id }}">إلغاء</button>
+                        <button class="discard-question-btn btn btn-sm btn-outline-danger ms-1" data-question-id="{{ $question->id }}">
+                            <em class="icon ni ni-cross me-1"></em>
+                            إلغاء
+                        </button>
                     </div>
                 </form>
             </div>
         </div>
 
         <div class="d-flex">
-            <div class="custom-control custom-switch opacity-1">
+            <div class="custom-control custom-switch">
                 <input
                     type="checkbox" class="toggle-active-question-btn custom-control-input"
                     id="toggle-active-question-{{ $question->id }}" name="active"
