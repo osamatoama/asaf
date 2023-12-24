@@ -207,7 +207,7 @@ function getProductsHandler(url, btn = null) {
 function submitAndGetResult(e, submitBtn) {
     e.preventDefault();
     window.scroll({ top: 0, behavior: 'smooth' });
-    getProductsHandler(submitBtn.dataset.url, submitBtn);
+    // getProductsHandler(submitBtn.dataset.url, submitBtn);
     document.querySelector(".multistep-form-wrapper").classList.add("switch-effect");
     setTimeout(() => {
         document.querySelector(".multistep-form-wrapper").classList.add("hidden");
