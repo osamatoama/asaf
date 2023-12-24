@@ -40,7 +40,7 @@ class QuizController extends Controller
 
     public function info()
     {
-        $quiz = Quiz::active()->firstOrFail();
+        $quiz = Quiz::firstOrFail();
 
         return new QuizInfoResource($quiz);
     }
@@ -55,6 +55,14 @@ class QuizController extends Controller
 
         $genderId = $results[0] ?? 0;
         $gender   = Gender::find($genderId);
+
+        if ($quiz->isInactive()) {
+            return response()->json([
+                'status'  => 200,
+                'success' => false,
+                'message' => 'الاختبار غير مفعل',
+            ]);
+        }
 
         if (blank($gender)) {
             return response()->json([

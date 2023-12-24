@@ -73,6 +73,9 @@ a {
     width: calc(50% - 15px);
     flex-grow: 1;
 }
+.intro .intro-text.hidden {
+    display: none;
+}
 .intro .intro-text .text-bold-light {
     color: #fff;
     font-size: 30px;
@@ -85,6 +88,9 @@ a {
 .intro .intro-text .text-normal-dark {
     color: #fff;
     font-size: 18px;
+}
+.intro .intro-text .text-white {
+    color: white;
 }
 .intro .intro-text .start-quiz {
     width: fit-content;
@@ -104,7 +110,9 @@ a {
     border-radius: 9px;
     transition: 0.3s;
 }
-
+.intro .intro-text .start-quiz.hidden {
+    display: none;
+}
 .intro .intro-text .start-quiz:hover {
     box-shadow: 0 0 10px 0 #88903c;
 }

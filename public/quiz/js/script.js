@@ -378,3 +378,39 @@ document.querySelector(".submit-form-btn").addEventListener("click", function (e
 });
 
 document.querySelector(".start-over").addEventListener("click", () => location.reload());
+
+document.addEventListener("DOMContentLoaded", function() {
+    const introText = document.querySelector('.intro-text');
+    const introTitle = document.querySelector('.intro-title');
+    const introDescription = document.querySelector('.intro-description');
+    const startQuizBtn = document.querySelector('button.start-quiz');
+    const QUIZ_INFO_URL = introText.dataset.quizInfoUrl;
+
+    // TODO: Add Loader until fetch complete
+
+    fetch(QUIZ_INFO_URL, {
+            method: "GET",
+            headers: {
+                "content-type": "application/json",
+                accept: "application/json",
+            },
+        })
+        .then(function (res) {
+            return res.json();
+        })
+        .then(function (data) {
+
+            if (data.quiz.active) {
+                introTitle.innerHTML = data.quiz.title;
+                introDescription.innerHTML = data.quiz.description;
+                startQuizBtn.classList.remove('hidden')
+            } else {
+                introTitle.innerHTML = 'قيد الصيانة';
+                introDescription.innerHTML = 'سنعود قريباً';
+            }
+
+            introText.classList.remove('hidden');
+
+            // TODO: Remove Loader
+        });
+});
