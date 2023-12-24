@@ -96,4 +96,29 @@ class QuizQuestionService
             ];
         }
     }
+
+    public function toggleActive(QuizQuestion $quizQuestion): object
+    {
+        DB::beginTransaction();
+
+        try {
+            $quizQuestion->update([
+                'active' => ! $quizQuestion->active,
+            ]);
+
+            DB::commit();
+
+            return (object)[
+                'success' => true,
+                'message' => $quizQuestion->active ? 'تم تفعيل السؤال' : 'تم إلغاء تفعيل السؤال',
+            ];
+        } catch (Exception $e) {
+            DB::rollBack();
+
+            return (object)[
+                'success' => false,
+                'message' => __('global.Something went wrong Please try again'),
+            ];
+        }
+    }
 }

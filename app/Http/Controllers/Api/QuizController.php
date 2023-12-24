@@ -2,21 +2,21 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\QuizResultsRequest;
-use App\Http\Resources\ProductResource;
-use App\Http\Resources\QuizResource;
+use App\Models\Quiz;
 use App\Models\Client;
 use App\Models\Gender;
 use App\Models\Product;
-use App\Models\Quiz;
-use App\Models\QuizQuestion;
-use App\Models\QuizQuestionAnswer;
 use App\Models\QuizResult;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
+use App\Models\QuizQuestion;
+use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
+use App\Models\QuizQuestionAnswer;
 use Illuminate\Support\Collection;
+use App\Http\Controllers\Controller;
+use App\Http\Resources\QuizResource;
+use App\Http\Resources\ProductResource;
+use App\Http\Requests\QuizResultsRequest;
 
 class QuizController extends Controller
 {
@@ -27,7 +27,11 @@ class QuizController extends Controller
 
     public function index(): QuizResource
     {
-        $quiz = Quiz::with('questions.answers')->firstOrFail();
+        $quiz = Quiz::with([
+                'questions' => fn($q) => $q->active(),
+                'questions.answers',
+            ])
+            ->firstOrFail();
 
         return new QuizResource($quiz);
     }

@@ -1,4 +1,4 @@
-<div id="add-question" class="add-question card mt-4 p-2">
+<div id="add-question" class="add-question card col-12 mt-4 p-2">
     <form id="add-question-form" action="{{ route('dashboard.quiz-questions.store') }}">
 
         <input type="hidden" name="quiz_id" value="{{ $quiz->id }}">

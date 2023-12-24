@@ -54,9 +54,12 @@ Route::prefix('dashboard')->as('dashboard.')->middleware([
     Route::resource('quizzes', QuizController::class)
         ->except(['create', 'store', 'destroy']);
 
+    //Quiz Questions
+    Route::put('quiz-questions/{quizQuestion}/toggle-active', [QuizQuestionController::class, 'toggleActive'])->name('quiz-questions.toggle-active');
     Route::resource('quiz-questions', QuizQuestionController::class)
         ->only(['store', 'update', 'destroy']);
 
+    //Quiz Answers
     Route::resource('quiz-question-answers', QuizQuestionAnswerController::class)
         ->only(['store', 'update', 'destroy']);
 

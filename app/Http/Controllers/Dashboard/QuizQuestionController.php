@@ -96,4 +96,23 @@ class QuizQuestionController extends Controller
             'message' => $destroy->message,
         ]);
     }
+
+    public function toggleActive(QuizQuestion $quizQuestion): JsonResponse
+    {
+        abort_if(Gate::denies($this->permissions['edit']), Response::HTTP_FORBIDDEN, 'ليس لديك صلاحية');
+
+        $update = $this->quizQuestionService->toggleActive($quizQuestion);
+
+        if ($update->success) {
+            return response()->json([
+                'success' => true,
+                'message' => $update->message,
+            ]);
+        }
+
+        return response()->json([
+            'success' => false,
+            'message' => $update->message,
+        ]);
+    }
 }

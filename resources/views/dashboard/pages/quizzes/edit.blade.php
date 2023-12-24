@@ -2,7 +2,7 @@
 
 @push('styles')
     <link rel="stylesheet" href="{{ asset('dashboard_theme/assets/css/editors/quill.rtl.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/dashboard/css/custom/edit-quiz.css') }}?version=1.0.0">
+    <link rel="stylesheet" href="{{ asset('assets/dashboard/css/custom/edit-quiz.css') }}?version=1.0.1">
 @endpush
 
 @section('content')
@@ -28,14 +28,12 @@
     </div>
 
     <div class="nk-block">
-        <div class="card h-100">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center py-3">
+                <h5 class="card-title">الأسئلة والإجابات</h5>
+            </div>
+
             <div class="card-inner">
-                <div class="card-head">
-                    <h5 class="card-title">الأسئلة والإجابات</h5>
-                </div>
-
-                <hr>
-
                 <div class="card-body">
                     <div class="row g-gs">
                         @foreach ($quiz->questions as $question)

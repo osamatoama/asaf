@@ -19,6 +19,10 @@ class UpdateRequest extends FormRequest
                 'description' => null,
             ]);
         }
+
+        $this->merge([
+            'active' => filled($this->active),
+        ]);
     }
 
     /**
@@ -29,6 +33,7 @@ class UpdateRequest extends FormRequest
         return [
             'title' => ['required', 'string', 'max:191'],
             'description' => ['required', 'string'],
+            'active' => ['required', 'boolean'],
         ];
     }
 
@@ -37,6 +42,7 @@ class UpdateRequest extends FormRequest
         return [
             'title' => 'الاسم',
             'description' => 'الوصف',
+            'active' => 'التفعيل',
         ];
     }
 }
