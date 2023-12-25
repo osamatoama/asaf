@@ -22,6 +22,9 @@
 
             <button class="start-quiz hidden">اكتشف ذوقك</button>
         </div>
+        <div class="intro-loader">
+            <div class="spinner"></div>
+        </div>
     </div>
     <div class="user-preferences-form-container hidden switch-effect" data-quiz-url="{{ route('api.quiz') }}">
         <h1 class="main-heading">اعرف عطرك حسب شخصيتك</h1>
