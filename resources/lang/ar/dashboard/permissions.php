@@ -57,7 +57,8 @@ return [
     'gender_show'                 => 'عرض نوع',
     'gender_delete'               => 'حذف نوع',
     'gender_access'               => 'الوصول للأنواع',
-
-
-
+    'quiz_question_create'        => 'إضافة سؤال',
+    'quiz_question_edit'          => 'تعديل سؤال',
+    'quiz_question_show'          => 'عرض سؤال',
+    'quiz_question_delete'        => 'حذف سؤال',
 ];

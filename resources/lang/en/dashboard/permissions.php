@@ -57,4 +57,8 @@ return [
     'gender_show'                 => 'Show Gender',
     'gender_delete'               => 'Delete Gender',
     'gender_access'               => 'Access Genders',
+    'quiz_question_create'        => 'Create Quiz Question',
+    'quiz_question_edit'          => 'Edit Quiz Question',
+    'quiz_question_show'          => 'Show Quiz Question',
+    'quiz_question_delete'        => 'Delete Quiz Question',
 ];
