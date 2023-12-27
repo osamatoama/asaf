@@ -379,7 +379,7 @@ document.querySelector(".submit-form-btn").addEventListener("click", function (e
 
 document.querySelector(".start-over").addEventListener("click", () => location.reload());
 
-document.addEventListener("DOMContentLoaded", async function () {
+document.addEventListener("load", async function () {
     const loader = document.querySelector('.intro .intro-loader');
     const introText = document.querySelector('.intro-text');
     const introTitle = document.querySelector('.intro-title');
