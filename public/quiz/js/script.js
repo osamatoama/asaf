@@ -380,7 +380,7 @@ document.querySelector(".submit-form-btn").addEventListener("click", function (e
 document.querySelector(".start-over").addEventListener("click", () => location.reload());
 
 (async function fetchIntroData() {
-    const loader = document.querySelector('.intro .intro-loader');
+    const loader = document.querySelector('.intro-loader');
     const introText = document.querySelector('.intro-text');
     const introTitle = document.querySelector('.intro-title');
     const introDescription = document.querySelector('.intro-description');
