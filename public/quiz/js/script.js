@@ -379,7 +379,7 @@ document.querySelector(".submit-form-btn").addEventListener("click", function (e
 
 document.querySelector(".start-over").addEventListener("click", () => location.reload());
 
-document.addEventListener("load", async function () {
+(async function fetchIntroData() {
     const loader = document.querySelector('.intro .intro-loader');
     const introText = document.querySelector('.intro-text');
     const introTitle = document.querySelector('.intro-title');
@@ -414,4 +414,4 @@ document.addEventListener("load", async function () {
     } finally {
         loader.classList.add("hide");
     }
-});
+})();
