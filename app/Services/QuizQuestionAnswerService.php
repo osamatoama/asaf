@@ -70,7 +70,7 @@ class QuizQuestionAnswerService
             $data = $request->validated();
 
             $quizQuestionAnswer->update($data);
-            $quizQuestionAnswer->products()->sync($data['product_ids']);
+            // $quizQuestionAnswer->products()->sync($data['product_ids']);
 
             DB::commit();
 

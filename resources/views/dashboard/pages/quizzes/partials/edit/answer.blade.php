@@ -51,7 +51,16 @@
                 </div>
             </div>
 
+            {{-- TEMP: Fix and bring input back --}}
             <div class="col-md-7">
+                @forelse($answer->products as $product)
+                    <span class="badge bg-outline-primary">{{ $product->name }}</span>
+                @empty
+                    ---
+                @endforelse
+            </div>
+
+            {{-- <div class="col-md-7">
                 <div class="form-group">
                     <div class="form-control-wrap">
                         <select class="form-select select2" name="product_ids[]" data-placeholder="اختر المنتجات" multiple>
@@ -62,7 +71,7 @@
                         <div class="invalid-feedback"></div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
             <div class="col-md-2">
                 <button type="submit" class="btn btn-sm btn-outline-success ms-1 mb-1">

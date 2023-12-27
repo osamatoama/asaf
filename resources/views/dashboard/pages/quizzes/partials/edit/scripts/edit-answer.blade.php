@@ -20,7 +20,7 @@
         axios.post(el.attr('action'), new FormData(el[0]))
             .then((response) => {
                 $(`#answer-${answerId}`).replaceWith(response.data.data.html)
-                initSelect2($(`#answer-${answerId}`).find('.select2'))
+                // initSelect2($(`#answer-${answerId}`).find('.select2'))
                 $(`#answer-${answerId} .answer-edit`).addClass('d-none')
                 successToast(response.data.message)
                 resetForm(el)
