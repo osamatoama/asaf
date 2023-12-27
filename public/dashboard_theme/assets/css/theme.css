@@ -1,0 +1,224 @@
+/*!
+ * Theme Name: Default
+ * Package : DashLite
+ * Author: Softnio
+ * Author URI: http://themeforest.net/user/softnio
+ * Version	 :	1.0.0
+ * Updated	 :	07.23.2020
+**/
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;1,100;1,200;1,300;1,400;1,500&display=swap');
+body * {
+    font-family: 'Poppins', sans-serif!important;
+}
+
+.share {
+    display: grid;
+    grid-template-columns: repeat(2, .1fr);
+    gap: 15px;
+    margin: 0px 15px;
+}
+
+.share-stuff {
+    display: flex;
+    width: 150px;
+    flex-direction: column;
+    gap: 15px;
+    position: absolute;
+    padding: 15px;
+    border-radius: 20px;
+    z-index: 100;
+    border: 1px solid black;
+    background-color: white;
+}
+
+.share-stuff button {
+    justify-content: center;
+}
+
+.delete-button {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    color: #526484;
+}
+
+.delete-button:hover {
+    color: #854fff;
+    background: #f5f6fa;
+}
+
+em {
+    vertical-align: sub;
+}
+
+td,
+th {
+    vertical-align: middle!important;
+}
+
+.notification-dropdown {
+    display: none!important;
+}
+
+.fix-actions .dropdown-menu {
+    min-width: auto!important;
+    left: -35px!important;
+    white-space: nowrap;
+}
+
+.view-table {
+    border: 1px solid;
+    text-align-last: start;
+    border-radius: 5px;
+}
+
+.view-table th {
+    border: 1px solid;
+}
+
+.view-table td {
+    text-align-last: center;
+}
+
+.required:after {
+    content: " *";
+    color: red;
+}
+
+textarea {
+    resize: none!important;
+}
+
+.gold-mart-title {
+    text-align: center;
+}
+
+.payment-icon {
+    font-size: 30px;
+}
+
+#channels {
+    display: flex;
+    flex-direction: column;
+}
+
+.channel-box {
+    gap: 10px;
+}
+
+.select-trans-form select {
+    color: #526484;
+    line-height: 1.25rem;
+    padding: 0.4375rem calc(2.125rem + 2px) 0.4375rem 1rem;
+    display: block;
+    padding-left: 8px;
+    padding-right: 20px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.translation-tabs {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    flex-direction: row;
+    gap: 1rem;
+    font-size: 1rem;
+}
+
+.fix-svg svg {
+    width: 1.25rem!important;
+}
+
+.fix-svg textarea {
+    overflow-wrap: inherit;
+    border-style: none;
+    resize: none;
+    background-color: transparent;
+    color: #606f7b;
+    width: 100%;
+    font-weight: 200;
+    height: auto;
+    padding: 0;
+    min-height: 150px;
+}
+
+.fix-svg .flex {
+    display: flex;
+    flex-direction: row;
+}
+
+.alert-fix .table th,
+.alert-fix .table td {
+    border-top: none!important;
+}
+
+.nk-sidebar-head {
+    width: 300px!important;
+    height: auto!important;
+}
+
+div.dataTables_wrapper div.dataTables_filter input,
+.dual-listbox .dual-listbox__search {
+    margin: 0px 10px;
+}
+
+.dropzone .dz-preview.dz-image-preview {
+    background: none!important;
+}
+
+
+/* nav */
+
+.register-tab .nav {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-bottom: 0;
+    list-style: none;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+}
+
+.register-tab .nav-tabs {
+    height: 100%;
+    width: 100%;
+    border-bottom: none;
+}
+
+.register-tab .nav-tabs a {
+    display: inline-block;
+    border-radius: 20px;
+    width: 90%;
+    height: 100%;
+    border: 1px solid;
+    /* Font */
+    font-style: normal;
+    font-weight: normal;
+    font-size: clamp(14px, 3vw, 24px);
+    line-height: 42px;
+    /* identical to box height */
+}
+
+.register-tab .nav-tabs a:hover {
+    text-decoration: none;
+}
+
+.register-tab .nav-tabs a.active {
+    background: #9769ff;
+    color: #FFFFFF;
+}
+
+.register-tab .nav-tabs li {
+    height: 100%;
+    width: 50%;
+    text-align: center;
+}
+
+html:not([dir=rtl]) .nav {
+    padding-right: 0;
+}

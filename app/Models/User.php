@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Traits\Auditable;
 use App\Models\Traits\User\UserHelpers;
 use App\Models\Traits\User\UserRelations;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -11,7 +12,7 @@ use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, UserHelpers, UserRelations;
+    use HasApiTokens, HasFactory, Notifiable, UserHelpers, UserRelations, Auditable;
 
     /**
      * The attributes that are mass assignable.
@@ -19,10 +20,15 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+        'parent_id',
         'name',
         'email',
         'phone',
         'password',
+        'verification_code',
+        'verified',
+        'active',
+        'dark_mode_enabled'
     ];
 
     /**
@@ -43,5 +49,10 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password'          => 'hashed',
+        'verified'          => 'boolean',
+        'active'            => 'boolean',
+        'dark_mode_enabled' => 'boolean',
+        'created_at'        => 'datetime:Y-m-d H:i:s',
+        'updated_at'        => 'datetime:Y-m-d H:i:s',
     ];
 }

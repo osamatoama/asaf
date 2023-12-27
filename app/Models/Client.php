@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use App\Models\Traits\Auditable;
 use App\Models\Traits\Client\ClientHelpers;
 use App\Models\Traits\Client\ClientRelations;
 use Illuminate\Database\Eloquent\Model;
 
 class Client extends Model
 {
-    use ClientRelations, ClientHelpers;
+    use ClientRelations, ClientHelpers, Auditable;
 
     protected $fillable = [
         'key',
@@ -16,5 +17,8 @@ class Client extends Model
         'email',
     ];
 
-    protected $dateFormat = 'Y-m-d H:i:s';
+    protected $casts = [
+        'created_at' => 'datetime:Y-m-d H:i:s',
+        'updated_at' => 'datetime:Y-m-d H:i:s',
+    ];
 }

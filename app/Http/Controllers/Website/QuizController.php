@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers\Website;
 
-use App\Http\Controllers\Controller;
-use App\Models\Gender;
 use Illuminate\Support\Arr;
+use App\Http\Controllers\Controller;
 
 class QuizController extends Controller
 {

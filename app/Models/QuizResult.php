@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use App\Models\Traits\Auditable;
 use App\Models\Traits\QuizResult\QuizResultHelpers;
 use App\Models\Traits\QuizResult\QuizResultRelations;
 use Illuminate\Database\Eloquent\Model;
 
 class QuizResult extends Model
 {
-    use QuizResultRelations, QuizResultHelpers;
+    use QuizResultRelations, QuizResultHelpers, Auditable;
 
     protected $fillable = [
         'quiz_id',
@@ -21,8 +22,8 @@ class QuizResult extends Model
     ];
 
     protected $casts = [
-        'score' => 'integer',
+        'score'      => 'integer',
+        'created_at' => 'datetime:Y-m-d H:i:s',
+        'updated_at' => 'datetime:Y-m-d H:i:s',
     ];
-
-    protected $dateFormat = 'Y-m-d H:i:s';
 }

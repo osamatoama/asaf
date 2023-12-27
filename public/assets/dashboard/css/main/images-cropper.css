@@ -1,0 +1,39 @@
+#cropImgModal,
+#confirmCloseCropModal {
+    background-color: #000000ab;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+}
+#cropImgModal .close-crop-modal em {
+    cursor: pointer;
+}
+.crop-loader-overlay {
+    background-color: #bbb5c863;
+    z-index: 100;
+}
+.crop-loader-overlay em {
+    font-size: 100px;
+    animation: spinLoader 3s infinite linear;
+}
+#cropImgModal .uploaded-image-container .dimensions {
+    top: -3%;
+    left: 1%;
+    padding: 2px 5px;
+    z-index: 100;
+}
+@keyframes spinLoader {
+    0% {
+        transform: rotate(0);
+        -webkit-transform: rotate(0);
+        -moz-transform: rotate(0);
+        -ms-transform: rotate(0);
+        -o-transform: rotate(0);
+    }
+    100% {
+        transform: rotate(360deg);
+        -webkit-transform: rotate(360deg);
+        -moz-transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+        -o-transform: rotate(360deg);
+    }
+}

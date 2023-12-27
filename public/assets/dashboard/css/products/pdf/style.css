@@ -1,0 +1,248 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    border: none;
+    outline: none;
+    font-family: 'Montserrat-Arabic', sans-serif;
+}
+
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+@font-face {
+    font-family: 'Montserrat-Arabic';
+    src: url('./fonts/Montserrat-Arabic-Regular.ttf');
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: 'Montserrat-Arabic-Medium';
+    src: url('./fonts/Montserrat-Arabic-Medium.ttf');
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: 'Montserrat-Arabic-Light';
+    src: url('./fonts/Montserrat-Arabic-Light.ttf');
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: 'Montserrat-Arabic-Bold';
+    src: url('./fonts/Montserrat-Arabic-SemiBold.ttf');
+    font-weight: bold;
+}
+
+.fw-normal {
+    font-family: 'Montserrat-Arabic';
+    font-weight: normal;
+}
+
+.fw-light {
+    font-family: 'Montserrat-Arabic-Light', 'Montserrat-Arabic';
+    font-weight: 300;
+}
+
+.fw-medium {
+    font-family: 'Montserrat-Arabic-Medium', 'Montserrat-Arabic';
+    font-weight: 500;
+}
+
+.fw-bold {
+    font-family: 'Montserrat-Arabic-Bold', 'Montserrat-Arabic';
+    font-weight: bold;
+}
+
+.ltr {
+    position: ltr !important;
+}
+
+.fs-17 {
+    font-size: 17px;
+}
+
+.fs-15 {
+    font-size: 15px;
+}
+
+.fs-14 {
+    font-size: 14px;
+}
+
+.text-gold {
+    color: #bf9725;
+}
+
+.text-dark {
+    color: #18181a;
+}
+
+.text-gray {
+    color: #606060;
+}
+
+.text-muted {
+    color: #858585;
+}
+
+.text-success {
+    color: #3d9635;
+}
+
+.text-primary {
+    color: #854fff;
+}
+
+.text-info {
+    color: #1761c4;
+}
+
+.text-danger {
+    color: #dc3545;
+}
+
+.bg-light {
+    background-color: #f9f6f3;
+}
+
+.bg-danger {
+    background-color: #dc3545;
+}
+
+.bg-success {
+    background-color: #3d9635;
+}
+
+.bg-primary {
+    background-color: #854fff;
+}
+
+.border-gray {
+    border: 1px solid #dfdcd9;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.m-t-5 {
+    margin-top: -5px;
+}
+
+.mt-5 {
+    margin-top: 5px;
+}
+
+.pe-5 {
+    padding-inline-end: 5px;
+}
+
+.ps-5 {
+    padding-inline-start: 5px;
+}
+
+.rounded-7 {
+    border-radius: 7px;
+}
+
+.rounded-circle {
+    border-radius: 50%;
+}
+
+.container {
+    width: calc(100% * 2440 / 2480);
+    margin: 0 auto;
+    padding: 15px;
+}
+
+.page-title {
+    font-size: 30px;
+    margin: 5px 0 20px;
+}
+
+.product-cards-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 15px;
+    background-color: #fff;
+    box-shadow: 0px 1px 3px 0px #364a632c;
+}
+
+.product-cards-container .product-card {
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+.product-cards-container .product-img-wrapper {
+    width: 120px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.product-cards-container .product-img-wrapper .product-default-image {
+    width: 100%;
+    aspect-ratio: 1/1;
+    padding: 5px;
+}
+
+.product-cards-container .product-img-wrapper .product-num {
+    white-space: nowrap;
+}
+
+.product-cards-container .product-info-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    width: 100%;
+}
+
+.product-cards-container .product-status-wrapper {
+    display: flex;
+    align-items: flex-start;
+    gap: 7px;
+}
+
+.product-cards-container .product-status-wrapper .product-status-bullet {
+    width: 15px;
+    height: 15px;
+    flex-shrink: 0;
+}
+
+.product-cards-container .product-info-inner-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    column-gap: 10px;
+    row-gap: 25px;
+    width: 100%;
+}
+
+.product-cards-container .product-info-column {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.product-cards-container .product-info-column .product-detail {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}

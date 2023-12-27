@@ -1,0 +1,31 @@
+textarea.resize-none {
+    resize: none;
+    min-height: initial;
+}
+
+input.resizable {
+    min-width: 16ch;
+}
+
+.invalid-feedback {
+    font-size: 0.8rem;
+}
+
+.ql-toolbar.is-invalid, .select2-selection.is-invalid {
+    border-color: #e85347;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.opacity-1 {
+    opacity: 1;
+    background-color: rgba(255, 255, 255);
+}
+
+.opacity-03 {
+    border: 1px solid lightsalmon;
+    /* opacity: 0.3; */
+    background-color: rgba(200, 200, 200, 0.2);
+}

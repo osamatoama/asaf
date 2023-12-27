@@ -1,0 +1,6 @@
+{
+    "The :attribute must contain at least one letter.": "يجب أن تحتوي كلمة المرور على الأقل على حرف كبير وحرف صغير ولا تقل عن 8 أحرف.",
+    "The :attribute must contain at least one uppercase and one lowercase letter.": "يجب أن تحتوي كلمة المرور على الأقل على حرف كبير وحرف صغير ولا تقل عن 8 أحرف.",
+    "The :attribute must contain at least one number.": "يجب أن تحتوي كلمة المرور على الأقل على حرف كبير وحرف صغير ولا تقل عن 8 أحرف.",
+    "The :attribute must contain at least one symbol.": "يجب أن تحتوي كلمة المرور على الأقل على حرف كبير وحرف صغير ولا تقل عن 8 أحرف."
+}

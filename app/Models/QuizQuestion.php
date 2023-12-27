@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use App\Models\Traits\Auditable;
 use App\Models\Traits\QuizQuestion\QuizQuestionHelpers;
 use App\Models\Traits\QuizQuestion\QuizQuestionRelations;
 use Illuminate\Database\Eloquent\Model;
 
 class QuizQuestion extends Model
 {
-    use QuizQuestionRelations, QuizQuestionHelpers;
+    use QuizQuestionRelations, QuizQuestionHelpers, Auditable;
 
     public const GENDER_QUESTION = 'اختر التصنيف المناسب لك في العطور';
 
@@ -20,9 +21,9 @@ class QuizQuestion extends Model
     ];
 
     protected $casts = [
-        'active'    => 'boolean',
-        'has_image' => 'boolean',
+        'active'     => 'boolean',
+        'has_image'  => 'boolean',
+        'created_at' => 'datetime:Y-m-d H:i:s',
+        'updated_at' => 'datetime:Y-m-d H:i:s',
     ];
-
-    protected $dateFormat = 'Y-m-d H:i:s';
 }

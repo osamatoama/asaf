@@ -1,0 +1,82 @@
+#images {
+    min-height: unset;
+    border-radius: 0;
+}
+#images .dz-message {
+    margin: 0;
+}
+.dz-message-icon img {
+    width: 40px;
+}
+.dropzone.uploaded-images-wrapper {
+    width: calc(100% - 30px);
+    height: fit-content;
+    min-height: unset;
+    margin: 0 auto;
+    padding: 0;
+    border: none;
+}
+.dropzone.uploaded-images-wrapper .dz-image-preview {
+    border: 1px solid #DDDDDD;
+    box-shadow: 0px 4px 30px 0px #0000001A;
+    border-radius: 10px;
+}
+
+.dropzone.uploaded-images-wrapper .dz-preview .dz-image {
+    border-radius: 10px 10px 0 0;
+}
+.dz-img-controls {
+    border-top: 1px solid #DDDDDD;
+    border-radius: 0 0 10px 10px;
+}
+.dz-img-controls.active .default-text{
+    color: #BF9725;
+}
+.dz-img-controls .dz-custom-remove {
+    cursor: pointer;
+    font-size: 17px;
+    color: #F37878;
+    background-color: #f377772e;
+    padding: 5px;
+    border-radius: 5px;
+}
+.default-img-wrapper.disabled,
+  .default-img-wrapper.disabled *{
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+.default-img-checkbox {
+    position: relative;
+    height: 20px;
+    width: 20px;
+    cursor: pointer;
+}
+.default-img-checkbox .default-img-inp {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+.default-img-checkbox .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    color: #BF9725;
+    background-color: #fff;
+    border: 2px solid #DDDDDD;
+    border-radius: 2px;
+}
+.default-img-checkbox:hover .default-img-inp~.checkmark {
+    background-color: #c1972526;
+}
+.default-img-checkbox .default-img-inp:checked~.checkmark {
+    background-color: #fff;
+    border: 2px solid #BF9725;
+}
+.default-img-checkbox .default-img-inp:checked~.checkmark em {
+    display: initial !important;
+    color: #BF9725;
+}

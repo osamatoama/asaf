@@ -2,10 +2,12 @@
 
 namespace App\Models\Traits\Product;
 
+use App\Helpers\GlobalConstants;
 use App\Models\Gender;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Fluent;
 use Spatie\Image\Exceptions\InvalidManipulation;
+use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
@@ -22,11 +24,13 @@ trait ProductHelpers
     public function getImageAttribute(): Fluent
     {
         $media = $this->getFirstMedia('product-images');
+        $conversions = ['thumbnail'];
 
-        return new Fluent([
-            'original'  => $media?->getUrl(),
-            'thumbnail' => $media?->getUrl('thumbnail'),
+        $data = media()->getUrls($media, $conversions)->merge([
+            'media' => $media,
         ]);
+
+        return new Fluent($data);
     }
 
     public function scopeWantedGenders(Builder $query, int $genderId): Builder {
@@ -46,7 +50,8 @@ trait ProductHelpers
      */
     public function registerMediaCollections(): void
     {
-        $this->addMediaCollection('product-images');
+        $this->addMediaCollection('product-images')
+            ->singleFile();
     }
 
     /**
@@ -56,7 +61,8 @@ trait ProductHelpers
     {
         // Thumbnail
         $this->addMediaConversion('thumbnail')
-            ->width(200)
+            ->width(GlobalConstants::THUMBNAIL_WIDTH)
+            ->height(GlobalConstants::THUMBNAIL_HEIGHT)
             ->nonQueued();
     }
 }

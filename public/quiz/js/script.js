@@ -168,6 +168,8 @@ function getProductsHandler(url, btn = null) {
     // const userData = getuserData();
     const user_key = getuserKey();
 
+    let email = btn?.dataset.email;
+
     const fetchProductsRes = fetch(url, {
         method: "POST",
         headers: {
@@ -175,7 +177,7 @@ function getProductsHandler(url, btn = null) {
             accept: "application/json",
         },
         body: JSON.stringify({
-            email: btn?.dataset.email != "null" || null,
+            email: (email !== "null") ? email : null,
             phone: +btn?.dataset.phone || null,
             user_key,
             results: storedAnswers,
@@ -376,3 +378,40 @@ document.querySelector(".submit-form-btn").addEventListener("click", function (e
 });
 
 document.querySelector(".start-over").addEventListener("click", () => location.reload());
+
+document.addEventListener("DOMContentLoaded", async function () {
+    const loader = document.querySelector('.intro .intro-loader');
+    const introText = document.querySelector('.intro-text');
+    const introTitle = document.querySelector('.intro-title');
+    const introDescription = document.querySelector('.intro-description');
+    const startQuizBtn = document.querySelector('button.start-quiz');
+    const QUIZ_INFO_URL = introText.dataset.quizInfoUrl;
+
+    try {
+        const res = await fetch(QUIZ_INFO_URL, {
+            method: "GET",
+            headers: {
+                "content-type": "application/json",
+                accept: "application/json",
+            },
+        });
+
+        const data = await res.json();
+
+        if (data.quiz.active) {
+            introTitle.innerHTML = data.quiz.title;
+            introDescription.innerHTML = data.quiz.description;
+            startQuizBtn.classList.remove('hidden');
+        } else {
+            introTitle.innerHTML = 'قيد الصيانة';
+            introDescription.innerHTML = 'سنعود قريباً';
+        }
+
+        introText.classList.remove('hidden');
+    } catch (error) {
+        introTitle.innerHTML = 'قيد الصيانة';
+        introDescription.innerHTML = 'سنعود قريباً';
+    } finally {
+        loader.classList.add("hide");
+    }
+});

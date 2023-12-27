@@ -1,0 +1,47 @@
+/* nav */
+.register-tab .nav {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-bottom: 0;
+    list-style: none;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+}
+
+.register-tab .nav-tabs {
+    height: 100%;
+    width: 100%;
+    border-bottom: none;
+}
+
+.register-tab .nav-tabs a {
+    display: inline-block;
+    border-radius: 20px;
+    width: 90%;
+    height: 100%;
+    border: 1px solid;
+    /* Font */
+    font-style: normal;
+    font-weight: normal;
+    font-size: clamp(14px, 3vw, 24px);
+    line-height: 42px;
+    /* identical to box height */
+}
+
+.register-tab .nav-tabs a:hover {
+    text-decoration: none;
+}
+
+.register-tab .nav-tabs a.active {
+    background: #9769ff;
+    color: #FFFFFF;
+}
+
+.register-tab .nav-tabs li {
+    height: 100%;
+    width: 50%;
+    text-align: center;
+}

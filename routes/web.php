@@ -19,10 +19,10 @@ Route::get('storage-link', function () {
     return 'Installed';
 });
 
-Route::get('project-install', function () {
-    Artisan::call('project:install');
-    return 'Installed';
-});
+//Route::get('project-install', function () {
+//    Artisan::call('project:install');
+//    return 'Installed';
+//});
 
 Route::get('add-migration/{path?}/{database?}', function ($path = '', $database = '') {
     $data = ['--force' => true];

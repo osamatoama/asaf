@@ -16,10 +16,12 @@ class ProductResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        $image = $this->resource->image;
+
         return [
             'name'         => $this->resource->name ?? '',
             'url'          => $this->resource->url ?? '',
-            'image'        => $this->resource->image_url ?? '',
+            'image'        => $image->media ? $image->thumbnail : ($this->resource->image_url ?? ''),
             'description'  => $this->resource->description ?? '',
         ];
     }
