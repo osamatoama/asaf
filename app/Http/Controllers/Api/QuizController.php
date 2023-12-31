@@ -76,43 +76,44 @@ class QuizController extends Controller
 
         $newAnswersIds = array_values($results);
 
-        $client = Client::where('key', $userKey)
-            ->when(filled($phone), function ($query) use ($phone) {
-                return $query->orWhere('phone', $phone);
-            })->when(filled($email), function ($query) use ($email) {
-                return $query->orWhere('email', $email);
-            })->first();
+        // TEMP
+//        $client = Client::where('key', $userKey)
+//            ->when(filled($phone), function ($query) use ($phone) {
+//                return $query->orWhere('phone', $phone);
+//            })->when(filled($email), function ($query) use ($email) {
+//                return $query->orWhere('email', $email);
+//            })->first();
 
-        $existedClientQuizResults = $quiz->results()
-            ->where('gender_id', $genderId)
-            ->where('client_id', $client->id ?? 0)
-            ->get();
+//        $existedClientQuizResults = $quiz->results()
+//            ->where('gender_id', $genderId)
+//            ->where('client_id', $client->id ?? 0)
+//            ->get();
 
-        if (blank($client)) {
-            $client = Client::create([
-                'key'   => $userKey,
-                'phone' => $phone,
-                'email' => $email,
-            ]);
+//        if (blank($client)) {
+//            $client = Client::create([
+//                'key'   => $userKey,
+//                'phone' => $phone,
+//                'email' => $email,
+//            ]);
+//
+//            $resultedProductIsRandom = true;
+//            $existedClientQuizResult = null;
+//        } else {
+//
+//            $clientUpdateCase = $this->clientUpdateCase(
+//                $client,
+//                $existedClientQuizResults,
+//                $newAnswersIds,
+//                $phone,
+//                $email
+//            );
+//
+//            $client                  = $clientUpdateCase->client;
+//            $resultedProductIsRandom = $clientUpdateCase->resultedProductIsRandom;
+//            $existedClientQuizResult = $clientUpdateCase->existedClientQuizResult;
+//        }
 
-            $resultedProductIsRandom = true;
-            $existedClientQuizResult = null;
-        } else {
-
-            $clientUpdateCase = $this->clientUpdateCase(
-                $client,
-                $existedClientQuizResults,
-                $newAnswersIds,
-                $phone,
-                $email
-            );
-
-            $client                  = $clientUpdateCase->client;
-            $resultedProductIsRandom = $clientUpdateCase->resultedProductIsRandom;
-            $existedClientQuizResult = $clientUpdateCase->existedClientQuizResult;
-        }
-
-        if ($resultedProductIsRandom) {
+//        if ($resultedProductIsRandom) {
             $productsIdsArr = [];
 
             foreach ($newAnswersIds as $newAnswerId) {
@@ -138,10 +139,12 @@ class QuizController extends Controller
 
             $product   = Product::whereIn('id', $productsIdsArr)->inRandomOrder()->first();
             $quizScore = $maxOccurrence;
-        } else {
-            $product   = $existedClientQuizResult?->product;
-            $quizScore = $existedClientQuizResult?->score ?? 0;
-        }
+
+            // TEMP
+//        } else {
+//            $product   = $existedClientQuizResult?->product;
+//            $quizScore = $existedClientQuizResult?->score ?? 0;
+//        }
 
         if (blank($product)) {
             return response()->json([
@@ -151,11 +154,12 @@ class QuizController extends Controller
             ]);
         }
 
-        $newQuizResult = $this->createQuizResult($client, $quiz, $quizScore, $product, $genderId);
+        // TEMP
+//        $newQuizResult = $this->createQuizResult($client, $quiz, $quizScore, $product, $genderId);
 
-        $this->createQuizResultAnswers($newQuizResult, $results);
+//        $this->createQuizResultAnswers($newQuizResult, $results);
 
-        $this->createQuizResultClient($client, $newQuizResult);
+//        $this->createQuizResultClient($client, $newQuizResult);
 
         return response()->json([
             'status'   => 200,
