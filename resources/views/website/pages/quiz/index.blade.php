@@ -3,10 +3,10 @@
 @section('content')
     <div class="intro">
         <a href="https://perfume-quiz.valinteca.com/perfume-quiz" class="intro-logo">
-            <img src="{{ asset('quiz/images/logo.png') }}" alt="logo">
+            <img src="{{ assetCustom('quiz/images/logo.png') }}" alt="logo">
         </a>
         {{-- <div class="intro-image">
-            <img src="{{ asset('quiz/images/intro.jpg') }}" alt="Perfume Quiz">
+            <img src="{{ assetCustom('quiz/images/intro.jpg') }}" alt="Perfume Quiz">
         </div> --}}
         <div class="intro-text hidden" data-quiz-info-url="{{ route('api.quiz.info') }}">
             {{-- <p class="text-bold-light">محتار بين عطور عسَّاف؟</p>

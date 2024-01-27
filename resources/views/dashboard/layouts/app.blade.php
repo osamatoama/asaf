@@ -7,7 +7,7 @@
     <meta name="description" content="Perfume Quiz">
     <meta name="_token" content="{{ csrf_token() }}">
 
-    <link rel="shortcut icon" href="{{ asset('assets/dashboard/images/favicon.png') }}">
+    <link rel="shortcut icon" href="{{ assetCustom('assets/dashboard/images/favicon.png') }}">
 
     <title>اختبار العطور</title>
 

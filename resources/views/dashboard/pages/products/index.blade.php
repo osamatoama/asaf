@@ -50,6 +50,6 @@
 @endsection
 
 @push('scripts')
-    <script src="{{ asset('assets/dashboard/js/libs/datatable-btns.js') }}"></script>
+    <script src="{{ assetCustom('assets/dashboard/js/libs/datatable-btns.js') }}"></script>
     @include('dashboard.pages.products.partials.scripts.index')
 @endpush

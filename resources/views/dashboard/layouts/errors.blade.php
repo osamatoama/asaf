@@ -6,12 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Perfume Quiz">
 
-    <link rel="shortcut icon" href="{{ asset('assets/dashboard/images/favicon.png') }}">
+    <link rel="shortcut icon" href="{{ assetCustom('assets/dashboard/images/favicon.png') }}">
 
     <title>@yield('title') | اختبار العطور</title>
 
-    <link rel="stylesheet" href="{{ asset('assets/dashboard/css/dashlite.rtl.css') }}">
-    <link id="skin-default" rel="stylesheet" href="{{ asset('assets/dashboard/css/theme.rtl.css') }}">
+    <link rel="stylesheet" href="{{ assetCustom('assets/dashboard/css/dashlite.rtl.css') }}">
+    <link id="skin-default" rel="stylesheet" href="{{ assetCustom('assets/dashboard/css/theme.rtl.css') }}">
 </head>
 <body @class(['nk-body bg-white npc-default pg-error', 'has-rtl' => true]) dir="rtl">
 <div class="nk-app-root">

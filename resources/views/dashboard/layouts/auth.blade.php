@@ -7,12 +7,12 @@
     <meta name="description" content="Perfume Quiz">
     <meta name="robots" content="noindex,nofollow">
 
-    <link rel="shortcut icon" href="{{ asset('assets/dashboard/images/favicon.png') }}">
+    <link rel="shortcut icon" href="{{ assetCustom('assets/dashboard/images/favicon.png') }}">
 
     <title>اختبار العطور</title>
 
-    <link rel="stylesheet" href="{{ asset('assets/dashboard/css/dashlite.rtl.css') }}">
-    <link id="skin-default" rel="stylesheet" href="{{ asset('assets/dashboard/css/theme.rtl.css') }}">
+    <link rel="stylesheet" href="{{ assetCustom('assets/dashboard/css/dashlite.rtl.css') }}">
+    <link id="skin-default" rel="stylesheet" href="{{ assetCustom('assets/dashboard/css/theme.rtl.css') }}">
 
     @stack('styles')
 </head>
@@ -25,12 +25,12 @@
                     <div class="brand-logo pb-4 text-center">
                         <a href="{{ route('website.perfume-quiz') }}" class="logo-link">
                             <img class="logo-light logo-img"
-                                 src="{{ asset('assets/dashboard/images/logos/logo.png') }}"
-                                 srcset="{{ asset('assets/dashboard/images/logos/logo2x.png') }} 2x"
+                                 src="{{ assetCustom('assets/dashboard/images/logos/logo.png') }}"
+                                 srcset="{{ assetCustom('assets/dashboard/images/logos/logo2x.png') }} 2x"
                                  alt="logo">
                             <img class="logo-dark logo-img"
-                                 src="{{ asset('assets/dashboard/images/logos/logo-dark.png') }}"
-                                 srcset="{{ asset('assets/dashboard/images/logos/logo-dark2x.png') }} 2x"
+                                 src="{{ assetCustom('assets/dashboard/images/logos/logo-dark.png') }}"
+                                 srcset="{{ assetCustom('assets/dashboard/images/logos/logo-dark2x.png') }} 2x"
                                  alt="logo-dark">
                         </a>
                     </div>
@@ -62,8 +62,8 @@
     </div>
 </div>
 
-<script src="{{ asset('assets/dashboard/js/bundle.js') }}"></script>
-<script src="{{ asset('assets/dashboard/js/scripts.js') }}"></script>
+<script src="{{ assetCustom('assets/dashboard/js/bundle.js') }}"></script>
+<script src="{{ assetCustom('assets/dashboard/js/scripts.js') }}"></script>
 
 @include('dashboard.partials.scripts.main')
 @include('dashboard.partials.scripts.auth')

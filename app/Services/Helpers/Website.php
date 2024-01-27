@@ -23,7 +23,7 @@ class Website
 
     public function assets(string $path = ''): string
     {
-        return asset('assets/website/' . ltrim($path, '/'));
+        return assetCustom('assets/website/' . ltrim($path, '/'));
     }
 
     public function localeFlag(string $locale): string

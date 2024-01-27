@@ -1,6 +1,6 @@
 @include('dashboard.partials.scripts.dictionary')
 @include('dashboard.partials.scripts.constants')
-<script src="{{ asset('assets/dashboard/js/functions.js') }}"></script>
+<script src="{{ assetCustom('assets/dashboard/js/functions.js') }}"></script>
 <script>
     $('.should-toggle').on('click', function () {
         toggleButton($(this))

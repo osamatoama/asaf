@@ -3,16 +3,16 @@
         <div class="nk-sidebar-brand">
             <a href="{{ route('dashboard.home') }}" class="logo-link nk-sidebar-logo">
                 <img class="logo-light logo-img"
-                    src="{{ asset('assets/dashboard/images/logos/logo.png') }}"
-                    srcset="{{ asset('assets/dashboard/images/logos/logo2x.png') }} 2x"
+                    src="{{ assetCustom('assets/dashboard/images/logos/logo.png') }}"
+                    srcset="{{ assetCustom('assets/dashboard/images/logos/logo2x.png') }} 2x"
                     alt="logo">
                 <img class="logo-dark logo-img"
-                    src="{{ asset('assets/dashboard/images/logos/logo-dark.png') }}"
-                    srcset="{{ asset('assets/dashboard/images/logos/logo-dark2x.png') }} 2x"
+                    src="{{ assetCustom('assets/dashboard/images/logos/logo-dark.png') }}"
+                    srcset="{{ assetCustom('assets/dashboard/images/logos/logo-dark2x.png') }} 2x"
                     alt="logo-dark">
                 <img class="logo-small logo-img logo-img-small"
-                    src="{{ asset('assets/dashboard/images/logos/logo-small.png') }}"
-                    srcset="{{ asset('assets/dashboard/images/logos/logo-small2x.png') }} 2x"
+                    src="{{ assetCustom('assets/dashboard/images/logos/logo-small.png') }}"
+                    srcset="{{ assetCustom('assets/dashboard/images/logos/logo-small2x.png') }} 2x"
                     alt="logo-small">
             </a>
         </div>

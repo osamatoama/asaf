@@ -1,1 +1,1 @@
-<script src="{{ asset('quiz/js/script.js') }}"></script>
+<script src="{{ assetCustom('quiz/js/script.js') }}"></script>

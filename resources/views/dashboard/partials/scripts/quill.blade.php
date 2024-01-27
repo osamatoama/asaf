@@ -1,4 +1,4 @@
-<script src="{{ asset('dashboard_theme/assets/js/libs/editors/quill.js') }}"></script>
+<script src="{{ assetCustom('dashboard_theme/assets/js/libs/editors/quill.js') }}"></script>
 
 <script>
     let Link = Quill.import('formats/link');

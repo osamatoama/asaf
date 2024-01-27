@@ -23,7 +23,7 @@ class Dashboard
 
     public function assets(string $path = ''): string
     {
-        return asset('assets/dashboard/' . ltrim($path, '/'));
+        return assetCustom('assets/dashboard/' . ltrim($path, '/'));
     }
 
     public function localeFlag(string $locale): string

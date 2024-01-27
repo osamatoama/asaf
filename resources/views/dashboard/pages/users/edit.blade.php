@@ -1,7 +1,7 @@
 @extends('dashboard.layouts.app')
 
 @push('styles')
-    <link rel="stylesheet" href="{{ asset('assets/dashboard/libs/intl-tel-input/css/intlTelInput.min.css') }}">
+    <link rel="stylesheet" href="{{ assetCustom('assets/dashboard/libs/intl-tel-input/css/intlTelInput.min.css') }}">
     <style>
         .iti {
             width: 100%;
@@ -247,7 +247,7 @@
 @endsection
 
 @push('scripts')
-    <script src="{{ asset('assets/dashboard/libs/intl-tel-input/js/intlTelInput.min.js') }}"></script>
+    <script src="{{ assetCustom('assets/dashboard/libs/intl-tel-input/js/intlTelInput.min.js') }}"></script>
     <script>
         const form = document.querySelector('.users-form')
         const phoneInput = form.querySelector('#phone')
@@ -257,7 +257,7 @@
             initialCountry: phoneCountryInput.value ?? 'sa',
             preferredCountries: ['sa'],
             separateDialCode: true,
-            // utilsScript: `{{ asset('assets/dashboard/libs/intl-tel-input/js/utils.js') }}`,
+            // utilsScript: `{{ assetCustom('assets/dashboard/libs/intl-tel-input/js/utils.js') }}`,
         })
 
         form.addEventListener('submit', function () {

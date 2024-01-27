@@ -7,12 +7,12 @@
             <div class="nk-header-brand d-xl-none">
                 <a href="{{ route('website.perfume-quiz') }}" class="logo-link">
                     <img class="logo-light logo-img"
-                         src="{{ asset('assets/dashboard/images/logos/logo.png') }}"
-                         srcset="{{ asset('assets/dashboard/images/logos/logo2x.png') }} 2x"
+                         src="{{ assetCustom('assets/dashboard/images/logos/logo.png') }}"
+                         srcset="{{ assetCustom('assets/dashboard/images/logos/logo2x.png') }} 2x"
                          alt="logo">
                     <img class="logo-dark logo-img"
-                         src="{{ asset('assets/dashboard/images/logos/logo-dark.png') }}"
-                         srcset="{{ asset('assets/dashboard/images/logos/logo-dark2x.png') }} 2x"
+                         src="{{ assetCustom('assets/dashboard/images/logos/logo-dark.png') }}"
+                         srcset="{{ assetCustom('assets/dashboard/images/logos/logo-dark2x.png') }} 2x"
                          alt="logo-dark">
                 </a>
             </div>

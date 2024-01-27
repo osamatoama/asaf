@@ -1,6 +1,6 @@
 @extends('dashboard.layouts.app')
 @push('styles')
-    <link rel="stylesheet" href="{{ asset('dashboard_theme/assets/css/editors/quill.rtl.css') }}">
+    <link rel="stylesheet" href="{{ assetCustom('dashboard_theme/assets/css/editors/quill.rtl.css') }}">
 @endpush
 @section('content')
     <div class="card h-100">

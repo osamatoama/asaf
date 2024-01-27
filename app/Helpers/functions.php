@@ -40,3 +40,14 @@ if (!function_exists('media')) {
         return app(Media::class);
     }
 }
+
+if (! function_exists('assetCustom')) {
+    function assetCustom(string $asset): string
+    {
+        if (request()->secure()) {
+            return asset($asset, true);
+        }
+
+        return asset($asset);
+    }
+}

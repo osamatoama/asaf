@@ -8,6 +8,6 @@
     }
 
     const _urls = {
-        assets: '{{ asset('assets/dashboard') }}'
+        assets: '{{ assetCustom('assets/dashboard') }}'
     }
 </script>
