@@ -168,6 +168,7 @@ function getProductsHandler(url, btn = null) {
     // const userData = getuserData();
     const user_key = getuserKey();
 
+    let customerId = btn?.dataset.customerId;
     let email = btn?.dataset.email;
 
     const fetchProductsRes = fetch(url, {
@@ -177,7 +178,7 @@ function getProductsHandler(url, btn = null) {
             accept: "application/json",
         },
         body: JSON.stringify({
-            customerId: btn?.dataset.customerId,
+            customerId: (customerId !== "null") ? customerId : null,
             email: (email !== "null") ? email : null,
             phone: +btn?.dataset.phone || null,
             user_key,
