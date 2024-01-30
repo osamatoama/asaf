@@ -44,11 +44,10 @@ if (!function_exists('media')) {
 if (! function_exists('assetCustom')) {
     function assetCustom(string $asset): string
     {
-        return asset($asset, true);
-        // if (request()->secure()) {
-        //     return asset($asset, true);
-        // }
+        if (app()->environment('production')) {
+            return asset($asset, true);
+        }
 
-        // return asset($asset);
+        return asset($asset);
     }
 }

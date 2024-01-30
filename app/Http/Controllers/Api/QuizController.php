@@ -50,8 +50,9 @@ class QuizController extends Controller
         $quiz     = Quiz::firstOrFail();
         $results  = (array) $request->get('results', []);
         $userKey  = $request->get('user_key');
-        $phone    = $request->get('phone');
-        $email    = $request->get('email');
+        // $phone    = $request->get('phone');
+        // $email    = $request->get('email');
+        $remoteId    = $request->get('customerId');
 
         $genderId = $results[0] ?? 0;
         $gender   = Gender::find($genderId);
@@ -77,43 +78,51 @@ class QuizController extends Controller
         $newAnswersIds = array_values($results);
 
         // TEMP
-//        $client = Client::where('key', $userKey)
-//            ->when(filled($phone), function ($query) use ($phone) {
-//                return $query->orWhere('phone', $phone);
-//            })->when(filled($email), function ($query) use ($email) {
-//                return $query->orWhere('email', $email);
-//            })->first();
+       $client = Client::where('key', $userKey)
+            ->when(filled($remoteId), function ($query) use ($remoteId) {
+                return $query->orWhere('remote_id', $remoteId);
+            })
+        //    ->when(filled($phone), function ($query) use ($phone) {
+        //        return $query->orWhere('phone', $phone);
+        //    })
+        //    ->when(filled($email), function ($query) use ($email) {
+        //        return $query->orWhere('email', $email);
+        //    })
+           ->first();
 
-//        $existedClientQuizResults = $quiz->results()
-//            ->where('gender_id', $genderId)
-//            ->where('client_id', $client->id ?? 0)
-//            ->get();
+       $existedClientQuizResults = $quiz->results()
+           ->where('gender_id', $genderId)
+           ->where('client_id', $client->id ?? 0)
+           ->get();
 
-//        if (blank($client)) {
-//            $client = Client::create([
-//                'key'   => $userKey,
-//                'phone' => $phone,
-//                'email' => $email,
-//            ]);
-//
-//            $resultedProductIsRandom = true;
-//            $existedClientQuizResult = null;
-//        } else {
-//
-//            $clientUpdateCase = $this->clientUpdateCase(
-//                $client,
-//                $existedClientQuizResults,
-//                $newAnswersIds,
-//                $phone,
-//                $email
-//            );
-//
-//            $client                  = $clientUpdateCase->client;
-//            $resultedProductIsRandom = $clientUpdateCase->resultedProductIsRandom;
-//            $existedClientQuizResult = $clientUpdateCase->existedClientQuizResult;
-//        }
+       if (blank($client)) {
+           $client = Client::create([
+               'remote_id' => $remoteId,
+               'key'   => $userKey,
+            //    'phone' => null,
+            //    'email' => null,
+           ]);
 
-//        if ($resultedProductIsRandom) {
+           $resultedProductIsRandom = true;
+           $existedClientQuizResult = null;
+       } else {
+
+           $clientUpdateCase = $this->clientUpdateCase(
+               $client,
+               $existedClientQuizResults,
+               $newAnswersIds,
+            //    $phone,
+            //    $email
+           );
+
+           $client                  = $clientUpdateCase->client;
+           $resultedProductIsRandom = $clientUpdateCase->resultedProductIsRandom;
+           $existedClientQuizResult = $clientUpdateCase->existedClientQuizResult;
+       }
+
+       if ($resultedProductIsRandom) {
+        // END TEMP
+
             $productsIdsArr = [];
 
             foreach ($newAnswersIds as $newAnswerId) {
@@ -141,10 +150,11 @@ class QuizController extends Controller
             $quizScore = $maxOccurrence;
 
             // TEMP
-//        } else {
-//            $product   = $existedClientQuizResult?->product;
-//            $quizScore = $existedClientQuizResult?->score ?? 0;
-//        }
+       } else {
+           $product   = $existedClientQuizResult?->product;
+           $quizScore = $existedClientQuizResult?->score ?? 0;
+       }
+        // END TEMP
 
         if (blank($product)) {
             return response()->json([
@@ -155,11 +165,12 @@ class QuizController extends Controller
         }
 
         // TEMP
-//        $newQuizResult = $this->createQuizResult($client, $quiz, $quizScore, $product, $genderId);
+       $newQuizResult = $this->createQuizResult($client, $quiz, $quizScore, $product, $genderId);
 
-//        $this->createQuizResultAnswers($newQuizResult, $results);
+       $this->createQuizResultAnswers($newQuizResult, $results);
 
-//        $this->createQuizResultClient($client, $newQuizResult);
+       $this->createQuizResultClient($client, $newQuizResult);
+        // END TEMP
 
         return response()->json([
             'status'   => 200,
@@ -180,13 +191,13 @@ class QuizController extends Controller
         Client $client,
         Collection $existedResults,
         array $newAnswersIds,
-        string $phone = null,
-        string $email = null
+        // string $phone = null,
+        // string $email = null
     ): object {
-        $client->update([
-            'phone' => $client->phone ?? $phone,
-            'email' => $client->email ?? $email,
-        ]);
+        // $client->update([
+        //     'phone' => $client->phone ?? $phone,
+        //     'email' => $client->email ?? $email,
+        // ]);
 
         $updatedClient = $client->fresh();
 
@@ -280,8 +291,8 @@ class QuizController extends Controller
     ): void {
         $quizResult->quizResultClient()->create([
             'key'   => $client->key,
-            'phone' => $client->phone,
-            'email' => $client->email,
+            // 'phone' => null,
+            // 'email' => null,
         ]);
     }
 }

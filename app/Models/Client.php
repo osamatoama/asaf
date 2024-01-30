@@ -12,6 +12,7 @@ class Client extends Model
     use ClientRelations, ClientHelpers, Auditable;
 
     protected $fillable = [
+        'remote_id',
         'key',
         'phone',
         'email',
