@@ -55,6 +55,14 @@ class QuizController extends Controller
         $remoteId    = $request->get('customerId');
         $isGuest    = $request->get('isGuest');
 
+        if ($isGuest === 'true') {
+            $isGuest = true;
+        } elseif ($isGuest === 'false') {
+            $isGuest = false;
+        } elseif ($isGuest === 'null') {
+            $isGuest = null;
+        }
+
         $genderId = $results[0] ?? 0;
         $gender   = Gender::find($genderId);
 
