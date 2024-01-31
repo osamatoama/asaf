@@ -102,12 +102,18 @@ class ClientService
         $table->editColumn('key', function (Client $row) {
             return $row->key ?? '---';
         });
-        $table->editColumn('phone', function (Client $row) {
-            return $row->phone ?? '---';
+        $table->editColumn('remote_id', function (Client $row) {
+            return $row->remote_id ?? '---';
         });
-        $table->editColumn('email', function (Client $row) {
-            return $row->email ?? '---';
+        $table->addColumn('type', function (Client $row) {
+            return $row->getType();
         });
+        // $table->editColumn('phone', function (Client $row) {
+        //     return $row->phone ?? '---';
+        // });
+        // $table->editColumn('email', function (Client $row) {
+        //     return $row->email ?? '---';
+        // });
 
         $table->editColumn('results_count', function (Client $row) {
             return $row->results_count ?? 0;

@@ -55,6 +55,8 @@ class QuizController extends Controller
         $remoteId    = $request->get('customerId');
         $isGuest    = $request->get('isGuest');
 
+        logError($request->all());
+
         if ($isGuest === 'true') {
             $isGuest = true;
         } elseif ($isGuest === 'false') {

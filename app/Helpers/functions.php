@@ -1,9 +1,10 @@
 <?php
 
-use App\Services\Helpers\Dashboard;
 use App\Services\Helpers\Media;
-use App\Services\Helpers\Platform;
 use App\Services\Helpers\Website;
+use App\Services\Helpers\Platform;
+use App\Services\Helpers\Dashboard;
+use Illuminate\Support\Facades\Log;
 
 if (!function_exists('platform')) {
     function platform(): Platform
@@ -49,5 +50,12 @@ if (! function_exists('assetCustom')) {
         }
 
         return asset($asset);
+    }
+}
+
+if (! function_exists('logError')) {
+    function logError(mixed $error): void
+    {
+        Log::error($error);
     }
 }

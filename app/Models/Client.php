@@ -23,4 +23,18 @@ class Client extends Model
         'created_at' => 'datetime:Y-m-d H:i:s',
         'updated_at' => 'datetime:Y-m-d H:i:s',
     ];
+
+    /**
+     * Helpers
+     */
+    public function getType()
+    {
+        if ($this->is_guest === true) {
+            return 'Guest';
+        } elseif ($this->is_guest === false) {
+            return 'Client';
+        } else {
+            return 'Undefined';
+        }
+    }
 }

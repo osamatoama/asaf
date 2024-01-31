@@ -17,9 +17,9 @@
                         <thead>
                             <tr>
                                 <th class="text-center">تسلسل</th>
+                                <th class="text-center">المعرف</th>
+                                <th class="text-center">النوع</th>
                                 <th class="text-center">كود العميل</th>
-                                <th class="text-center">البريد الإلكتروني</th>
-                                <th class="text-center">الهاتف</th>
                                 <th class="text-center">عدد مرّات اجتياز الاختبار</th>
                                 <th class="text-center">{{ __('global.Actions') }}</th>
                             </tr>
