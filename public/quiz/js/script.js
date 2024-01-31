@@ -169,6 +169,7 @@ function getProductsHandler(url, btn = null) {
     const user_key = getuserKey();
 
     let customerId = btn?.dataset.customerId;
+    let isGuest = btn?.dataset.isGuest;
     let email = btn?.dataset.email;
 
     const fetchProductsRes = fetch(url, {
@@ -179,6 +180,7 @@ function getProductsHandler(url, btn = null) {
         },
         body: JSON.stringify({
             customerId: (customerId !== "null") ? customerId : null,
+            isGuest: isGuest,
             email: (email !== "null") ? email : null,
             phone: +btn?.dataset.phone || null,
             user_key,

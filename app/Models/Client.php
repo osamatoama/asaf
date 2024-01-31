@@ -14,6 +14,7 @@ class Client extends Model
     protected $fillable = [
         'remote_id',
         'key',
+        'is_guest',
         'phone',
         'email',
     ];

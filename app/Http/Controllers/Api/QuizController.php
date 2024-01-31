@@ -53,6 +53,7 @@ class QuizController extends Controller
         // $phone    = $request->get('phone');
         // $email    = $request->get('email');
         $remoteId    = $request->get('customerId');
+        $isGuest    = $request->get('isGuest');
 
         $genderId = $results[0] ?? 0;
         $gender   = Gender::find($genderId);
@@ -97,10 +98,11 @@ class QuizController extends Controller
 
        if (blank($client)) {
            $client = Client::create([
-               'remote_id' => $remoteId,
-               'key'   => $userKey,
-            //    'phone' => null,
-            //    'email' => null,
+                'remote_id' => $remoteId,
+                'key'   => $userKey,
+                'is_guest' => $isGuest,
+                // 'phone' => null,
+                // 'email' => null,
            ]);
 
            $resultedProductIsRandom = true;
@@ -108,11 +110,13 @@ class QuizController extends Controller
        } else {
 
            $clientUpdateCase = $this->clientUpdateCase(
-               $client,
-               $existedClientQuizResults,
-               $newAnswersIds,
-            //    $phone,
-            //    $email
+                $client,
+                $existedClientQuizResults,
+                $newAnswersIds,
+                // $phone,
+                // $email,
+                $remoteId,
+                $isGuest,
            );
 
            $client                  = $clientUpdateCase->client;
@@ -193,11 +197,15 @@ class QuizController extends Controller
         array $newAnswersIds,
         // string $phone = null,
         // string $email = null
+        $remoteId = null,
+        $isGuest = null,
     ): object {
-        // $client->update([
-        //     'phone' => $client->phone ?? $phone,
-        //     'email' => $client->email ?? $email,
-        // ]);
+        $client->update([
+            // 'phone' => $client->phone ?? $phone,
+            // 'email' => $client->email ?? $email,
+            'remote_id' => $remoteId ?? $client->remote_id,
+            'is_guest' => $isGuest ?? $client->is_guest,
+        ]);
 
         $updatedClient = $client->fresh();
 
