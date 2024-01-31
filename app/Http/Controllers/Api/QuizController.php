@@ -55,7 +55,6 @@ class QuizController extends Controller
         $userId    = $request->get('userId');
         $customerId    = $request->get('customerId');
         $isGuest    = $request->get('isGuest');
-        $remoteId    = $isGuest ? $userId : $customerId;
 
         logError($request->all());
 
@@ -66,6 +65,8 @@ class QuizController extends Controller
         } elseif ($isGuest === 'null') {
             $isGuest = null;
         }
+
+        $remoteId    = $isGuest ? $userId : $customerId;
 
         $genderId = $results[0] ?? 0;
         $gender   = Gender::find($genderId);
