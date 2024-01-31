@@ -12,23 +12,31 @@
                         <tbody>
                             <tr>
                                 <th>تسلسل</th>
-                                <td>{{ $client -> id }}</td>
+                                <td>{{ $client->id }}</td>
+                            </tr>
+                            <tr>
+                                <th>المعرف</th>
+                                <td>{{ $client->remote_id ?? '---' }}</td>
+                            </tr>
+                            <tr>
+                                <th>النوع</th>
+                                <td>{{ $client->getType() }}</td>
                             </tr>
                             <tr>
                                 <th>كود العميل</th>
-                                <td>{{ $client -> key }}</td>
+                                <td>{{ $client->key }}</td>
                             </tr>
-                            <tr>
+                            {{-- <tr>
                                 <th>البريد الإلكتروني</th>
-                                <td>{{ $client -> email ?? '---' }}</td>
+                                <td>{{ $client->email ?? '---' }}</td>
                             </tr>
                             <tr>
                                 <th>رقم الهاتف</th>
-                                <td>{{ $client -> phone ?? '---' }}</td>
-                            </tr>
+                                <td>{{ $client->phone ?? '---' }}</td>
+                            </tr> --}}
                             <tr>
                                 <th>عدد مرّات اجتياز الاختبار</th>
-                                <td>{{ $client -> results_count ?? 0 }}</td>
+                                <td>{{ $client->results_count ?? 0 }}</td>
                             </tr>
                             <tr>
                                 <th>أسماء الاختبارات المُجتازة</th>
