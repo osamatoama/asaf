@@ -52,8 +52,10 @@ class QuizController extends Controller
         $userKey  = $request->get('user_key');
         // $phone    = $request->get('phone');
         // $email    = $request->get('email');
-        $remoteId    = $request->get('customerId');
+        $userId    = $request->get('userId');
+        $customerId    = $request->get('customerId');
         $isGuest    = $request->get('isGuest');
+        $remoteId    = $isGuest ? $userId : $customerId;
 
         logError($request->all());
 

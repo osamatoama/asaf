@@ -169,8 +169,9 @@ function getProductsHandler(url, btn = null) {
     const user_key = getuserKey();
 
     let customerId = btn?.dataset.customerId;
+    let userId = btn?.dataset.userId;
     let isGuest = btn?.dataset.isGuest;
-    let email = btn?.dataset.email;
+    // let email = btn?.dataset.email;
 
     const fetchProductsRes = fetch(url, {
         method: "POST",
@@ -180,9 +181,10 @@ function getProductsHandler(url, btn = null) {
         },
         body: JSON.stringify({
             customerId: (customerId !== "null") ? customerId : null,
+            userId: (userId !== "null") ? userId : null,
             isGuest: isGuest,
-            email: (email !== "null") ? email : null,
-            phone: +btn?.dataset.phone || null,
+            // email: (email !== "null") ? email : null,
+            // phone: +btn?.dataset.phone || null,
             user_key,
             results: storedAnswers,
         }),
