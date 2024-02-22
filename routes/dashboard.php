@@ -13,6 +13,8 @@ use App\Http\Controllers\Dashboard\AuditLogController;
 use App\Http\Controllers\Dashboard\DropzoneController;
 use App\Http\Controllers\Dashboard\QuizQuestionController;
 use App\Http\Controllers\Dashboard\QuizQuestionAnswerController;
+use App\Http\Controllers\Dashboard\ReportController;
+use App\Http\Controllers\Dashboard\Reports\ProductsAppearanceReportController;
 
 Route::prefix('dashboard')->as('dashboard.')->middleware([
     'authGates',
@@ -80,5 +82,11 @@ Route::prefix('dashboard')->as('dashboard.')->middleware([
     Route::group(['prefix' => 'audit-logs', 'as' => 'audit-logs.'], function () {
         Route::get('', [AuditLogController::class, 'index'])->name('index');
         Route::get('{audit_log}', [AuditLogController::class, 'show'])->name('show');
+    });
+
+    //Reports
+    Route::group(['prefix' => 'reports', 'as' => 'reports.'], function () {
+        Route::get('/', [ReportController::class, 'index'])->name('index');
+        Route::get('products-apperance', [ProductsAppearanceReportController::class, 'index'])->name('products-apperance.index');
     });
 });

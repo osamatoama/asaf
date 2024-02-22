@@ -144,3 +144,19 @@
     </li>
 
 @endcanany
+
+
+@canany([
+    'report_access'
+])
+    <li @class(['nk-menu-item','active current-page' => isMenuOpened(['reports'])])>
+        <a href="{{ route('dashboard.reports.index') }}" class="nk-menu-link">
+            <span class="nk-menu-icon">
+                <em class="icon ni ni-reports"></em>
+            </span>
+            <span class="nk-menu-text">
+                التقارير
+            </span>
+        </a>
+    </li>
+@endcanany
