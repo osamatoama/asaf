@@ -6,7 +6,7 @@ use App\Services\ReportService;
 use Illuminate\Support\Facades\Gate;
 use App\Http\Controllers\Controller;
 
-class ProductsAppearanceReportController extends Controller
+class AnswerSelectionReportController extends Controller
 {
     private string $routeView;
 
@@ -14,7 +14,7 @@ class ProductsAppearanceReportController extends Controller
 
     public function __construct(private ReportService $reportService)
     {
-        $this->routeView      = 'reports.products-appearance';
+        $this->routeView      = 'reports.answer-selection';
         $this->permissions    = [
             'access' => 'report_access',
         ];
@@ -23,7 +23,7 @@ class ProductsAppearanceReportController extends Controller
     public function index()
     {
         abort_if(Gate::denies($this->permissions['access']), 403, 'ليس لديك صلاحية');
-        $result = $this->reportService->getProductsAppearanceReport();
+        $result = $this->reportService->getAnswerSelectionReport();
 
         return view('dashboard.pages.' . $this->routeView . '.index', compact('result'));
     }

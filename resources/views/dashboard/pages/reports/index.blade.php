@@ -22,6 +22,18 @@
                     </div>
                 </a>
             </div>
+
+            <div class="col-3">
+                <a href="{{ route('dashboard.reports.answer-selection.index') }}" class="card">
+                    <div class="card-inner">
+                        <h5 class="card-title">
+                            <em class="icon ni ni-check-c"></em>
+                            اختيار التصنيفات
+                        </h5>
+                        <p class="card-text text-muted">التصنيفات الأكثر والأقل اختياراً وعدد مرات الاختيار </p>
+                    </div>
+                </a>
+            </div>
         </div>
     </div>
 @endsection

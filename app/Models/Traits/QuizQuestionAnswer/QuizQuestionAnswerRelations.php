@@ -4,6 +4,8 @@ namespace App\Models\Traits\QuizQuestionAnswer;
 
 use App\Models\Product;
 use App\Models\QuizQuestion;
+use App\Models\QuizResultAnswer;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
@@ -31,5 +33,13 @@ trait QuizQuestionAnswerRelations
             'quiz_question_answer_id',
             'product_id'
         );
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function resultAnswers(): HasMany
+    {
+        return $this->hasMany(QuizResultAnswer::class, 'answer_id');
     }
 }
