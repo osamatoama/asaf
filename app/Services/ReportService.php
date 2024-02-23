@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\Quiz;
 use App\Models\Product;
 use App\Models\QuizResult;
 
@@ -22,6 +23,20 @@ class ReportService
                 ->withCount('results')
                 ->orderByDesc('results_count')
                 ->get(),
+        ];
+    }
+
+    public function getAnswerSelectionReport()
+    {
+        $quizzes = Quiz::with([
+                'questions' => fn($q) => $q->has('answers'),
+                'questions.answers' => fn($q) => $q->withCount('resultAnswers')
+            ])
+            ->withCount('results')
+            ->get();
+
+        return [
+            'quizzes' => $quizzes,
         ];
     }
 }
