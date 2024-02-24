@@ -47,7 +47,7 @@
                                                 $topQuestionAnswerSelectionsCount = $question->answers->max('result_answers_count');
                                             @endphp
 
-                                            @foreach ($question->answers as $answer)
+                                            @foreach ($question->answers->sortByDesc('result_answers_count') as $answer)
                                                 <li class="my-2">
                                                     <div class="row">
                                                         <div class="col-md-3">
@@ -74,52 +74,6 @@
                                 @endforeach
                             </ul>
                         </div>
-
-                        {{-- <div class="table-responsive">
-                            <table class="table table-bordered" style="border-top: 1px solid #d7d7d7">
-                                <tbody>
-                                    <tr>
-                                        <th>تسلسل</th>
-                                        <td>{{ $quiz->id }}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>اسم الاختبار</th>
-                                        <td>{{ $quiz->title }}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>عدد مرّات اجتياز الاختبار</th>
-                                        <td>{{ $quiz->results_count }}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>الأسئلة والإجابات</th>
-                                        <td>
-                                            <ul>
-                                                @foreach ($quiz->questions as $question)
-                                                    <li class="card mt-2 mb-4 p-2">
-                                                        <span style="font-size: x-large; font-weight: bold;">{{ $loop->iteration.' - '.$question->title }}</span>
-                                                        <ul>
-                                                            @foreach ($question->answers as $answer)
-                                                                <li class="my-2">
-                                                                    <div class="row">
-                                                                        <div class="col-md-3">
-                                                                            <span class="mx-4" style="font-size: medium;">{{ '- '.$answer->title }}</span>
-                                                                        </div>
-                                                                        <div class="col-md-9">
-
-                                                                        </div>
-                                                                    </div>
-                                                                </li>
-                                                            @endforeach
-                                                        </ul>
-                                                    </li>
-                                                @endforeach
-                                            </ul>
-                                        </td>
-
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div> --}}
                     </div>
                 </div>
             </div>

@@ -16,6 +16,7 @@ use App\Http\Controllers\Dashboard\QuizQuestionAnswerController;
 use App\Http\Controllers\Dashboard\ReportController;
 use App\Http\Controllers\Dashboard\Reports\AnswerSelectionReportController;
 use App\Http\Controllers\Dashboard\Reports\ProductsAppearanceReportController;
+use App\Http\Controllers\Dashboard\Reports\QuizCompletionReportCompletion;
 
 Route::prefix('dashboard')->as('dashboard.')->middleware([
     'authGates',
@@ -90,5 +91,6 @@ Route::prefix('dashboard')->as('dashboard.')->middleware([
         Route::get('/', [ReportController::class, 'index'])->name('index');
         Route::get('products-apperance', [ProductsAppearanceReportController::class, 'index'])->name('products-apperance.index');
         Route::get('answer-selection', [AnswerSelectionReportController::class, 'index'])->name('answer-selection.index');
+        Route::get('quiz-completion', [QuizCompletionReportCompletion::class, 'index'])->name('quiz-completion.index');
     });
 });

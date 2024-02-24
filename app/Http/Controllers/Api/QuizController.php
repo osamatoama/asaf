@@ -14,10 +14,13 @@ use Illuminate\Http\JsonResponse;
 use App\Models\QuizQuestionAnswer;
 use Illuminate\Support\Collection;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\QuizEntriesRequest;
 use App\Http\Resources\QuizResource;
 use App\Http\Resources\ProductResource;
 use App\Http\Requests\QuizResultsRequest;
+use App\Http\Resources\QuizEntryResource;
 use App\Http\Resources\QuizInfoResource;
+use App\Models\QuizEntry;
 
 class QuizController extends Controller
 {
@@ -45,6 +48,26 @@ class QuizController extends Controller
         return new QuizInfoResource($quiz);
     }
 
+    public function entries(QuizEntriesRequest $request): JsonResponse
+    {
+        $quiz = Quiz::firstOrFail();
+        $userKey = $request->get('user_key');
+        $client = Client::firstOrCreate(['key' => $userKey], []);
+
+        $quizEntry = QuizEntry::create([
+            'quiz_id' => $quiz->id,
+            'client_id' => $client->id,
+            'key' => $userKey,
+            'entry_time' => now(),
+        ]);
+
+        return response()->json([
+            'status'   => 200,
+            'success'  => true,
+            'entry'  => new QuizEntryResource($quizEntry),
+        ]);
+    }
+
     public function results(QuizResultsRequest $request): JsonResponse
     {
         $quiz     = Quiz::firstOrFail();
@@ -55,8 +78,6 @@ class QuizController extends Controller
         $userId    = $request->get('userId');
         $customerId    = $request->get('customerId');
         $isGuest    = $request->get('isGuest');
-
-        logError($request->all());
 
         if ($isGuest === 'true') {
             $isGuest = true;
@@ -187,6 +208,21 @@ class QuizController extends Controller
        $this->createQuizResultAnswers($newQuizResult, $results);
 
        $this->createQuizResultClient($client, $newQuizResult);
+
+       $latestQuizEntry = $client->quizEntries()->forQuiz($quiz->id)->latest()->first();
+        if (empty($latestQuizEntry)) {
+            $latestQuizEntry = $client->quizEntries()->create([
+                'quiz_id' => $quiz->id,
+                'key' => $userKey,
+                'entry_time' => now(),
+                'completed' => true,
+            ]);
+        } else {
+            $latestQuizEntry->update([
+                'completed' => true,
+            ]);
+        }
+
         // END TEMP
 
         return response()->json([
