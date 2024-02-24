@@ -25,6 +25,16 @@ class Client extends Model
         'is_guest' => 'boolean',
     ];
 
+
+    /**
+     * Relations
+     */
+    public function quizEntries()
+    {
+        return $this->hasMany(QuizEntry::class);
+    }
+
+
     /**
      * Helpers
      */

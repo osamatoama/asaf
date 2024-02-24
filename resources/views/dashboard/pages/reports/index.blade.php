@@ -34,6 +34,18 @@
                     </div>
                 </a>
             </div>
+
+            <div class="col-3">
+                <a href="{{ route('dashboard.reports.quiz-completion.index') }}" class="card">
+                    <div class="card-inner">
+                        <h5 class="card-title">
+                            <em class="icon ni ni-chevrons-right"></em>
+                            إكمال الاختبار
+                        </h5>
+                        <p class="card-text text-muted">عدد العملاء الذين أكملوا الاختبار والنسبة المئوية لهم</p>
+                    </div>
+                </a>
+            </div>
         </div>
     </div>
 @endsection

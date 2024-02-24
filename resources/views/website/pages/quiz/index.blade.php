@@ -15,7 +15,7 @@
             <button class="start-quiz hidden">اكتشف ذوقك</button>
         </div>
     </div>
-    <div class="user-preferences-form-container hidden switch-effect" data-quiz-url="{{ route('api.quiz') }}">
+    <div class="user-preferences-form-container hidden switch-effect" data-quiz-url="{{ route('api.quiz') }}" data-quiz-entry-url="{{ route('api.quiz.entries') }}">
         <h1 class="main-heading">اعرف عطرك حسب شخصيتك</h1>
         <div class="multistep-form-wrapper">
             <div class="steps-header">
@@ -27,7 +27,7 @@
                     <div class="buttons-wrapper no-prev" data-current-step="1">
                         <button class="back-to-prev-step-btn" data-move="backward">السابق</button>
                         <button class="move-to-next-step-btn" data-move="forward">التالي</button>
-                        <button type="submit" data-user-id="${userData.userId}" data-customer-id="${userData.customerId}" data-is-guest="${userData.isGuest}" data-email="${userData.email}" data-phone="${userData.phone}" class="submit-form-btn hidden" data-action="submit" data-url="{{ route('api.results') }}">
+                        <button type="submit" data-user-id="${userData.userId}" data-customer-id="" data-is-guest="" data-email="" data-phone="" class="submit-form-btn hidden" data-action="submit" data-url="{{ route('api.results') }}">
                             تأكيد
                         </button>
                     </div>
