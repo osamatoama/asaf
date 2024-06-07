@@ -2,8 +2,9 @@
 
 namespace App\Models\Traits\Quiz;
 
-use App\Models\QuizQuestion;
+use App\Models\QuizEntry;
 use App\Models\QuizResult;
+use App\Models\QuizQuestion;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
@@ -25,5 +26,13 @@ trait QuizRelations
     public function results(): HasMany
     {
         return $this->hasMany(QuizResult::class, 'quiz_id');
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function entries()
+    {
+        return $this->hasMany(QuizEntry::class, 'quiz_id');
     }
 }

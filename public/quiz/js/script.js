@@ -103,9 +103,32 @@ function quizRequestHandler() {
             renderFormQuestions(data.quiz.questions);
             document.querySelector('.intro').remove();
             document.querySelector(".user-preferences-form-container").classList.remove("hidden");
+            quizEntryHandler();
             setTimeout(() => {
                 document.querySelector(".user-preferences-form-container").classList.remove("switch-effect");
             }, 600);
+        });
+}
+
+function quizEntryHandler() {
+    const QUIZ_ENTRY_URL = document.querySelector(".user-preferences-form-container").dataset.quizEntryUrl;
+    const user_key = getuserKey();
+
+    const saveQuizEntry = fetch(QUIZ_ENTRY_URL, {
+        method: "POST",
+        headers: {
+            "content-type": "application/json",
+            "accept": "application/json",
+        },
+        body: JSON.stringify({
+            user_key,
+        }),
+    });
+    saveQuizEntry
+        .then(function (res) {
+            return res.json();
+        })
+        .then(function (data) {
         });
 }
 
