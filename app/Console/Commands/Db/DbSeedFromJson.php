@@ -30,7 +30,9 @@ class DbSeedFromJson extends Command
     {
         $baseUrl = $this->option('base-url') ?? null;
         $dbName = $this->option('db') ?? env('DB_DATABASE');
-        $excludedTables = [];
+        $excludedTables = [
+            'audit_logs',
+        ];
 
         if (empty($baseUrl)) {
             $this->error('Base URL is required');
