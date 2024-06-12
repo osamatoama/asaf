@@ -160,3 +160,19 @@
         </a>
     </li>
 @endcanany
+
+@canany([
+    'media_access'
+])
+    <li @class(['nk-menu-item'])>
+        <a href="{{ url('dashboard/media') }}" class="nk-menu-link" target="_blank">
+            <span class="nk-menu-icon">
+                <em class="icon ni ni-folder"></em>
+            </span>
+            <span class="nk-menu-text">
+                الميديا
+            </span>
+        </a>
+    </li>
+@endcanany
+

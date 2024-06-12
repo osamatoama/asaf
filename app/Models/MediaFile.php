@@ -49,6 +49,6 @@ class MediaFile extends Model implements HasMedia
      */
     public function registerMediaCollections(): void
     {
-        $this->addMediaCollection('default')->singleFile();
+        $this->addMediaCollection('files')->singleFile();
     }
 }

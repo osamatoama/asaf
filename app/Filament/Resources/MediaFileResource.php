@@ -60,7 +60,7 @@ class MediaFileResource extends Resource
                         SpatieMediaLibraryFileUpload::make('file')
                             ->label('الملف')
                             ->disk('media')
-                            ->collection('default'),
+                            ->collection('files'),
                     ]),
             ]);
     }
