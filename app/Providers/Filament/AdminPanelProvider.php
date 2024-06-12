@@ -28,8 +28,10 @@ class AdminPanelProvider extends PanelProvider
             ->path('media-dashboard')
             // ->login()
             ->colors([
-                'primary' => Color::Amber,
+                // 'primary' => Color::Amber,
+                'primary' => '#854fff',
             ])
+            ->favicon(asset('assets/dashboard/images/favicon.png'))
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
             ->pages([
