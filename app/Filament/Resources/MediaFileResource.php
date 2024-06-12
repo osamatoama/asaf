@@ -12,6 +12,7 @@ use Filament\Resources\Resource;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Select;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\ViewColumn;
 use Filament\Forms\Components\TextInput;
 use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
@@ -94,6 +95,10 @@ class MediaFileResource extends Resource
                     ->label('مساحة التخزين')
                     ->numeric()
                     ->formatStateUsing(fn (string $state): string => round($state / (1024 ** 2), 2) . ' MB'),
+
+                ViewColumn::make('url')
+                    ->label('الرابط')
+                    ->view('filament.media-dashboard.files.url-column'),
             ])
             ->filters([
                 SelectFilter::make('folder')

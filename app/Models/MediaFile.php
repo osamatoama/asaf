@@ -37,6 +37,14 @@ class MediaFile extends Model implements HasMedia
     }
 
     /**
+     * Accessors
+     */
+    public function getUrlAttribute()
+    {
+        return $this->attachment->getUrl();
+    }
+
+    /**
      * Media
      */
     public function registerMediaCollections(): void
