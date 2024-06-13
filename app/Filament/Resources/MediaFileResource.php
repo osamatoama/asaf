@@ -46,21 +46,23 @@ class MediaFileResource extends Resource
                         'md' => 2,
                     ])
                     ->schema([
-                        TextInput::make('name')
-                            ->label('الاسم')
-                            ->rules(['string', 'max:255']),
+                        // TextInput::make('name')
+                        //     ->label('الاسم')
+                        //     ->rules(['string', 'max:255']),
 
                         Select::make('folder_id')
                             ->label('المجلد')
                             ->options(MediaFolder::all()->pluck('name', 'id'))
                             ->required()
                             ->rules(['exists:media_folders,id'])
-                            ->searchable(),
+                            ->searchable()
+                            ->columnStart(1),
 
                         SpatieMediaLibraryFileUpload::make('file')
                             ->label('الملف')
                             ->disk('media')
-                            ->collection('files'),
+                            ->collection('files')
+                            ->columnStart(1),
                     ]),
             ]);
     }
@@ -69,8 +71,8 @@ class MediaFileResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('name')
-                    ->label('الاسم'),
+                // TextColumn::make('name')
+                //     ->label('الاسم'),
 
                 TextColumn::make('folder.name')
                     ->label('المجلد'),

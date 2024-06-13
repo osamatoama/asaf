@@ -5,12 +5,10 @@ namespace App\Models;
 use Spatie\MediaLibrary\HasMedia;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\InteractsWithMedia;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class MediaFile extends Model implements HasMedia
 {
-    use SoftDeletes;
     use InteractsWithMedia;
 
     /**

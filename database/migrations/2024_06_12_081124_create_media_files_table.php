@@ -15,10 +15,9 @@ return new class extends Migration
             $table->id();
 
             $table->foreignId('folder_id')->nullable()->constrained('media_folders')->nullOnDelete();
-            $table->string('name');
+            $table->string('name')->nullable();
 
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
