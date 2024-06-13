@@ -6,8 +6,12 @@ use Filament\Pages;
 use Filament\Panel;
 use Filament\Widgets;
 use Filament\PanelProvider;
+use App\Http\Middleware\IsActive;
 use Filament\Support\Colors\Color;
+use App\Http\Middleware\IsVerified;
 use App\Filament\Widgets\StatsOverview;
+use App\Http\Middleware\AuthGates;
+use Illuminate\Auth\Middleware\Authorize;
 use Filament\Http\Middleware\Authenticate;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\Cookie\Middleware\EncryptCookies;
@@ -56,8 +60,9 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
-                'isActive',
-                'isVerified',
+                IsActive::class,
+                IsVerified::class,
+                AuthGates::class,
             ])
             ->authGuard('admin');
     }

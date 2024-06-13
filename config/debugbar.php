@@ -174,8 +174,8 @@ return [
         'files'           => false, // Show the included files
         'config'          => false, // Display config settings
         'cache'           => false, // Display cache events
-        'models'          => true,  // Display models
-        'livewire'        => true,  // Display Livewire (when available)
+        'models'          => false,  // Display models
+        'livewire'        => false,  // Display Livewire (when available)
     ],
 
     /*
