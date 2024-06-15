@@ -20,6 +20,14 @@ Route::get('storage-link', function () {
     return 'Storage Linked';
 });
 
+Route::get('migrate', function () {
+    Artisan::call('migrate', [
+        '--force' => true
+    ]);
+
+    return 'Migrated';
+});
+
 Route::get('seed', function () {
     Artisan::call('db:seed', [
         '--class' => 'PermissionTableSeeder',
