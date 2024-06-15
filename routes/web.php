@@ -17,7 +17,12 @@ Route::get('optimize-clear', function () {
 
 Route::get('storage-link', function () {
     Artisan::call('storage:link');
-    return 'Installed';
+    return 'Storage Linked';
+});
+
+Route::get('migrate', function () {
+    Artisan::call('migrate', ['--force' => true]);
+    return 'Migrated';
 });
 
 Route::get('migrate', function () {
