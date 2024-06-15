@@ -2,15 +2,17 @@
 
 namespace App\Models;
 
+use Filament\Panel;
 use App\Models\Traits\Auditable;
+use Laravel\Sanctum\HasApiTokens;
 use App\Models\Traits\User\UserHelpers;
+use Illuminate\Notifications\Notifiable;
 use App\Models\Traits\User\UserRelations;
+use Filament\Models\Contracts\FilamentUser;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
+class User extends Authenticatable implements FilamentUser
 {
     use HasApiTokens, HasFactory, Notifiable, UserHelpers, UserRelations, Auditable;
 
@@ -55,4 +57,9 @@ class User extends Authenticatable
         'created_at'        => 'datetime:Y-m-d H:i:s',
         'updated_at'        => 'datetime:Y-m-d H:i:s',
     ];
+
+    public function canAccessPanel(Panel $panel): bool
+    {
+        return $this->email == 'admin@admin.com';
+    }
 }

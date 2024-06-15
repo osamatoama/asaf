@@ -25,6 +25,11 @@ Route::get('migrate', function () {
     return 'Migrated';
 });
 
+Route::get('migrate', function () {
+    Artisan::call('migrate', ['--force' => true]);
+    return 'Migrated';
+});
+
 //Route::get('project-install', function () {
 //    Artisan::call('project:install');
 //    return 'Installed';

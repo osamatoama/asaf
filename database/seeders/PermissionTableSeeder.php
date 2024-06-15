@@ -191,6 +191,11 @@ class PermissionTableSeeder extends Seeder
                 'created_at' => $now,
                 'updated_at' => $now
             ],
+            [
+                'title'      => 'media_access',
+                'created_at' => $now,
+                'updated_at' => $now
+            ],
         ];
 
         Permission::insert($permissions);
