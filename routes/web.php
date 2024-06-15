@@ -1,9 +1,10 @@
 <?php
 
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 use App\Services\Salla\SallaClient;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Artisan;
 
 Route::get('/', function () {
     return redirect()->route('website.perfume-quiz');
@@ -16,7 +17,12 @@ Route::get('optimize-clear', function () {
 
 Route::get('storage-link', function () {
     Artisan::call('storage:link');
-    return 'Installed';
+    return 'Storage Linked';
+});
+
+Route::get('migrate', function () {
+    Artisan::call('migrate', ['--force' => true]);
+    return 'Migrated';
 });
 
 //Route::get('project-install', function () {
@@ -24,20 +30,20 @@ Route::get('storage-link', function () {
 //    return 'Installed';
 //});
 
-Route::get('add-migration/{path?}/{database?}', function ($path = '', $database = '') {
-    $data = ['--force' => true];
-    if (!empty($path) && ($path !== 'default')) {
-        $call = 'migrate:refresh';
-        $data['--path'] = '/database/migrations/' . $path . '.php';
-    } else {
-        $call = 'migrate';
-    }
-    if (!empty($database)) {
-        $data['--database'] = $database;
-    }
-    Artisan::call($call, $data);
-    return 'Migrated';
-});
+// Route::get('add-migration/{path?}/{database?}', function ($path = '', $database = '') {
+//     $data = ['--force' => true];
+//     if (!empty($path) && ($path !== 'default')) {
+//         $call = 'migrate:refresh';
+//         $data['--path'] = '/database/migrations/' . $path . '.php';
+//     } else {
+//         $call = 'migrate';
+//     }
+//     if (!empty($database)) {
+//         $data['--database'] = $database;
+//     }
+//     Artisan::call($call, $data);
+//     return 'Migrated';
+// });
 
 Route::get('class-seed/{name}/{database?}', function ($name, $database = '') {
     $data = ['--class' => $name, '--force' => true, '--no-interaction' => true];
