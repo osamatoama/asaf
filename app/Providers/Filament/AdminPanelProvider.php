@@ -59,10 +59,10 @@ class AdminPanelProvider extends PanelProvider
                 DispatchServingFilamentEvent::class,
             ])
             ->authMiddleware([
+                AuthGates::class,
                 Authenticate::class,
                 IsActive::class,
                 IsVerified::class,
-                AuthGates::class,
             ])
             ->authGuard('admin');
     }
