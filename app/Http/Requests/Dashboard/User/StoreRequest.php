@@ -94,7 +94,7 @@ class StoreRequest extends FormRequest
         ]), [
             'parent_id' => $this->getParentId(),
             'password'  => bcrypt($this->get('password')),
-            'phone'     => phone($this->input('phone'), $this->input('phone_country'))->formatE164(),
+            'phone'     => filled($this->input('phone')) ? phone($this->input('phone'), $this->input('phone_country'))->formatE164() : null,
             'verified'  => $this->boolean('verified'),
             'active'    => $this->boolean('active'),
         ]);
