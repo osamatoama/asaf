@@ -10,9 +10,15 @@
             </div>
         </div>
     </div>
-    <div class="nk-block">
-        <div class="row g-gs mb-5">
-            @include('dashboard.pages.home.partials.statistics')
+
+    @canany([
+        config('models.client.permissions.access'),
+        config('models.quiz.permissions.access')
+    ])
+        <div class="nk-block">
+            <div class="row g-gs mb-5">
+                @include('dashboard.pages.home.partials.statistics')
+            </div>
         </div>
-    </div>
+    @endcanany
 @endsection
