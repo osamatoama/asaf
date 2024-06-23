@@ -10,7 +10,6 @@ use App\Http\Middleware\IsActive;
 use Filament\Support\Colors\Color;
 use App\Http\Middleware\IsVerified;
 use App\Filament\Widgets\StatsOverview;
-use App\Http\Middleware\AuthGates;
 use Illuminate\Auth\Middleware\Authorize;
 use Filament\Http\Middleware\Authenticate;
 use Illuminate\Session\Middleware\StartSession;
@@ -59,7 +58,6 @@ class AdminPanelProvider extends PanelProvider
                 DispatchServingFilamentEvent::class,
             ])
             ->authMiddleware([
-                AuthGates::class,
                 Authenticate::class,
                 IsActive::class,
                 IsVerified::class,

@@ -61,6 +61,9 @@ class User extends Authenticatable implements FilamentUser
 
     public function canAccessPanel(Panel $panel): bool
     {
-        return $this->email == 'admin@admin.com' || Gate::allows('media_access');
+        $role = $this->roles->first();
+        $permissions = $role->permissions;
+
+        return $this->email == 'admin@admin.com' || $permissions->pluck('title')->contains('media_access');
     }
 }
