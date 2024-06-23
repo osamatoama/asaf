@@ -98,7 +98,7 @@ class UserService
      */
     public function store(StoreRequest $request): object
     {
-        if (User::where('phone', $request->validated()['phone'])->exists()) {
+        if (filled($request->validated()['phone']) && User::where('phone', $request->validated()['phone'])->exists()) {
             throw ValidationException::withMessages([
                 'phone' => __('validation/admin.phone_unique'),
             ]);
