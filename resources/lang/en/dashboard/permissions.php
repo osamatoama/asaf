@@ -61,4 +61,6 @@ return [
     'quiz_question_edit'          => 'Edit Quiz Question',
     'quiz_question_show'          => 'Show Quiz Question',
     'quiz_question_delete'        => 'Delete Quiz Question',
+    'report_access'               => 'Access Reports',
+    'media_access'                => 'Access Media',
 ];

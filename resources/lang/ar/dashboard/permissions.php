@@ -61,4 +61,6 @@ return [
     'quiz_question_edit'          => 'تعديل سؤال',
     'quiz_question_show'          => 'عرض سؤال',
     'quiz_question_delete'        => 'حذف سؤال',
+    'report_access'               => 'الوصول للتقارير',
+    'media_access'                => 'الوصول للميديا',
 ];
