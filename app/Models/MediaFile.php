@@ -39,7 +39,7 @@ class MediaFile extends Model implements HasMedia
      */
     public function getUrlAttribute()
     {
-        return $this->attachment->getUrl();
+        return $this->attachment?->getUrl();
     }
 
     /**
