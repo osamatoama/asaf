@@ -27,10 +27,6 @@ class AdminPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
     {
-        logError(auth()->check());
-        logError(auth('admin')->check());
-        logError(auth('web')->check());
-
         return $panel
             ->default()
             ->id('media-dashboard')
