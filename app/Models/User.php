@@ -11,6 +11,7 @@ use App\Models\Traits\User\UserRelations;
 use Filament\Models\Contracts\FilamentUser;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Gate;
 
 class User extends Authenticatable implements FilamentUser
 {
@@ -60,6 +61,6 @@ class User extends Authenticatable implements FilamentUser
 
     public function canAccessPanel(Panel $panel): bool
     {
-        return $this->email == 'admin@admin.com' || $this->can('media_access');
+        return $this->email == 'admin@admin.com' || Gate::allows('media_access');
     }
 }
