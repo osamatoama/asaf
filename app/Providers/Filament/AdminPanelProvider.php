@@ -62,7 +62,7 @@ class AdminPanelProvider extends PanelProvider
                 Authenticate::class,
                 IsActive::class,
                 IsVerified::class,
-                AuthGates::class,
+                // AuthGates::class,
             ])
             ->authGuard('admin');
     }
