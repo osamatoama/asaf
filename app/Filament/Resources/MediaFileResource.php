@@ -62,6 +62,7 @@ class MediaFileResource extends Resource
                             ->label('الملف')
                             ->disk('media')
                             ->collection('files')
+                            ->required()
                             ->columnStart(1),
                     ]),
             ]);
