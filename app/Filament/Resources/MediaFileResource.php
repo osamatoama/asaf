@@ -63,6 +63,7 @@ class MediaFileResource extends Resource
                             ->disk('media')
                             ->collection('files')
                             ->required()
+                            ->maxSize(1024 * 1024 * 200)
                             ->columnStart(1),
                     ]),
             ]);
