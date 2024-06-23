@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\MediaFile;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use App\Services\Salla\SallaClient;
@@ -102,4 +103,8 @@ Route::get('salla-categories', function () {
 
 Route::get('quiz-clients', function () {
     return \App\Models\Client::get(['id', 'key', 'email', 'phone']);
+});
+
+Route::get('testing', function () {
+    return MediaFile::with('media')->get();
 });
