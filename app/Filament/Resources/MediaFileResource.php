@@ -20,6 +20,7 @@ use App\Filament\Resources\MediaFileResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use App\Filament\Resources\MediaFileResource\RelationManagers;
+use Illuminate\Support\HtmlString;
 
 class MediaFileResource extends Resource
 {
@@ -62,6 +63,7 @@ class MediaFileResource extends Resource
                             ->label('الملف')
                             ->disk('media')
                             ->collection('files')
+                            ->preserveFilenames()
                             ->required()
                             ->maxSize(1024 * 200)
                             ->columnStart(1),
@@ -82,6 +84,9 @@ class MediaFileResource extends Resource
                 TextColumn::make('attachment.file_name')
                     ->label('اسم الملف')
                     ->limit(50)
+                    ->formatStateUsing(fn (string $state): HtmlString =>
+                        new HtmlString("<span dir='ltr'>$state</span>")
+                    )
                     ->tooltip(function (TextColumn $column): ?string {
                         $state = $column->getState();
 
